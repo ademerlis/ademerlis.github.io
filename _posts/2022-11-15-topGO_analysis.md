@@ -18,3 +18,9 @@ Resources I am currently using:
 7. https://www.biostars.org/p/247636/
 
 What I am really confused about is which algorithm and statistical test to use. I just want to make a basic bar graph showing the most significantly enriched GO terms for each hour, with the condition (control vs. wounded) as the comparison for differentially expressed genes.
+
+It looks like from source #7 that the Fisher exact test is used when the input is gene count data, and KS test should be used if the input is p-value from DGE. I think based on the line of code assigning either a "0" or a "1" based on p-value being < or > 0.05, this would indicate that my differentially expressed genes were based on p-value, not the count data directly. So the KS test would be best. 
+
+As for the algorithm, the only straightforward comparison I found was "classic" versus "elim", and "elim" seemed better because it took into account the GO term hierarchy (parent vs. child terms?) while the "classic" algorithm treats each GO term as an independent term (which doesn't make sense because GO terms have a hierarchy when you look at the significant node diagrams. So to not take that into account would mean that you are likely overestimating actual significance (redundancy of terms)). 
+
+So based on my understanding of this, I will use the "elim" algorithm and the KS test. I can choose which significance level to select as the cut-off, 0.05 or 0.01. 
