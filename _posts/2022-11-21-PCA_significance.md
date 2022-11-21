@@ -28,7 +28,7 @@ countdata_0 <- countsmatrix %>% dplyr::select(`0301C1`:`0306Z`)
 metadata_0 = data.frame(sample=colnames(countdata_0),
                 condition = stringr::str_detect(pattern = ".*C.*",string = colnames(countdata_0)),
                 hour = stringr::str_replace(pattern = "(.).*",replacement="\\1",string = colnames(countdata_0)),
- id = stringr::str_replace(pattern="(...).*",replacement="\\1",string=colnames(countdata_0)))
+ id = stringr::str_replace(pattern=".(...).*",replacement="\\1",string=colnames(countdata_0)))
 
 #changing TRUE and FALSE for condition to Control and Wounded
 metadata_0$condition[str_detect(metadata_0$condition,"TRUE")] <- "Control"
@@ -152,7 +152,7 @@ permanova<-adonis2(vegan ~ condition, data = PCA.h0.countsdata, method='eu', na.
 So I think maybe it has to be formatted a different way. 
 
  | Sample ID  | Condition | Gene | Count |
-| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- | ------------- |
 | 301 | Control  | Pdam0001 | 6 |
 | 302 | Control  | Pdam0001 |18|
 | 303 | Control  | Pdam0001 |12 |
@@ -184,6 +184,7 @@ Error:Error in eval(YVAR, environment(formula), globalenv()) :
   object 'Count' not found
 
 This is what the long format data frame looks like:
+
 <img width="514" alt="Screen Shot 2022-11-21 at 1 42 30 PM" src="https://user-images.githubusercontent.com/56000927/203134673-d52ae072-43c8-4fcd-94d9-65dcd8b91704.png">
 
 I'm so confused. I thought maybe i would want Gene and Condition and Gene:Condition as the terms for the PERMANOVA. I need to look up adonis2 and what it accepts in the formula.
