@@ -88,28 +88,15 @@ pca_0 = ggplot(pca12_0, aes(PC1,PC2,shape=condition,color=condition)) +
   
   Now I'm having trouble with the PERMANOVA part.
   
-  This is the section of code Kevin used: 
-  
+ # This is the section of code Kevin used: 
   ```{r}
+  master <- join_all(dfs, by=c("Fragment.ID", "Day", "Group"))
   master.pca <- master
-  coral_info<-master.pca[c(2,3)]
-
-pca_data<- scaled_pca%>%
-  augment(coral_info)%>%
-  group_by(Day, Group)%>%
-  mutate(PC1.mean = mean(.fittedPC1),
-         PC2.mean = mean(.fittedPC2))
-
-pca.centroids<- pca_data%>% 
-  dplyr::select(Day, Group, PC1.mean, PC2.mean)%>%
-  dplyr::group_by(Day, Group)%>%
-  dplyr::summarise(PC1.mean = mean(PC1.mean),
-                   PC2.mean = mean(PC2.mean))
+  coral_info<-master.pca[c(2,3)] #columns 2 and 3 are "Day" and "Group" in his metadata file
 
 #Examine PERMANOVA results.  
-
 # scale data
-vegan <- scale(master.pca[c(4:18)])
+vegan <- scale(master.pca[c(4:18)]) #these columns he created as calculations for physiology metrics (i.e. ChlC2.ugcell,  Carb.mgcell, Protein.mgcell)
 
 # PerMANOVA 
 permanova<-adonis(vegan ~ Day*Group, data = master.pca, method='eu')
