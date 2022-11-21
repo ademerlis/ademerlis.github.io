@@ -129,3 +129,61 @@ z_pca
 | 304 | Wounded  | 12 |
 | 305 | Wounded  | 20 |
 | 306 | Wounded  | 43 |
+
+Ok, when I rearranged the data to look like that, the permanova didn't work.
+
+# PERMANOVA 
+```{r}
+#first need to restructure results matrix so that it includes each row as a sample with the condition, and then each column is a gene
+hour0_countsmatrix <- assay(dds_0)
+t(hour0_countsmatrix) -> hour0_countsmatrix 
+#we use the dds object instead of the original countdata_0 matrix because this has filtered out genes with low counts (<10)
+PCA.h0.countsdata <- merge(metadata_0, hour0_countsmatrix, by='row.names', all=TRUE)
+dim(PCA.h0.countsdata)
+# scale data
+vegan <- scale(PCA.h0.countsdata[c(5:19451)]) #we just want to scale the gene counts
+
+# PERMANOVA 
+permanova<-adonis2(vegan ~ condition, data = PCA.h0.countsdata, method='eu', na.rm = TRUE, nperm = 999)
+
+```
+<img width="424" alt="Screen Shot 2022-11-21 at 1 13 18 PM" src="https://user-images.githubusercontent.com/56000927/203129685-78020370-12f8-463d-8ad2-8cf864be8276.png">
+
+So I think maybe it has to be formatted a different way. 
+
+ | Sample ID  | Condition | Gene | Count |
+| ------------- | ------------- | ------------- |
+| 301 | Control  | Pdam0001 | 6 |
+| 302 | Control  | Pdam0001 |18|
+| 303 | Control  | Pdam0001 |12 |
+| 304 | Wounded  | Pdam0001 |12 |
+| 305 | Wounded  | Pdam0001 |20 |
+| 306 | Wounded  | Pdam0001 |43 |
+
+And then the design for the PERMANOVA would actually be count ~ gene*condition
+
+Let's try that:
+
+```{r}
+#first need to restructure results matrix so that it includes each row as a sample with the condition, and then each column is a gene
+#we use the dds object instead of the original countdata_0 matrix because this has filtered out genes with low counts (<10)
+hour0_countsmatrix <- assay(dds_0)
+head(hour0_countsmatrix) #first gene is pdam_00021773
+tail(hour0_countsmatrix) #last gene is pdam_00025493
+t(hour0_countsmatrix) %>% as.data.frame() -> hour0_countsmatrix 
+
+PCA.h0.countsdata <- merge(metadata_0, hour0_countsmatrix, by='row.names', all=TRUE)
+PCA.h0.countsdata %>% 
+  pivot_longer(cols = pdam_00021773:pdam_00025493, names_to = "Gene ID", values_to = "Count") %>% as.matrix()->PCA.h0.countsdata_longformat
+
+# PERMANOVA 
+permanova<-adonis2(Count ~ `Gene ID`*condition, data = PCA.h0.countsdata_longformat, method='eu')
+```
+Doesn't work.
+Error:Error in eval(YVAR, environment(formula), globalenv()) : 
+  object 'Count' not found
+
+This is what the long format data frame looks like:
+<img width="514" alt="Screen Shot 2022-11-21 at 1 42 30 PM" src="https://user-images.githubusercontent.com/56000927/203134673-d52ae072-43c8-4fcd-94d9-65dcd8b91704.png">
+
+I'm so confused. I thought maybe i would want Gene and Condition and Gene:Condition as the terms for the PERMANOVA. I need to look up adonis2 and what it accepts in the formula.
