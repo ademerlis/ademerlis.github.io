@@ -90,6 +90,7 @@ pca_0 = ggplot(pca12_0, aes(PC1,PC2,shape=condition,color=condition)) +
   
   This is the section of code Kevin used: 
   
+  ```{r}
   master.pca <- master
   coral_info<-master.pca[c(2,3)]
 
@@ -128,4 +129,4 @@ z_pca
 ## Total     44    660.00                 1.00000           
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-  
+ ```
