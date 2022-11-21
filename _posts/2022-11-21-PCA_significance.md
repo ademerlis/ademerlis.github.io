@@ -188,3 +188,11 @@ This is what the long format data frame looks like:
 <img width="514" alt="Screen Shot 2022-11-21 at 1 42 30 PM" src="https://user-images.githubusercontent.com/56000927/203134673-d52ae072-43c8-4fcd-94d9-65dcd8b91704.png">
 
 I'm so confused. I thought maybe i would want Gene and Condition and Gene:Condition as the terms for the PERMANOVA. I need to look up adonis2 and what it accepts in the formula.
+
+From [adonis CRAN file](https://search.r-project.org/CRAN/refmans/vegan/html/adonis.html)
+"The left-hand side (LHS) of the formula must be either a community data matrix or a dissimilarity matrix, e.g., from vegdist or dist."
+
+So that's why Kevin used "vegan" as his input variable in the formula, which is a matrix of just his dependent variables.
+
+Adonis/Vegan is essentially running some sort of dissimilarity assessment, so it needs a matrix to run it on. So you can't put all the counts into one column.
+
