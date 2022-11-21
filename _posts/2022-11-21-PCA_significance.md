@@ -262,5 +262,10 @@ vegan <- scale(PCA.h4.countsdata[c(5:19773)]) #we just want to scale the gene co
 permanova<-adonis2(vegan ~ condition, data = PCA.h4.countsdata, method='eu', na.rm=TRUE, nperm = 999)
 permanova
 ```
+
+<img width="787" alt="Screen Shot 2022-11-21 at 3 23 15 PM" src="https://user-images.githubusercontent.com/56000927/203151271-c5ebae98-4616-4f2a-a78a-591f970910d7.png">
+
+I also tried running it without the scale() function for hour 4 and I got a less significant result.
 <img width="766" alt="Screen Shot 2022-11-21 at 3 20 45 PM" src="https://user-images.githubusercontent.com/56000927/203150926-309ed260-85ba-4b61-93d6-72e8e74b9093.png">
 
+I'm going to abandon this analysis for the time being because I don't think this is super necessary for the PCA plots anyways.
