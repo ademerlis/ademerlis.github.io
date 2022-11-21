@@ -19,7 +19,8 @@ Kevin sent me his Physiology Analysis Rmd for a paper he's currently working on,
 I want to also do a PERMANOVA for my PCA plots.
 
 What I've got so far:
-Example of DDS object creation for hour 0 (control vs. wounded):
+
+## Example of DDS object creation for hour 0 (control vs. wounded):
 
 ```{r}
 countdata_0 <- countsmatrix %>% dplyr::select(`0301C1`:`0306Z`)
@@ -59,7 +60,7 @@ anno_h0<-merge(as.data.frame(resSig_h0),Pdam_Gene_Names_Info,by='row.names',all=
 anno_h0<-na.omit(anno_h0)
 ```
 
-# Principal component analysis plot and Scree plots
+## Principal component analysis plot and Scree plots
 ```{r}
 #need to transform the data for plotting
 dds_vst0<- vst(dds_0,blind=FALSE)
@@ -88,7 +89,7 @@ pca_0 = ggplot(pca12_0, aes(PC1,PC2,shape=condition,color=condition)) +
   
   Now I'm having trouble with the PERMANOVA part.
   
- # This is the section of code Kevin used: 
+ ## This is the section of code Kevin used: 
   ```{r}
   master <- join_all(dfs, by=c("Fragment.ID", "Day", "Group"))
   master.pca <- master
@@ -117,3 +118,14 @@ z_pca
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
  ```
+ 
+ I think I need to make a dataset like this
+ 
+ | Sample ID  | Condition | Pdam0000001 |
+| ------------- | ------------- | ------------- |
+| 301 | Control  | 6 |
+| 302 | Control  | 18|
+| 303 | Control  | 12 |
+| 304 | Wounded  | 12 |
+| 305 | Wounded  | 20 |
+| 306 | Wounded  | 43 |
