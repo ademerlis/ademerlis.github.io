@@ -385,6 +385,13 @@ when I do it, I get nothing because there are zero genes selected from the 33 th
   #object 'p' not found
  ```
 
+My next thought is maybe it's the loading of the "vegan" package in mine that messes things up behind-the-scenes in R somehow, as when i do library(vegan) it has all of these notes that pop up. So I'm going to restart R and not load that package and see what happens.
 
+Just kidding, by process of elimination all the notes that pop up (I think) are from DESeq2. 
 
+I'll still try running the downstream code anyways and see if I still get 33 genes. I may just need to abandon ship on this LRT thing, especially since it is no longer as pertinent to the story.
+
+Nope still get 33 genes.
+
+Ok I'm just going to abandon ship.
 
