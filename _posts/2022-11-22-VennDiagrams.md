@@ -74,4 +74,5 @@ grid.draw(DGE_hour_venn)
 ```
 <img width="499" alt="Screen Shot 2022-11-22 at 9 42 58 AM" src="https://user-images.githubusercontent.com/56000927/203342857-9c585a78-c04b-4fdd-b551-8a2a52168561.png">
 
+When I look up that one gene that's shared among all time points, it is pdam_00003271 which was unannotated in the .gff file.
 
