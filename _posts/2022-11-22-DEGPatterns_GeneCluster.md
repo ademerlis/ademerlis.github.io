@@ -6,11 +6,11 @@ categories: Coding
 tags: [Coding]
 ---
 
-I have been trying to recreate this figure that Sami made a few months ago, but I'm having a lot of trouble getting it.
+I have been trying to recreate this figure but I'm having a lot of trouble getting it.
 
 ![Cluster_Plot](https://user-images.githubusercontent.com/56000927/203420486-0675395f-058a-4221-aae7-0a450c92c450.png)
 
-### The code she used is below:
+### The code used is below:
 
 ```{r packages, error=FALSE, warning=FALSE, message=FALSE}
 
