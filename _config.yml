@@ -6,7 +6,7 @@
 name: Allyson DeMerlis
 
 # Short bio or description (displayed in the header)
-description: PhD student at the University of Miami Rosenstiel School of Marine, Atmospheric, and Earth Science
+description: PhD candidate at the University of Miami Rosenstiel School of Marine, Atmospheric, and Earth Science
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars.githubusercontent.com/u/56000927?s=400&u=9c19614b1d0c18bd4039777d2f33139c73c60242&v=4
@@ -41,7 +41,7 @@ google_analytics:
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url:
+url: http://allysondemerlis.com
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
