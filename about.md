@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I am a marine biologist whose interests intersect genetics and physiology, with the goal of improving the chances of coral reef persistence in the face of climate change!
+I am a marine biologist whose interests intersect genetics and physiology, with the goal of improving the chances of coral reef persistence in the face of climate change.
 
 ### More Information
 
