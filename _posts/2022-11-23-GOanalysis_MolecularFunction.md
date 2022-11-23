@@ -274,4 +274,55 @@ full_join(sigGO_MF_h1, sigGO_MF_h2) %>% full_join(., sigGO_MF_h4) %>%
 
 We get some cool terms related to immune system activity!!! 
 
+Is there a way to make this figure look better...
 
+I think I want to try to make a dotplot, like in [Traylor-Knowles et al. 2021](https://www.frontiersin.org/articles/10.3389/fmars.2021.681563/full)
+
+<img width="900" alt="Screen Shot 2022-11-23 at 9 42 20 AM" src="https://user-images.githubusercontent.com/56000927/203574995-189a090c-79ce-4fe7-ae3d-25ee4f81c22f.png">
+
+I followed Mel's code from the 2021 paper [on Github](https://github.com/ademerlis/sctld_transcriptomics_2021/blob/main/SCTLD_BiNGO_Analysis_May2021.Rmd)
+
+Here is my code:
+```{r}
+#dot plot
+full_join(sigGO_MF_h1, sigGO_MF_h2) %>% full_join(., sigGO_MF_h4) %>%
+  filter(Fisherclassic < 0.05) %>% 
+  mutate(Fisherclassic = as.numeric(Fisherclassic)) %>% 
+ggplot(data=., aes(x=-log(Fisherclassic), y=reorder(Term, -Fisherclassic))) +
+    geom_point(aes(size=Annotated, color=-log(Fisherclassic))) +
+    scale_color_viridis(option="plasma") +
+  labs(x="-log P-Value", y="Gene Ontology Term Description", title=paste("Significant Molecular Function"), color = "-log(P-value)") +
+  scale_y_discrete(labels = function(x) str_wrap(x, width = 50)) +
+  theme_bw()
+```
+
+<img width="694" alt="Screen Shot 2022-11-23 at 11 15 01 AM" src="https://user-images.githubusercontent.com/56000927/203595507-76663c09-9243-43a5-8afb-6dca924b8a10.png">
+
+What's annoying me is that some of the GO terms are cut-off, and no matter how I try to scale or wrap the text on the Y axis, nothing helps. This is because I realized it's actually the annotation itself from the topGO function. It must have something where after a certain number of characters it just automatically adds "..." to the end. I have been googling and I can't figure out how to extract the whole term. Unfortunately I think I need to manually edit it in Illustrator. I can google the GO terms and get the same result using [QuickGO](https://www.ebi.ac.uk/QuickGO/search/GO:0008476) and just searching the term and picking the most annotated one. They seem to all match so far.
+
+I also don't like how the size for the annotation circles is like super high (1000-3000) but it seems like a lot of the values are small. I am going to try to fix the range of circles given so that more sizes are provided.
+
+I couldn't figure out how to add more circles to the Annotated key, so I just changed the range of sizes on the points on the plot themselves so they were scaled a bit larger overall. 
+
+I also realized I needed to separate it by hour, so I added that as well.
+
+```{r}
+#dot plot
+full_join(sigGO_MF_h1, sigGO_MF_h2) %>% full_join(., sigGO_MF_h4) %>%
+  filter(Fisherclassic < 0.05) %>% 
+  mutate(Fisherclassic = as.numeric(Fisherclassic)) %>% 
+  mutate(Annotated = as.numeric(Annotated)) %>% 
+ggplot(data=., aes(x=-log(Fisherclassic), y=reorder(Term, -Fisherclassic))) +
+    geom_point(aes(size=Annotated, color=-log(Fisherclassic))) +
+    scale_color_viridis(option="plasma") +
+  labs(x="-log P-Value", y="Gene Ontology Term Description", title=paste("Significant Molecular Functions"), color = "-log(P-value)") +
+  scale_y_discrete(labels = function(x) str_wrap(x, width = 30)) +
+  theme_bw() +
+  facet_grid(vars(hour), scales = "free") + 
+  scale_size(range = c(2,6))
+ggsave("significantMF_GO_perhour.pdf")
+```
+
+<img width="694" alt="Screen Shot 2022-11-23 at 11 36 18 AM" src="https://user-images.githubusercontent.com/56000927/203600181-4ffed145-dff4-4d93-904d-5afc72a36015.png">
+
+I need to bring this into Illustrator now and edit it manually. 
