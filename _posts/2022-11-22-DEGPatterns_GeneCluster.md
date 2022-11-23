@@ -12,7 +12,7 @@ I have been trying to recreate this figure but I'm having a lot of trouble getti
 
 ### The code used is below:
 
-```{r packages, error=FALSE, warning=FALSE, message=FALSE}
+```{r}
 
 library(knitr)
 library(DESeq2) #needs BiocManager
@@ -537,5 +537,4 @@ cluster3<-subset(cluster3,select=-c(Row.names,value))
 colnames(cluster3)[colnames(cluster3)=="genes"]<-"Geneid"
 cluster3<-merge(cluster3,clustering_sig_genes,by='Geneid')
 cluster3<-subset(cluster3,select=-c(Gene_Function.x))
-
 ```
