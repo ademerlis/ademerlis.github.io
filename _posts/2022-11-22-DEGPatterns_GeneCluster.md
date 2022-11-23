@@ -395,3 +395,147 @@ Nope still get 33 genes.
 
 Ok I'm just going to abandon ship.
 
+### Here is the last updated code for the gene clustering analysis (I'm going to remove it from my final_pub_script.md file):
+
+```{r}
+#first need to create metadata file for all hours
+metadata = data.frame(sample=colnames(countsmatrix),
+                condition = stringr::str_detect(pattern = ".*C.*",string = colnames(countsmatrix)),
+                hour = stringr::str_replace(pattern = "(.).*",replacement="\\1",string = colnames(countsmatrix)),
+ id = stringr::str_replace(pattern=".(...).*",replacement="\\1",string=colnames(countsmatrix)))
+
+#changing TRUE and FALSE for condition to Control and Wounded
+metadata$condition[str_detect(metadata$condition,"TRUE")] <- "Control"
+metadata$condition[str_detect(metadata$condition,"FALSE")] <- "Wounded"
+
+metadata <- metadata %>% column_to_rownames("sample")
+
+#need to change condition and hour to factors
+metadata$condition <- as.factor(metadata$condition)
+metadata$hour<-as.factor(metadata$hour)
+
+#LRT is the Likelihood Ratio Test, used to identify differentially expressed genes (DEGs) between control vs. treatment over time
+dds_all=DESeq2::DESeqDataSetFromMatrix(countData = countsmatrix, colData = metadata, design = ~condition+hour+condition:hour)
+dds_all <- estimateSizeFactors(dds_all)
+
+#prefiltering recommended by DESeq2 Vignette (removes anything with reads below 10)
+keep_all <- rowSums(counts(dds_all)) >= 10
+dds_all <- dds_all[keep_all,]
+
+#DESeq2 variable for LRT test
+dds_LRT<-DESeq2::DESeq(dds_all,reduced=~hour,test="LRT")
+
+res_LRT<-results(dds_LRT)
+summary(res_LRT)
+# out of 21267 with nonzero total read count
+# adjusted p-value < 0.1
+# LFC > 0 (up)       : 69, 0.32%
+# LFC < 0 (down)     : 103, 0.48%
+# outliers [1]       : 0, 0%
+# low counts [2]     : 4123, 19%
+
+#LRTs are very "generous", so a more stringent alpha value than 0.05 is needed
+res_LRT_01 <- results(dds_LRT, alpha = 0.01)
+summary(res_LRT_01)
+# out of 21267 with nonzero total read count
+# adjusted p-value < 0.01
+# LFC > 0 (up)       : 11, 0.052%
+# LFC < 0 (down)     : 22, 0.1%
+# outliers [1]       : 0, 0%
+# low counts [2]     : 3711, 17%
+
+#annotate with Gene Function
+results_LRT_table<-merge(as.data.frame(res_LRT_01),Pdam_Gene_Names_Info,by='row.names',all=FALSE)%>%
+  column_to_rownames("Row.names")
+dim(results_LRT_table) #21267 x 7
+
+#filtering by a significance value of p < 0.01 for gene expression 
+results_table_LRT_01 <- results_LRT_table %>% rownames_to_column("Geneid") %>% filter(padj < 0.01) #33 genes
+
+clustering_sig_genes <- results_table_LRT_01 %>% 
+                  arrange(padj) %>%
+                  head(n=1000)
+
+rld<-rlog(dds_LRT,blind=TRUE)
+rld_mat <- assay(rld)
+# Input is a matrix of log transformed values
+
+rld_cor <- cor(rld_mat)    ## cor() is a base R function
+
+head(rld_cor)   ## check the output of cor(), make note of the rownames and colnames
+
+cluster_rlog <- rld_mat[clustering_sig_genes$Geneid, ]
+
+
+# Use the `degPatterns` function from the 'DEGreport' package to show gene clusters across sample groups 
+
+clusters <- degPatterns(cluster_rlog, metadata, time="hour", col="condition")
+
+clusters$benchmarking_curve
+clusters$benchmarking
+clusters$plot
+
+#editing the plot for publication
+cluster_plot<-clusters$plot+
+  xlab(paste0("Hour"))+
+  # theme(text=element_text(size=12))+
+  # #theme(legend.key.size=unit(0.5,"cm"))+
+  # theme(legend.title=element_text(size=12))+
+  labs(fill="Condition")+
+  scale_color_discrete(name="Condition")
+  #theme_classic(base_size=12,base_family="serif")
+#ggsave(filename="Cluster_Plot.png")
+  
+# What type of data structure is the `clusters` output?
+class(clusters)
+
+# Let's see what is stored in the `df` component
+head(clusters$df)
+```
+
+Create tables for clusters
+```{r}
+#extract raw data from clusters
+clustersdata<-as.data.frame(clusters$raw)
+
+#cluster 1 table
+cluster1<-clustersdata[clustersdata$cluster=='1',]
+#clean up table and annotate with gene function
+cluster1<-subset(cluster1,merge=="Control0",select=-c(merge,condition,cluster,id,hour))
+#picked Control0 arbitrarily (cluster doesn't differ by condition or hour)
+rownames(cluster1) <- cluster1$genes 
+cluster1<-merge(cluster1,Pdam_Gene_Names_Info,by='row.names',all=TRUE)%>%
+  na.omit(cluster1)
+cluster1<-subset(cluster1,select=-c(Row.names,value))
+#merge with cluster_sig_genes table to sort by significance
+colnames(cluster1)[colnames(cluster1)=="genes"]<-"Geneid"
+cluster1<-merge(cluster1,clustering_sig_genes,by='Geneid')
+cluster1<-subset(cluster1,select=-c(Gene_Function.x))
+
+#cluster 2 table
+cluster2<-clustersdata[clustersdata$cluster=='2',]
+#clean up table and annotate with gene function
+cluster2<-subset(cluster2,merge=="Control0",select=-c(merge,condition,cluster,id,hour))
+rownames(cluster2) <- cluster2$genes 
+cluster2<-merge(cluster2,Pdam_Gene_Names_Info,by='row.names',all=TRUE)%>%
+  na.omit(cluster2)
+cluster2<-subset(cluster2,select=-c(Row.names,value))
+#merge with cluster_sig_genes
+colnames(cluster2)[colnames(cluster2)=="genes"]<-"Geneid"
+cluster2<-merge(cluster2,clustering_sig_genes,by='Geneid')
+cluster2<-subset(cluster2,select=-c(Gene_Function.x))
+
+#cluster 3 table
+cluster3<-clustersdata[clustersdata$cluster=='3',]
+#clean up table and annotate with gene function
+cluster3<-subset(cluster3,merge=="Control0",select=-c(merge,condition,cluster,id,hour))
+rownames(cluster3) <- cluster3$genes 
+cluster3<-merge(cluster3,Pdam_Gene_Names_Info,by='row.names',all=TRUE)%>%
+  na.omit(cluster3)
+cluster3<-subset(cluster3,select=-c(Row.names,value))
+#merge with cluster_sig_genes
+colnames(cluster3)[colnames(cluster3)=="genes"]<-"Geneid"
+cluster3<-merge(cluster3,clustering_sig_genes,by='Geneid')
+cluster3<-subset(cluster3,select=-c(Gene_Function.x))
+
+```
