@@ -27,7 +27,7 @@ str(head(GONames))
 
 Hour 0 had no annotated significant genes so we skip that (GO analysis isn't useful for unknown function genes)
 
-```{r}
+```
 #label differentially expressed genes as '1' and non-significant genes as '0'
 res_h1_GO<-as.data.frame(res_h1)
 res_h1_GO<- res_h1_GO%>%mutate(Group=case_when(padj<0.05~"1",padj>=0.05~"0"))
@@ -66,7 +66,7 @@ showSigOfNodes(GO_BP_h1,score(GO_BP_h1_resultelimKS),firstSigNodes = 5,useInfo =
 GO_BP_h1_resultstable %>% filter(Significant >= 1) %>% mutate(hour=1)-> sigGO_BP_h1 #filter for genes from this time point that are significantly associated with the GO terms (which are also significantly enriched)
 ```
 
-```{r}
+```
 #label differentially expressed genes as '1' and non-significant genes as '0'
 res_h2_GO<-as.data.frame(res_h2)
 res_h2_GO<- res_h2_GO%>%mutate(Group=case_when(padj<0.05~"1",padj>=0.05~"0"))
@@ -105,7 +105,7 @@ showSigOfNodes(GO_BP_h2,score(GO_BP_h2_resultelimKS),firstSigNodes = 5,useInfo =
 GO_BP_h2_resultstable %>% filter(Significant >= 1) %>% mutate(hour=2)-> sigGO_BP_h2 #filter for genes from this time point that are significantly associated with the GO terms (which are also significantly enriched)
 ```
 
-```{r}
+```
 #label differentially expressed genes as '1' and non-significant genes as '0'
 res_h4_GO<-as.data.frame(res_h4)
 res_h4_GO<- res_h4_GO%>%mutate(Group=case_when(padj<0.05~"1",padj>=0.05~"0"))
@@ -144,7 +144,7 @@ showSigOfNodes(GO_BP_h4,score(GO_BP_h4_resultelimKS),firstSigNodes = 5,useInfo =
 GO_BP_h4_resultstable %>% filter(Significant >= 1) %>% mutate(hour=4)-> sigGO_BP_h4 #filter for genes from this time point that are significantly associated with the GO terms (which are also significantly enriched)
 ```
 
-```{r}
+```
 full_join(sigGO_BP_h1, sigGO_BP_h2) %>% full_join(., sigGO_BP_h4) %>%  #109 GO terms total
   filter(Fisher01 < 0.05) #11 GO terms now
 
@@ -169,7 +169,7 @@ full_join(sigGO_BP_h1, sigGO_BP_h2) %>% full_join(., sigGO_BP_h4) %>%
 
 We're going to try this now for molecular function (when Sami did it, she got terms related to peroxidase activity, which is immune related).
 
-```{r}
+```
 #create topGO data object
 GO_MF_h1 <-new("topGOdata",
                 ontology="MF",
