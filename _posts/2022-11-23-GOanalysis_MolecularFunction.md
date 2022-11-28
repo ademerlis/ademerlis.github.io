@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GO vs KEGG Analysis
+title: GO Analysis
 date: '2022-11-22'
 categories: Coding
 tags: [Coding]
