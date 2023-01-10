@@ -46,7 +46,14 @@ Types of data for use in GLMMs:
 
 What I would like to do next is try to make a linear mixed effects model for the Fv/Fm data from the experiment. However, I'm over at AOML right now and the wifi is being so slow. So I'm not sure how far I'll get.
 
-(insert figure of IPAM data here)
+Ok, after working on this for an hour, I realized that there were some issues with the RStudio on my AOML desktop versus my laptop. First, I had updated the RStudio on my computer, so it messed up one of the packages that was needed for Ross Cunning's IPAMtoR custom program. I tried to install devtools to install this package (called "joeyr") but AOML wasn't letting me do that for some reason, or something else needed to be updated or something. I got it to work on my laptop though. Then, once I actually got it to work, I have been having issues importing the csv files that were downloaded from the IPAM software. 
 
+The error I keep getting (just for two of the files which is weird) is "Error in if (is.na(dplyr::last(df))) df <- df[, -(ncol(df))] : 
+  the condition has length > 1"
+  
+I thought maybe there was a download issue from OneDrive, because everything is stored on OneDrive. But even after downloading everything, still it is not working. So maybe it is something wrong with the import_ipam function. I am going to try to comment out the line "if (is.na(dplyr::last(df))) df <- df[,-(ncol(df))]", which is meant to get rid of trailing NAs, and see if that will let me import them.
 
+Now the error I get is "Error in dim(ordered) <- ns : 
+  dims [product 1] do not match the length of object [0]"
 
+I can't figure out why this isn't working. Maybe I need to save the files as .csv files again?
