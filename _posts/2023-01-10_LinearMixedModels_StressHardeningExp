@@ -44,5 +44,9 @@ Types of data for use in GLMMs:
 4. Percentage/Proportion --> beta or binomial distribution; the family="beta", link="logit" function in code. (example given is probability density of survival in different treatments)
 5. Time to failure --> Kaplan-Meier, Cox Proportional Hazards (example is probability of survivorshop over time in different treatments)
 
+What I would like to do next is try to make a linear mixed effects model for the Fv/Fm data from the experiment. However, I'm over at AOML right now and the wifi is being so slow. So I'm not sure how far I'll get.
+
+(insert figure of IPAM data here)
+
 
 
