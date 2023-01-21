@@ -67,3 +67,16 @@ I did this for march 16 and it still didnt work...
 I also tried to isolate the files that the error code was popping up for (it seemed like sequentially some of the files worked, but then there would be one that the code would get hung up on). But when testing csv files individually, they all worked and there were no issues.
 
 Maybe I need to ask Ross, Carly, Rich, or Alex if they have ever come across this error.
+
+OK WAIT I GOT IT TO WORK!!!!
+
+something about the if-then statement, R was getting tripped up on. So i replaced the lines:
+# Get rid of trailing NA
+    if (is.na(dplyr::last(df))) df <- df[,-(ncol(df))]
+    
+with:
+# Get rid of trailing NA
+    df <- df %>% select_if(~ !any(is.na(.)))
+    
+And I can now import march 16 and april 20!!!!! WOOOO!
+
