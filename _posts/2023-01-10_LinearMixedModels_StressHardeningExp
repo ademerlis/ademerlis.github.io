@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Figuring out Linear Mixed Models using Stress-Hardening Data
+title: Figuring out Linear Mixed Models using Stress-Hardening Data (and then figuring out why import_IPAM code doesn't work anymore)
 date: '2023-01-10'
 categories: Coding
 tags: [Coding]
@@ -57,3 +57,13 @@ Now the error I get is "Error in dim(ordered) <- ns :
   dims [product 1] do not match the length of object [0]"
 
 I can't figure out why this isn't working. Maybe I need to save the files as .csv files again?
+
+<u> Jan 21st 2023 update </u>  
+
+I installed an older version of RStudio (desktop from 7.1.2022) and tried to load the ipam files again, and march 16 and april 20 still didn't work (i get the same error from before). So I am going to download the files from google drive again and see if that helps in any way. maybe the files got reformatted somehow.
+
+I did this for march 16 and it still didnt work...
+
+I also tried to isolate the files that the error code was popping up for (it seemed like sequentially some of the files worked, but then there would be one that the code would get hung up on). But when testing csv files individually, they all worked and there were no issues.
+
+Maybe I need to ask Ross, Carly, Rich, or Alex if they have ever come across this error.
