@@ -37,9 +37,9 @@ for (i in 1:length(myterms))
 
 Ok, from this source I think I figured it out (https://ucdavis-bioinformatics-training.github.io/2018-June-RNA-Seq-Workshop/friday/enrichment.html):
 
-"Annotated: number of genes (in our gene list) that are annotated with the term
-Significant: Number of significantly DE genes annotated with that term (i.e. genes where geneList = 1)
-Expected: Under random chance, number of genes that would be expected to be significantly DE and annotated with that term
-raw.p.value: P-value from Fisher’s Exact Test, testing for association between significance and pathway membership."
+- Annotated: number of genes (in our gene list) that are annotated with the term
+- Significant: Number of significantly DE genes annotated with that term (i.e. genes where geneList = 1)
+- Expected: Under random chance, number of genes that would be expected to be significantly DE and annotated with that term
+- raw.p.value: P-value from Fisher’s Exact Test, testing for association between significance and pathway membership
 
 Also, based on the above source, the scoring I used for the GO analysis ("1" if padj < 0.05 and "0" if padj > 0.05) means that I need to use the Fisher Exact test, not the K-S test, because the K-S test compares the p-values themselves. 
