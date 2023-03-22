@@ -22,4 +22,4 @@ https://peerj.com/articles/159/
 
 Based on these articles, I am going to try to separate them and see if the pathways become clearer, because right now when all DEGs are grouped together, it is difficult to interpret biological meaning. 
 
-I also saw a suggestion about doing WGCNA first and then doing GO analysis on the modules of highly correlated genes. 
+I also saw a suggestion about doing WGCNA first and then doing GO analysis on the modules of highly correlated genes.
