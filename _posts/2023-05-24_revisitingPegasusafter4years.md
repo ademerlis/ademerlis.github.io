@@ -10,6 +10,8 @@ What has changed with Pegasus since 2019? Time to find out.
 
 The basics: https://acs-docs.readthedocs.io/
 
+also I found this article helpful: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8341507/
+
 I did reset my password so I should be able to log in using that.
 
 ```{bash}
