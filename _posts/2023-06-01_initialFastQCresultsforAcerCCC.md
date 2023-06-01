@@ -1,6 +1,6 @@
 ---
 layout: post
-title: understanding FastQC results
+title: initial FastQC results for Acer CCC samples (untrimmed)
 date: '2023-06-01'
 categories: coding
 tags: [coding]
