@@ -7,11 +7,17 @@ tags: [coding]
 ---
 
 So I got the multiqc report for the CCC Acer samples to work, and it seems like they are all over the place.
+
 **Note: these files have not been trimmed in any way.**
+
 I need to double-check they are 3' RNA-Seq and what kind of sequencing they were done on. (going to look at Natalia's presentation)
+
 It is 3’ Quantseq RNA sequencing
+
 Also a note from Natalia: the Novaseq S2 brings a lot of "artifacts" that need to be trimmed out. PolyA tail can be really long, even post-trimming, so that compromises alignment.
+
 She recommends using TrimGalore and use a code specifically to remove artifacts from NovaSeq + PolyA tails.
+
 So, let's try trimming them and then see if the FastQC results below become better (before we try to interpret these results below).
 
 <img width="1061" alt="Screen Shot 2023-06-01 at 12 45 28 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/dd49481d-8f43-464a-b684-e3eeb46adcbc">
