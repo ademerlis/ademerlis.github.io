@@ -3,7 +3,7 @@ layout: post
 title: installing cutadapt and trim_galore on Pegasus
 date: '2023-06-02'
 categories: coding
-tags: [coding]
+tags: [coding, CCC_ch4]
 ---
 
 trim_galore is a wrapper that requires cutadapt and fastQC (https://github.com/FelixKrueger/TrimGalore)
