@@ -17,3 +17,5 @@ My initial thought is to just skip the trimming step and try using Subread to al
 Before going further down this rabbit hole, let's circle back to the original goal, which was to determine differences between Trimmomatic and Cutadapt. From what I can tell, there aren't many differences. The only difference I can find is that Trimmomatic is newer than cutadapt (2014 vs 2011) (https://arxiv.org/pdf/2109.03625.pdf).
 
 I guess I can run both and see which works better? 
+
+here is the link for the available adapters on Trimmomatic: https://github.com/timflutre/trimmomatic/tree/master/adapters
