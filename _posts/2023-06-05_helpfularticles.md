@@ -22,4 +22,5 @@ tags: [coding]
 5. GC-content normalization for RNA-seq data: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-480
 
 6. **CCS Student Mentors tutorials**
-- <img width="1053" alt="Screen Shot 2023-06-05 at 9 25 20 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/9c0fc04e-047c-4c8d-bd56-140cfc01f7ae">
+- https://github.com/ccsstudentmentors/tutorials/tree/master/RNA-Seq/Quantifying-RNA-Expression
+<img width="1053" alt="Screen Shot 2023-06-05 at 9 25 20 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/9c0fc04e-047c-4c8d-bd56-140cfc01f7ae">
