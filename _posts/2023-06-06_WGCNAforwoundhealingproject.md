@@ -72,4 +72,19 @@ rm(adjacency) # may need to delete adjacency, TOM to clear up vector memory
 So those are things I also need to do when I re-run my analysis (unless the time-series analysis pipeline for WGCNA suggests otherwise)
 
 
+Ok I found another tutorial that has helped me figure out how to create the traits matrix for correlating with the modules. This one comes from UT Austin and it's a coral larval development dataset (https://wikis.utexas.edu/display/bioiteam/Clustering+using+WGCNA)
+
+Their traits matrix that they use to correlate has binary (0-1) encoding for their 4 replicates per time point. It looks like this:
+
+<img width="844" alt="Screen Shot 2023-06-06 at 10 18 28 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/6495eb19-425d-44a7-a998-5031dc12d212">
+
+So I need to make a table that has the same thing, with wounded replicates and control replicates as the rows, and then the time points (hour 0, 1, 2, 4) as the columns.
+
+I initially made the metadata file with just the time points as the columns, but then when I created the heatmap I realized that it was combined control and wounded coral samples within that. So, I needed to create sort of an interaction term for each column, i.e. hour0_control vs. hour0_wounded. Then I encoded the binary 0 or 1 based on whether the sample fit that criteria or not.
+
+Ok, after following all the above changes and making a new metadata file, I got this:
+
+<img width="1197" alt="Screen Shot 2023-06-06 at 10 59 58 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/a8407339-e316-4f06-98a8-52080e31c2d7">
+
+What is interesting is that modules seem to correlate more based on time rather than treatment, but that there are some that are opposite between treatments.
 
