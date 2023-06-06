@@ -33,6 +33,18 @@ So I think I need to redo this analysis with the time component in mind.
 
 Also another thing I just noticed -- when going through the SCTLD WGCNA code that Mike Connelly wrote, I realized he had made some more specifications to the network construction part of the code that I had not included in mine. These suggestions are actually also in the WGCNA FAQ section (https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/faq.html#:~:text=Data%20analysis%20questions,network%20to%20be%20biologically%20meaningful.)
 
+Direct quotes from FAQ that are relevant:
+"The default correlation method in all functions in WGCNA is standard Pearson correlation. In general, unless there is good reason to believe that there are no outlier measurements, we recommend (and use ourselves) the **biweight mid-correlation** as a robust alternative. This is implemented in WGCNA function bicor. Many WGCNA functions take the argument corFnc that allows one to specify an alternative correlation function to the standard cor and bicor is one option. Additional arguments to the correlation function can be specified using the argument corOptions (depending on function, this argument may require one of two alternate forms, please see the help for each function for details). In certain functions, notably the of the blockwise family, correlation function cannot be specified directly as a function; rather, one must use the argument corType to specify either Pearson or biweight mid-correlation.
+
+Some cautionary notes regarding the use of bicor:
+
+1. **Restricting the number of excluded outliers:** argument maxPOutliers. The default version of the biweight mid-correlation, described in Langfelder and Horvath (2011) (link to article), can produce unwanted results when the data have a bi-modal distribution (e.g., when a gene expression depends heavily on a binary variable such as disease status or genotype) or when one of the variables entering the correlation is itself binary (or ordinal). For this reason, we strongly recommend using the argument **maxPOutliers = 0.05 or 0.10** whenever the biweight midcorrelation is used. This argument essentially forces bicor to never regard more than the specified proportion of samples as outliers.
+2. **Dealing with binary data.** When relating high-throughput data x to binary variable y such as sample traits, one can use argument robustY = FALSE to turn off the robust treatment for the y argment of bicor. This results in a hybrid robust-Pearson correlation as described in Langfelder and Horvath (2011). The hybrid correlation can also be used when one of the inputs is numeric but known to not have any outliers."
+
+I added the maxPOutliers argument to the adjacency calculation, but I'm sure if I should also add the robustY = FALSE. Technically the condition trait would be a binary trait (0 = control, 1 = wounded), so I think I should add it.
+
+Then again these may all change once I look into time-series with WGCNA.
+
 https://github.com/ademerlis/sctld_transcriptomics_2021/blob/main/ofav_wgcna_updated.Rmd
 
 ```{R}
