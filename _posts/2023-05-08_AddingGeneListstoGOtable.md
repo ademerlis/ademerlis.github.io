@@ -2,8 +2,8 @@
 layout: post
 title: Adding gene lists to GO tables
 date: '2023-05-08'
-categories: RNA, coding
-tags: [RNA, coding]
+categories: RNA, coding, woundhealingPdam
+tags: [RNA, coding, woundhealingPdam]
 ---
 I want to figure out which specific genes are corresponding to each GO term -- right now it's just number of genes reported in the "Significant" column in the results table.
 
