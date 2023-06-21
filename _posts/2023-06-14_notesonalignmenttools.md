@@ -1,6 +1,6 @@
 ---
 layout: post
-title: notes on alignmnet tools
+title: notes on alignment tools
 date: '2023-06-14'
 categories: coding
 tags: [coding, CCC_ch4, temperaturevariability2023]
