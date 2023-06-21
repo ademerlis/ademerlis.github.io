@@ -31,4 +31,6 @@ I think what is confusing me too is looking at Natalia's index script (https://g
 
 Alternatively, should I try the Matz / Bowtie2 route? That seems to be another popular pipeline that publications use for Tag-seq based transcriptomes/genomes in particular. 
 
+Update: I found these two articles which say that gff3 and gtf are similar files and can be used in STAR under the --sjdbGTFfile flag. However, one source suggests that converting the gff to gtf using "gffread" is recommended (idk why but I think it has to do with making sure the information is presented correctly for STAR to use it). https://biohpc.cornell.edu/doc/RNA-Seq-2018-Lecture1.pdf and https://goenomics.com/glossary.html
 
+See https://github.com/ademerlis/ademerlis.github.io/blob/master/_posts/2023-06-21_STARalignmenttroubleshooting.md for more details
