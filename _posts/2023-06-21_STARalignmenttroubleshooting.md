@@ -49,5 +49,5 @@ From the same source, I also found this which was interesting (a new tool to con
 I then found this website which explains the difference between GFF and GTF and how you need to "adjust them for the intended reading tool." https://goenomics.com/glossary.html
 <img width="852" alt="Screen Shot 2023-06-21 at 11 24 09 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/c63a0fd0-fd65-4574-a68e-d3fac3374dc6">
 
-so, first I need to check if I indexed the Acer genome in the same way. That code worked for me. 
+so, first I need to check if I indexed the Acer genome in the same way.
 
