@@ -222,3 +222,81 @@ multiqc ${and}/Allyson_CCC/aligned/ \
 Ok this time when I submitted it, I think it couldn't read the fastq files because they were still in the zipped .gz format (which is why in Natalia's script she has a flag for --readFilesCommand gunzip -c). I'll try adding that then running it again.
 
 Ok I think that's working.
+
+Update: It did work!!!! I did get an exit code though because I think there was an issue with the multiqc part of the code. I removed the last two lines of the code to get rid of the multiqc code, and I'll try running that as a separate script now.
+
+This is what I ran and it worked:
+```{bash}
+#!/bin/bash
+#BSUB -J AcerCCC_multiqc
+#BSUB -q general
+#BSUB -P and_transcriptomics
+#BSUB -o multiqc_STARalign.out
+#BSUB -e multiqc_STARalign.err
+#BSUB -n 8
+#BSUB -u allyson.demerlis@earth.miami.edu
+#BSUB -N
+
+cd /scratch/projects/and_transcriptomics/Allyson_CCC/aligned/
+
+multiqc .
+```
+
+I can't tell if the results of the alignment are good or not.
+
+![Screen Shot 2023-06-22 at 1 09 22 PM](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/43e0e9b0-e61d-41fe-a53f-fe0fdae85e5e)
+
+
+![Screen Shot 2023-06-22 at 1 09 36 PM](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/bbc35f87-52b3-4104-b71a-83f8f1a2db48)
+
+
+![Screen Shot 2023-06-22 at 1 09 48 PM](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/59a8a10e-1349-483f-95a1-43fb5df772f5)
+
+If I had to guess, I would say the results are not good. 
+
+Thankfully, Jill Ashey has come to save the day by sharing her github repo for using STAR + the Acer genome from Iliana Baums and Sheila Kitchen. https://github.com/JillAshey/SedimentStress/blob/master/Bioinf/RNASeq_pipeline_FL.md 
+
+In her code, one thing that could be useful and help is this note that she added: 
+![Screen Shot 2023-06-22 at 1 13 00 PM](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/08eeb8d7-4609-4908-b414-425ce3ffc197)
+
+The only problem is I'm not sure how exactly to add the identifier. But she definitely added it for Acer before running STAR.
+
+Here is the code she used for the Acer genome index:
+```{bash}
+module load STAR/2.5.3a-foss-2016b
+
+STAR --runThreadN 10 --runMode genomeGenerate --genomeDir /data/putnamlab/jillashey/Francois_data/Florida/output/STAR/GenomeIndex_Acerv --genomeFastaFiles /data/putnamlab/jillashey/genome/Acerv/Acerv_assembly_v1.0_171209.fasta --sjdbGTFfile /data/putnamlab/jillashey/genome/Acerv/Acerv.GFFannotations.fixed_transcript.gff3
+```
+
+and for aligning reads to the genome
+```{bash}
+mkdir AlignReads_Acerv
+cd AlignReads_Acerv
+ln -s /data/putnamlab/jillashey/Francois_data/Florida/data/trimmed/*trim.fq .
+
+nano AlignReads_acerv.sh
+
+#!/bin/bash
+#SBATCH -t 100:00:00
+#SBATCH --nodes=1 --ntasks-per-node=20
+#SBATCH --export=NONE
+#SBATCH --mem=100GB
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=jillashey@uri.edu
+#SBATCH --account=putnamlab
+#SBATCH --error="Align_Acerv_out_error"
+#SBATCH --output="Align_Acerv_out"
+
+module load STAR/2.5.3a-foss-2016b
+
+F=/data/putnamlab/jillashey/Francois_data/Florida/output/STAR/AlignReads_Acerv
+
+array1=($(ls $F/*trim.fq))
+for i in ${array1[@]}
+do
+STAR --runMode alignReads --quantMode TranscriptomeSAM --outTmpDir ${i}_TMP --readFilesIn ${i} --genomeDir /data/putnamlab/jillashey/Francois_data/Florida/output/STAR/GenomeIndex_Acerv --twopassMode Basic --twopass1readsN -1 --outStd Log BAM_Unsorted BAM_Quant --outSAMtype BAM Unsorted SortedByCoordinate --outReadsUnmapped Fastx --outFileNamePrefix ${i}.
+done 
+
+sbatch AlignReads_acerv.sh 
+```
+
