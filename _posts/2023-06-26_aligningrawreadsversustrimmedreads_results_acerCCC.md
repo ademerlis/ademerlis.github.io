@@ -26,4 +26,9 @@ versus the Acer CCC samples:
 
 I think overall I can move forward with samples that have greater than 30% alignment for the Acer CCC ones, and move on with all the stress-hardening samples and see how the gene counts come out. Then I need to try to align the unmapped reads to the symbiont genome (Symbiodinium fitti) to see if those get high alignment. 
 
+Also, I thought I wrote this somewhere already but I can't find it, but it is important to note that the Acer CCC and the Acer stress-hardening were sequenced differently.
+
+Acer CCC = 3’ Quantseq NovaSeq S2
+
+Acer stress-hardening = ... 
 
