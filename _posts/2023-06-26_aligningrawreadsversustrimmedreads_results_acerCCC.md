@@ -30,5 +30,7 @@ Also, I thought I wrote this somewhere already but I can't find it, but it is im
 
 Acer CCC = 3’ Quantseq NovaSeq S2
 
-Acer stress-hardening = ... 
+Acer stress-hardening = NovaSeq S2 SR100
+
+... Wait they were sequenced the same way lol. Nevermind. I guess that in and of itself is interesting. The CCC samples may have been worse quality because they were collected in the field? Or who knows. But that's actually really interesting that they were pretty much sequenced the same way. 
 
