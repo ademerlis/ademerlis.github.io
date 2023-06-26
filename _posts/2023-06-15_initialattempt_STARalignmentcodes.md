@@ -1,6 +1,6 @@
 ---
 layout: post
-title: STAR alignment codes
+title: initial attempt STAR alignment codes
 date: '2023-06-15'
 categories: coding
 tags: [coding, CCC_ch4, temperaturevariability2023]
