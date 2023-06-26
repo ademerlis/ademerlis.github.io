@@ -1,6 +1,6 @@
 ---
 layout: post
-title: STAR alignment Acer genome
+title: SUCCESS STAR alignment Acer genome
 date: '2023-06-21'
 categories: coding
 tags: [coding, CCC_ch4, temperaturevariability2023]
