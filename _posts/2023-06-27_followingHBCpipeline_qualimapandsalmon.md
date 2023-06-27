@@ -129,7 +129,6 @@ They say that "at least 75% of the reads should be uniquely mapped. Once values 
 NOTE: The thresholds suggested above will vary depending on the organism that you are working with. Much of what is discussed here is in the context of working with human or mouse data. For example, 75% of mapped reads holds true only if the genome is good or mature. For badly assembled genomes we may not observe a high mapping rate, even if the actual sequence sample is good."
 
 Based on my alignmnet scores from STAR multiqc report, there's a lot of variability with the samples. 
-/var/folders/q0/c_wrfffx0z96fqvf_w89y1b40000gn/T/TemporaryItems/NSIRD_screencaptureui_VRAjzI/Screen Shot 2023-06-27 at 11.39.35 AM.png
 
 But it doesn't exactly say what to do with it. Like do I remove these files? I already have so few samples. 
 
@@ -142,4 +141,4 @@ Ok well I can't even use Salmon anyways because I don't have a reference transcr
 
 i'm gonna keep creating memes to deal with the pain
 
-/Users/allysondemerlis/Downloads/IMG_7322.JPG
+![IMG_7322](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/9f8d593a-5a0c-472a-a3c4-e09c0f7a4f30)
