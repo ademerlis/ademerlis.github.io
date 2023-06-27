@@ -113,4 +113,33 @@ done
 Ok I think I got it to work!
 
 A couple things to note: 
-1) the code I wrote 
+1) the code I wrote overwrites each output file because I didn't specify file names in the -outdir flag. 
+2) the qualimap bamqc report doesn't give me any useful info that multiqc didn't already give me. so idk why this is useful.
+
+ do i need to do qualimap or samtools????? 
+if I had a GTF file, qualimap rnaseq looks like it would be helpful because it provides info about exons vs introns, etc. but for whatever reason the gff file doesn't work in qualimap.
+
+Going back to the HBC training:
+
+"Having completed the alignment, the first thing we want to know is how well did our reads align to the reference. Rather than looking at each read alignment, it can be more useful to evaluate statistics that give a general overview for the sample. One of the output files from the STAR aligner contains mapping statistics, let’s take a closer look at one of those files."
+
+Ok, so look at each Log.final.out file and look for the mapping rates and the number of multimappers. (it also gives this in the multiqc report...)
+
+They say that "at least 75% of the reads should be uniquely mapped. Once values start to drop lower than 60% it’s advisable to start troubleshooting. The lower the number of uniquely mapping reads means the higher the number of reads that are mapping to multiple locations. It is best to keep this number low because multi-mappers are not included when we start counting reads
+NOTE: The thresholds suggested above will vary depending on the organism that you are working with. Much of what is discussed here is in the context of working with human or mouse data. For example, 75% of mapped reads holds true only if the genome is good or mature. For badly assembled genomes we may not observe a high mapping rate, even if the actual sequence sample is good."
+
+Based on my alignmnet scores from STAR multiqc report, there's a lot of variability with the samples. 
+/var/folders/q0/c_wrfffx0z96fqvf_w89y1b40000gn/T/TemporaryItems/NSIRD_screencaptureui_VRAjzI/Screen Shot 2023-06-27 at 11.39.35 AM.png
+
+But it doesn't exactly say what to do with it. Like do I remove these files? I already have so few samples. 
+
+Regardless, I the tutorial also has this good section of text that explains how the field has moved towards the use of STAR then Salmon:
+"To determine where on the human genome our reads originated from, we will align our reads to the reference genome using STAR (Spliced Transcripts Alignment to a Reference). STAR is an aligner designed to specifically address many of the challenges of RNA-seq data mapping using a strategy to account for spliced alignments. We will not go into detail about how STAR works, but if you are interested in undertanding the alignment strategy we have some materials linked here.
+
+NOTE: Until recently, the standard approach for RNA-seq analysis has been to map our reads using a splice-aware aligner (i.e STAR) and then use the resulting BAM files as input to counting tools like featureCounts and htseq-count to obtain our final expression matrix. The field has now moved towards using lightweight alignment tools like Salmon as standard practice, and so we only use STAR for generating a BAM file. If you are interested in knowing more about the standard approach we have some materials linked here."
+
+Ok well I can't even use Salmon anyways because I don't have a reference transcriptome. So I guess that's why Stringtie is used...
+
+i'm gonna keep creating memes to deal with the pain
+
+/Users/allysondemerlis/Downloads/IMG_7322.JPG
