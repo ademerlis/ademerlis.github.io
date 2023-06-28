@@ -146,7 +146,71 @@ head(Acerv.gff)
 write.table(Acerv.gff, file="~/Desktop/GFFs/Acerv.GFFannotations.fixed_transcript.gff3", sep="\t", col.names = FALSE, row.names=FALSE, quote=FALSE)
 ```
 
+Because she did this step before the STAR alignment, I should re-run all the STAR things so that those files aren't messed up. 
 
+**new STAR index**
+```{bash}
+#!/bin/bash
+#BSUB -J Acer_star_index_fixedannotations
+#BSUB -q general
+#BSUB -P and_transcriptomics
+#BSUB -n 8
+#BSUB -o /scratch/projects/and_transcriptomics/genomes/Acer/star_index%J.out
+#BSUB -e /scratch/projects/and_transcriptomics/genomes/Acer/star_index%J.err
+#BSUB -u and128@miami.edu
+#BSUB -N
+
+and="/scratch/projects/and_transcriptomics"
+
+/scratch/projects/and_transcriptomics/programs/STAR-2.7.10b/bin/Linux_x86_64_static/STAR \
+--runThreadN 16 \
+--runMode genomeGenerate \
+--genomeDir ${and}/genomes/Acer/Acer_STAR_index \
+--genomeFastaFiles ${and}/genomes/Acer/Acerv_assembly_v1.0_171209.fasta \
+--sjdbGTFfile ${and}/genomes/Acer/Acerv.GFFannotations.fixed_transcript.gff3 \
+--sjdbOverhang 100 \
+--sjdbGTFtagExonParentTranscript Parent \
+--genomeSAindexNbases 13
+```
+
+**new STAR alignment**
+```{bash}
+#!/bin/bash
+#BSUB -J star_align_trimmed_fixedannotations
+#BSUB -q bigmem
+#BSUB -P and_transcriptomics
+#BSUB -n 16
+#BSUB -W 120:00
+#BSUB -R "rusage[mem=15000]"
+#BSUB -o star_align%J.out
+#BSUB -e star_align%J.err
+#BSUB -u and128@miami.edu
+#BSUB -N
+
+# A soft clipping option is added to STAR to deal with any leftover polyA and adapter contamination 
+
+and="/scratch/projects/and_transcriptomics"
+
+cd "/scratch/projects/and_transcriptomics/Allyson_CCC/trimmed/trimmed_and_removedpolyA_fastqfiles/forSTAR"
+
+data=($(ls *.gz))
+
+for sample in ${data[@]} ;
+
+do \
+/scratch/projects/and_transcriptomics/programs/STAR-2.7.10b/bin/Linux_x86_64_static/STAR \
+--genomeDir ${and}/genomes/Acer/Acer_STAR_index_annotationsupdated \
+--outSAMtype BAM SortedByCoordinate \
+--runThreadN 16 \
+--readFilesCommand gunzip -c \
+--readFilesIn ${sample} \
+--quantMode TranscriptomeSAM GeneCounts \
+--clip3pAdapterSeq AAAAAAAAAA \
+--outReadsUnmapped Fastx \
+--outFileNamePrefix ${and}/Allyson_CCC/aligned/${sample} ; \
+
+done
+```
 
 5) **re-estimate assembly**
    (jill submitted this as a job so it must take some more computing power)
