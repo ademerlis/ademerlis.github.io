@@ -47,9 +47,9 @@ done
 ```
 
 Ok what do all the flags mean:
--G is a reference annotation file to be used as a guide for the assembly process. 
--e "When the -e option is used, the reference annotation file -G is a required input and StringTie will not attempt to assemble the input read alignments but instead it will only estimate the expression levels of the "reference" transcripts provided in the -G file. With this option, no "novel" transcript assemblies (isoforms) will be produced, and read alignments not overlapping any of the given reference transcripts will be ignored, which may provide a considerable speed boost when the given set of reference transcripts is limited to a set of target genes for example."
--o output file name
+- G is a reference annotation file to be used as a guide for the assembly process. 
+- e "When the -e option is used, the reference annotation file -G is a required input and StringTie will not attempt to assemble the input read alignments but instead it will only estimate the expression levels of the "reference" transcripts provided in the -G file. With this option, no "novel" transcript assemblies (isoforms) will be produced, and read alignments not overlapping any of the given reference transcripts will be ignored, which may provide a considerable speed boost when the given set of reference transcripts is limited to a set of target genes for example."
+- o output file name
 
 I think this is working (although it says "line 21: command not found") but there are still .gtf files being generated so that's good I guess.
 
@@ -207,10 +207,37 @@ do \
 --quantMode TranscriptomeSAM GeneCounts \
 --clip3pAdapterSeq AAAAAAAAAA \
 --outReadsUnmapped Fastx \
---outFileNamePrefix ${and}/Allyson_CCC/aligned/${sample} ; \
+--outFileNamePrefix ${and}/Allyson_CCC/aligned_updatedannotations/${sample} ; \
 
 done
 ```
+
+**run stringtie again**
+```{bash}
+#!/bin/bash
+#BSUB -J stringtie
+#BSUB -q general
+#BSUB -P and_transcriptomics
+#BSUB -o stringtie%J.out
+#BSUB -e stringtie%J.err
+#BSUB -u and128@miami.edu
+#BSUB -N
+
+module load python/3.8.7
+
+and="/scratch/projects/and_transcriptomics"
+
+cd "/scratch/projects/and_transcriptomics/Allyson_CCC/aligned"
+
+data=($(ls *Aligned.sortedByCoord.out.bam))
+
+for i in ${data[@]} ;
+
+do \
+${and}/programs/stringtie-2.2.1/stringtie -G /${and}/genomes/Acer/Acerv_assembly_v1.0.gff3 -e -o ${i}.gtf ${i} ; \ 
+done
+```
+
 
 5) **re-estimate assembly**
    (jill submitted this as a job so it must take some more computing power)
