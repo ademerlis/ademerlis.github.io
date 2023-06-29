@@ -240,7 +240,7 @@ ${and}/programs/stringtie-2.2.1/stringtie -G /${and}/genomes/Acer/Acerv.GFFannot
 done
 ```
 
-I still get the same error as  before (lline 21: command not found) but the .gtf files are still generated so i'll move forward with them. 
+I still get the same error as  before (line 21: command not found) but the .gtf files are still generated so i'll move forward with them. 
 
 **Merge stringTie gtf results**:
 
@@ -324,6 +324,39 @@ cd /scratch/projects/and_transcriptomics/Allyson_CCC/aligned_updatedannotations/
 Nope that did nothing. 
 
 The other thing I'm wondering is whether the merge function worked? Because the size of the merged gtf file is 44 MB while the size of each gtf file is ~42 MB. Shouldn't the merged one be way larger? But if the merged file only had one sample gtf in it, that still wouldn't make the senstivity and precision 100%... 
+
+The multiqc for the updated STAR alignment came back as well and it's identical to the unedited gff one (in terms of alignment rates for the samples). So idk if that really did anything.
+
+What if the gffcompare thing isn't working because of the error message I got? line 21: command not found? Maybe that's why it isn't working and it's generating the gtf files wrong or something. 
+
+So I asked ChatGPT and apparently after Sept 2021 the -e option got removed from stringtie. So what does that mean the command is doing then? 
+
+I just looked on the github page for stringtie and it says that the -e option is still there, but is required with -G. And the purpose of it is to "only estimate the abundance of given reference transcripts." Which idk what that means, like would that mean that the sample gtf files would only be matched to reference transcripts from the Baums and Kitchen genome assembly? 
+
+Let me try two things: first try running it without the -e option and see if that does anything, then try running it with the fasta file as well to see if it needs like extra annotations or something. 
+
+1. without e option
+- even when I removed the e option it says "/projects/lsf_spool/1688064612.27955592.shell: line 21:  : command not found". So something isn't working at all. Maybe. I should try just runnnig stringtie on one file.
+```{bash}
+/scratch/projects/and_transcriptomics/programs/stringtie-2.2.1/stringtie -G /scratch/projects/and_transcriptomics/genomes/Acer/Acerv_assembly_v1.0.gff3 -o 1087_trimmed_trimmed.fastq.gzAligned.sortedByCoord.out.bam.gtf 1087_trimmed_trimmed.fastq.gzAligned.sortedByCoord.out.bam
+```
+It ran and didn't have any errors come up. Btu the resulting .gtf file is only 15KB in size which seems weird.
+
+Let's try running it with the fasta file too and see if the file size changes. 
+
+```{bash}
+/scratch/projects/and_transcriptomics/programs/stringtie-2.2.1/stringtie -G /scratch/projects/and_transcriptomics/genomes/Acer/Acerv_assembly_v1.0.gff3 --ref /scratch/projects/and_transcriptomics/genomes/Acer/Acerv_assembly_v1.0_171209.fasta -o 1087_trimmed_trimmed.fastq.gzAligned.sortedByCoord.out.bam.gtf 1087_trimmed_trimmed.fastq.gzAligned.sortedByCoord.out.bam
+```
+
+It doesn't look like this made any difference. I guess I'll try to add this fasta reference thing into the script and see if the error message goes away. 
+
+The error message didn't go away. Then I removed the .gff3 assembly file too and the ERROR STILL POPPED UP. so it must have something to do with stringtie program???
+
+I just updated the ~/.bash_profile to have an export PATH specifically for stringtie. I can now run stringtie in the command line. But when I submit the job, i still get the error of line 21 command not found!!! what the heck am i doing wrong. 
+
+I think I. amgoing to give up and just try Natalia's method of directly using the STAR output files. I'm still not sure what Stringtie even does to be honest.
+
+ 
 
 5) **re-estimate assembly**
    (jill submitted this as a job so it must take some more computing power)
