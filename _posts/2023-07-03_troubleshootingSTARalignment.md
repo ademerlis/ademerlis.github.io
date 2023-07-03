@@ -1,4 +1,3 @@
-#  Troubleshooting STAR alignment
 ---
 layout: post
 title: Troubleshooting STAR alignment
@@ -11,7 +10,7 @@ This morning to try to troubleshoot the "missing gene IDs" issue with my STAR al
 
 To do this, I downloaded the IGV GUI to my local computer, then also installed samtools into my bash_profile because I needed to create an index for the .bam file to load it in IGV. To run IGV, you input the .fasta genome file, then your sample .bam file and the index file. For the sample I used, it looked like this:
 
-![image](/Users/allysondemerlis/Downloads/STAR_bam_files/igv_snapshot.png)
+![igv_snapshot](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/827788f0-c898-44fc-9834-4ec7dffd1cee)
 
 It doesn't look like any of the IGV examples, so that makes me think something is wrong.
 
