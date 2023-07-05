@@ -18,4 +18,6 @@ I see two options for moving forward (while waiting to hear back about help from
 1. try pipeline with other Acer samples and see if those are better-quality and thus alignment would work better
 2. try something like Galaxy that does most of the coding work for you
 
+I tried using Galaxy, because they have STAR for RNA-seq on there, and the upload rate for just one trimmed.fastq.gz file was so slow that I gave up. Today (July 5) I'm going to try to run FeatureCounts on the aligned reads and see if it works anyways. I'm also going to try to run stringtie with the stress-hardening exp Acer samples and see if those work better.
+
 
