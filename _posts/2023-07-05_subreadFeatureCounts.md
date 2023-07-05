@@ -56,3 +56,55 @@ It looks like I'm getting different alignment rates, but still low (less than 25
 
 So I loaded the subread module that is on Pegasus to run this, and the version 1.6.2 was from 2019. ChatGPT said that the version of Subread can also significantly affect alignment rates, so maybe I should download the most up-to-date version to my scratch space and try running that instead.
 
+```{bash}
+Allysons-MacBook-Pro-2:Downloads allysondemerlis$ scp subread-2.0.6-Linux-x86_64.tar.gz and128@pegasus.ccs.miami.edu:/scratch/projects/and_transcriptomics/programs
+
+[and128@login4 programs]$ tar -xzf subread-2.0.6-Linux-x86_64.tar.gz
+cd subread-2.0.6-Linux-x86_64/bin/
+nano ~/.bash_profile
+#in bash profile add: export PATH=$PATH:/scratch/projects/and_transcriptomics/programs/subread-2.0.6-Linux-x86_64
+```
+
+Now I should be able to run the scripts with this program. 
+
+We'll update the original script first:
+```{bash}
+#!/bin/bash
+#BSUB -J featurecounts_trimmed
+#BSUB -q general
+#BSUB -P and_transcriptomics
+#BSUB -o featurecounts%J.out
+#BSUB -e featurecounts%J.err
+#BSUB -n 8
+
+and="/scratch/projects/and_transcriptomics"
+
+/scratch/projects/and_transcriptomics/programs/subread-2.0.6-Linux-x86_64/bin/featureCounts -t gene \
+-g ID \
+-a ${and}/genomes/Acer/Acerv_assembly_v1.0.gff3 \
+-o ${and}/Allyson_CCC/subread_counts/AcerCCC.counts \
+${and}/Allyson_CCC/aligned/*Aligned.sortedByCoord.out.bam
+```
+
+It looks like I am getting the same percentages. Ugh ok whatever. I'll just run it on the updated annotations files too just so everything is updated.
+
+
+```{bash}
+#!/bin/bash
+#BSUB -J featurecounts_trimmed_updatedannotations
+#BSUB -q general
+#BSUB -P and_transcriptomics
+#BSUB -o featurecounts_updatedannotations%J.out
+#BSUB -e featurecounts_updatedannotations%J.err
+#BSUB -n 8
+
+and="/scratch/projects/and_transcriptomics"
+
+/scratch/projects/and_transcriptomics/programs/subread-2.0.6-Linux-x86_64/bin/featureCounts -t gene \
+-g ID \
+-a ${and}/genomes/Acer/Acerv.GFFannotations.fixed_transcript.gff3 \
+-o ${and}/Allyson_CCC/subread_counts/AcerCCC_fixedannotations.counts \
+${and}/Allyson_CCC/aligned_updatedannotations/*Aligned.sortedByCoord.out.bam
+```
+
+NOTE: you did not change the names of the output files so you overwrote them. whoops. but the only difference is the version of subread and it didn't look like it changed percent alignment very much (still around 25%).
