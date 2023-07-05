@@ -76,3 +76,5 @@ cd /scratch/projects/and_transcriptomics/Allyson_stresshardening_RNAseq/aligned/
 ```
 
 Now look at the summary file (Acerv.merged): 
+
+<img width="799" alt="Screen Shot 2023-07-05 at 11 39 04 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/00aa7b4b-c412-4dd2-bcf3-47712bf62ff9">
