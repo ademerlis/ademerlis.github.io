@@ -356,7 +356,17 @@ I just updated the ~/.bash_profile to have an export PATH specifically for strin
 
 I think I. amgoing to give up and just try Natalia's method of directly using the STAR output files. I'm still not sure what Stringtie even does to be honest.
 
- 
+...
+
+**continuing on July 6** 
+
+OMG I THINK I GOT IT TO WORK
+
+<img width="542" alt="Screen Shot 2023-07-06 at 2 41 47 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/99707e47-7d19-4a6a-9590-352df77cd260">
+
+I removed 4 more samples from the CCC stringtie analysis and I got that result above. See [my recent blog post](https://github.com/ademerlis/ademerlis.github.io/blob/master/_posts/2023-07-06_AcerCCCversusAcerStressHardeningsamples.md) for my thought process behind it (has to do with percent alignment that succeeded in STAR).  
+
+Ok so now I can continue with the rest of the pipeline. 
 
 5) **re-estimate assembly**
    (jill submitted this as a job so it must take some more computing power)
@@ -375,15 +385,36 @@ module load python/3.8.7
 
 and="/scratch/projects/and_transcriptomics"
 
-cd "/scratch/projects/and_transcriptomics/Allyson_CCC/aligned"
+cd "/scratch/projects/and_transcriptomics/Allyson_CCC/aligned/"
 
 data=($(ls *Aligned.sortedByCoord.out.bam))
 
 for i in ${data[@]} ;
 
 do \
-${and}/programs/stringtie-2.2.1/stringtie -e -G /${and}/genomes/Acer/Acerv_assembly_v1.0.gff3 -o ${i}.merge.gtf ${i} ; \ 
+${and}/programs/stringtie-2.2.1/stringtie -e -G /scratch/projects/and_transcriptomics/Allyson_CCC/aligned/stringtie_gtf_files/stringtie_acerv_merged.gtf -o ${i}_reestimated.merge.gtf ${i} ; \ 
 done
+```
+
+make a directory for stringtie_reestimatedmerged_gtf_files and move the new gtf files to that.
+
+6) obtain gene counts
+
+run this in the command line, no need to submit a job
+
+```{bash}
+F="/scratch/projects/and_transcriptomics/Allyson_CCC/aligned/stringtie_reestimatedmerged_gtf_files/"
+
+data=($(ls *merge.gtf))
+
+for i in ${data[@]} ;
+
+do \
+echo "${i} $F${i}" >> sample_list_acerv.txt ; \
+done
+
+/scratch/projects/and_transcriptomics/programs/stringtie-2.2.1/prepDE.py -g gene_count_acerv_matrix.csv -i sample_list_acerv.txt
+
 ```
 
 
