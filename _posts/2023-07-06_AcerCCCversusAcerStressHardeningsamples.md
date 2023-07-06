@@ -40,3 +40,16 @@ This ends up being a problem though because when I try to run stringtie and gffc
 
 <img width="500" alt="Screen Shot 2023-07-06 at 1 55 47 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/969c52d6-0840-4ac2-8cd1-80956d03b9d3">
 
+I'm going to try rerunning the CCC ones and maybe be more stringent with which samples to run with it? When I look at the quality of the Acer stress-hardening samples, it looks like the minimum % aligned of the trimmed reads is 44%. Maybe I should set like a cutoff of alignment because stringtie needs a minimum alignment? Let's remove the bottom 4 samples from the STAR alignment graph for the CCC samples: 1087, 1097, 1098, 2383
+
+Here are the multiqc reports for the Acer stress-hardening samples so I have visuals to compare to:
+
+Raw reads:
+<img width="673" alt="Screen Shot 2023-07-06 at 2 34 50 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/5ef5da60-9688-4501-81af-35a9b393b0a2">
+
+Trimmed reads:
+<img width="654" alt="Screen Shot 2023-07-06 at 2 35 25 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/3b0c90ef-39ad-4ebf-9ff6-6933d4c879c5">
+
+STAR alignment: 
+<img width="668" alt="Screen Shot 2023-07-06 at 2 35 52 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/42fb9a77-cc84-40fa-9ccc-152dbdc20fef">
+
