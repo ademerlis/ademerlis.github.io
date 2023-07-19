@@ -92,18 +92,19 @@ mkdir ${and}/Ch2_temperaturevariability2023/trimmed_qc/
 mkdir ${and}/Ch2_temperaturevariability2023/processed/
 
 # Make an array of sequences to trim
-array1=($(ls *.fastq.gz)) 
+array1=($(ls *.fastq.gz))
 
-# fastp loop; trim the Read 1 TruSeq adapter sequence; trim poly x default 10 (to trim polyA) 
+# fastp loop; trim the Read 1 TruSeq adapter sequence; trim poly x default 10 (to trim polyA)
 
 cd ${and}/Ch2_temperaturevariability2023/fastq_rawreads/
 
 for i in ${array1[@]}; do
- ${and}/programs/fastp --in1 ${i} --out1 ${and}/Ch2_temperaturevariability2023/processed/clean.${i} --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --trim_poly_x 6 -q 30 -y -Y 50 
+ ${and}/programs/fastp --in1 ${i} --out1 ${and}/Ch2_temperaturevariability2023/processed/clean.${i} --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --trim_poly_x 6 -q 30 -y -Y 50
         fastqc ${and}/Ch2_temperaturevariability2023/processed/clean.${i} -o ${and}/Ch2_temperaturevariability2023/trimmed_qc/ # fastqc the cleaned reads
-done 
+done
 
 echo "Read trimming of adapters complete." $(date)
+
 
 # Quality Assessment of Trimmed Reads
 
@@ -120,4 +121,90 @@ Let's give it a try.
 While it's running: note that in all their codes, they specify this adapter sequence: --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
 
 That's because it corresponds to the [Illumina TruSeq single index and CD index based kits read 1](https://knowledge.illumina.com/library-preparation/general/library-preparation-general-reference_material-list/000001314).
+
+Ok this script was pending for too long in the general queue, so I changed it to bigmem and submitted it again. Then I got this error: "cannot access *.fastq.gz: No such file or directory"
+
+Maybe it doesn't like the array thing. So I updated the for loop to mirror my trimming script from the old pipeline:
+
+```{bash}
+for sample in ${and}/Ch2_temperaturevariability2023/fastq_rawreads/*.fastq.gz ;
+do \
+ ${and}/programs/fastp --in1 ${i} --out1 ${and}/Ch2_temperaturevariability2023/processed/clean.${i} --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --trim_poly_x 6 -q 30 -y -Y 50 
+        fastqc ${and}/Ch2_temperaturevariability2023/processed/clean.${i} -o ${and}/Ch2_temperaturevariability2023/trimmed_qc/ # fastqc the cleaned reads
+done
+```
+
+updated script:
+
+```{bash}
+#!/bin/bash
+#BSUB -J trim_qc.sh
+#BSUB -q bigmem
+#BSUB -n 8
+#BSUB -R "rusage[mem=10000]"
+#BSUB -P and_transcriptomics
+#BSUB -o trim_qc_%J.out
+#BSUB -e trim_qc_%J.err
+#BSUB -u allyson.demerlis@earth.miami.edu
+#BSUB -N
+
+and="/scratch/projects/and_transcriptomics"
+
+# load modules needed
+module load fastqc/0.10.1
+
+# fastp loop; trim the Read 1 TruSeq adapter sequence; trim poly x default 10 (to trim polyA)
+
+for sample in ${and}/Ch2_temperaturevariability2023/fastq_rawreads/*.fastq.gz ;
+do \
+ ${and}/programs/fastp --in1 ${sample} --out1 ${and}/Ch2_temperaturevariability2023/processed/clean.${sample} --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --trim_poly_x 6 -q 30 -y -Y 50 \
+        fastqc ${and}/Ch2_temperaturevariability2023/processed/clean.${sample} -o ${and}/Ch2_temperaturevariability2023/trimmed_qc/ \ # fastqc the cleaned reads
+done
+
+echo "Read trimming of adapters complete." $(date)
+
+# Quality Assessment of Trimmed Reads
+
+multiqc ${and}/Ch2_temperaturevariability2023/trimmed_qc/ #Compile MultiQC report from FastQC files
+
+mv multiqc_report.html trimmed_qc/ #move output files to the QC directory
+mv multiqc_data trimmed_qc/ #move output files to the QC directory
+
+echo "Cleaned MultiQC report generated." $(date)
+```
+
+Ok after a series of trials and tribulations with this code (the file paths weren't working, it was getting overwhelmed with trying to remake directories and the file names didn't work etc)...
+
+Here is the most simplified version of the code and based on for loops that have worked for me in the past:
+
+(I also deleted everything and started from scratch so the mkdir functions could work)
+
+```{bash}
+#!/bin/bash
+#BSUB -J trim_qc.sh
+#BSUB -q bigmem
+#BSUB -n 8
+#BSUB -R "rusage[mem=10000]"
+#BSUB -P and_transcriptomics
+#BSUB -o trim_qc_%J.out
+#BSUB -e trim_qc_%J.err
+#BSUB -u allyson.demerlis@earth.miami.edu
+#BSUB -N
+
+and="/scratch/projects/and_transcriptomics"
+
+module load fastqc/0.10.1
+
+for sample in ${and}/Ch2_temperaturevariability2023/fastq_rawreads/*.fastq.gz ;
+do \
+${and}/programs/fastp --in1 ${sample} --out1 ${sample}.clean.processed --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --trim_poly_x 6 -q 30 -y -Y 50 ; \
+done
+
+cd ${and}/Ch2_temperaturevariability2023/fastq_rawreads/
+
+fastqc *.clean.processed
+
+multiqc .
+```
+
 
