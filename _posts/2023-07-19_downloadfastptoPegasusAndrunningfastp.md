@@ -1,6 +1,6 @@
 ---
 layout: post
-title: download fastp to Pegasus
+title: download fastp to Pegasus and running fastp
 date: '2023-07-19'
 categories: coding
 tags: [coding, temperaturevariability2023]
@@ -206,5 +206,7 @@ fastqc *.clean.processed
 
 multiqc .
 ```
+
+Ok in comparing the old multiqc report for the trimmed files using cutadapt/Trim galore versus the new multiqc report with fastp, it looks like multiqc gives you more information when you use cutadapt (like % BP trimmed). But overall the numbers look similar, sequence duplication levels look similar, and overall both reports don't have any big drastic differences. Which I guess is good? it means that this step isn't the issue perse. My next step will be to use HISAT2 instead of STAR. 
 
 
