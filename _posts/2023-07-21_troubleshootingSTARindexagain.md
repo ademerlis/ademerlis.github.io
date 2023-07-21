@@ -148,69 +148,56 @@ Load libraries and data.
 #Load libraries
 library(tidyverse)
 library(R.utils)
-```
+
 
 Load  gene gff file
 
-```{r}
 gff <- read.csv(file="Mcap2020/Data/TagSeq/Montipora_capitata_HIv3.genes.gff3", header=FALSE, sep="\t") 
-```
 
 Rename columns 
 
-```{r}
 colnames(gff) <- c("scaffold", "Gene.Predict", "id", "gene.start","gene.stop", "pos1", "pos2","pos3", "gene")
 head(gff)
-```
 
 Create transcript ID  
-```{r}
+
 gff$transcript_id <- sub(";.*", "", gff$gene)
 gff$transcript_id <- gsub("ID=", "", gff$transcript_id) #remove ID= 
 gff$transcript_id <- gsub("Parent=", "", gff$transcript_id) #remove ID= 
 head(gff)
-```
+
 
 Create Parent ID 
-```{r}
+
 gff$parent_id <- sub(".*Parent=", "", gff$gene)
 gff$parent_id <- sub(";.*", "", gff$parent_id)
 gff$parent_id <- gsub("ID=", "", gff$parent_id) #remove ID= 
 head(gff)
-```
+
 
 Now add these values into the gene column separated by semicolons.  
 
-```{r}
 gff <- gff %>% 
   mutate(gene = ifelse(id != "gene", paste0(gene, ";transcript_id=", gff$transcript_id, ";gene_id=", gff$parent_id),  paste0(gene)))
 head(gff)
-```
+
 
 Now remove the transcript and parent ID separate columns.  
 
-```{r}
+
 gff<-gff %>%
   select(!transcript_id)%>%
   select(!parent_id)
 
 head(gff)
-```
+
 
 Save file. Then upload this to Andromeda for use in bioinformatic steps.  
 
-```{r}
 write.table(gff, file="Mcap2020/Data/TagSeq/Montipora_capitata_HIv3.genes_fixed.gff3", sep="\t", col.names = FALSE, row.names=FALSE, quote=FALSE)
 
 #gzip the file 
 gzip("Mcap2020/Data/TagSeq/Montipora_capitata_HIv3.genes_fixed.gff3")
-```
-
-`scp ~/MyProjects/EarlyLifeHistory_Energetics/Mcap2020/Data/TagSeq/Montipora_capitata_HIv3.genes_fixed.gff3.gz ashuffmyer@ssh3.hac.uri.edu:/data/putnamlab/ashuffmyer/mcap-2020-tagseq/sequences`
-
-or 
-
-`wget https://github.com/AHuffmyer/EarlyLifeHistory_Energetics/raw/master/Mcap2020/Data/TagSeq/Montipora_capitata_HIv3.genes_fixed.gff3.gz`  
 ```
 
 When I look at my most updated gff3 file ("Acerv.GFFannotations.fixed_transcript_take2.gff3"), I see that "Parent=" is still there. I don't know if this messes it up at all, since I think "Parent" is supposed to correspond to the gene_id, and then the "transcript_id" is supposed to be the more specific one (i.e. the one that has the .exon1 in it). 
