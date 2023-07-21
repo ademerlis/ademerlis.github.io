@@ -249,3 +249,67 @@ Now it looks like this. This might be right? Idk how much this changes things.
 
 Let's try now running the alignment on the samples. NOTE: I have two pipelines of trimmed sequences now: the NJ_pipeline is from Natalia and Jill and that involved using cutadapt. The AS_pipeline is Ariana and Sam and involved using fastp. I am going to try this new STAR gff file on the NJ pipeline first since that is farther along (all the way to counts matrix) and so it can be directly compared.
 
+updated STAR index script:
+```{bash}
+#!/bin/bash
+#BSUB -J Acer_star_index_fixedannotations_take3
+#BSUB -q general
+#BSUB -P and_transcriptomics
+#BSUB -n 8
+#BSUB -o /scratch/projects/and_transcriptomics/genomes/Acer/star_index%J.out
+#BSUB -e /scratch/projects/and_transcriptomics/genomes/Acer/star_index%J.err
+#BSUB -u and128@miami.edu
+#BSUB -N
+
+and="/scratch/projects/and_transcriptomics"
+
+/scratch/projects/and_transcriptomics/programs/STAR-2.7.10b/bin/Linux_x86_64_static/STAR \
+--runThreadN 16 \
+--runMode genomeGenerate \
+--genomeDir ${and}/genomes/Acer/Acer_STAR_index_gffannotations.fixed_take3 \
+--genomeFastaFiles ${and}/genomes/Acer/Acerv_assembly_v1.0_171209.fasta \
+--sjdbGTFfile ${and}/genomes/Acer/Acerv.GFFannotations.fixed_transcript_take3.gff3 \
+--sjdbOverhang 100 \
+--sjdbGTFtagExonParentTranscript Parent \
+--genomeSAindexNbases 13
+```
+
+updated STAR alignment script for Ch2_temperaturevariability:
+
+```{bash}
+#!/bin/bash
+#BSUB -J star_align_trimmed_take3
+#BSUB -q bigmem
+#BSUB -P and_transcriptomics
+#BSUB -n 16
+#BSUB -o star_align%J.out
+#BSUB -e star_align%J.err
+#BSUB -u and128@miami.edu
+#BSUB -N
+
+# A soft clipping option is added to STAR to deal with any leftover polyA and adapter contamination 
+
+and="/scratch/projects/and_transcriptomics"
+
+cd "/scratch/projects/and_transcriptomics/Ch2_temperaturevariability2023/NJ_pipeline/trimmed/trimmed_andremovedpolyA_fastqfiles/Acer"
+
+data=($(ls *.gz))
+
+for sample in ${data[@]} ;
+
+do \
+/scratch/projects/and_transcriptomics/programs/STAR-2.7.10b/bin/Linux_x86_64_static/STAR \
+--genomeDir ${and}/genomes/Acer/Acer_STAR_index_gffannotations.fixed_take3/ \
+--outSAMtype BAM SortedByCoordinate \
+--runThreadN 16 \
+--readFilesCommand gunzip -c \
+--readFilesIn ${sample} \
+--quantMode TranscriptomeSAM GeneCounts \
+--clip3pAdapterSeq AAAAAAAAAA \
+--outReadsUnmapped Fastx \
+--outFileNamePrefix ${and}/Ch2_temperaturevariability2023/aligned_updatedgff3_take3/${sample} ; \
+
+done
+```
+
+going to rerun the Ch4_AcerCCC ones too.
