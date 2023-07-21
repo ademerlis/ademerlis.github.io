@@ -247,4 +247,5 @@ Now it looks like this. This might be right? Idk how much this changes things.
 
 <img width="1337" alt="Screen Shot 2023-07-21 at 9 46 43 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/13946726-4337-41c4-ae12-e384caff488a">
 
-Let's try now running the alignment on the samples.
+Let's try now running the alignment on the samples. NOTE: I have two pipelines of trimmed sequences now: the NJ_pipeline is from Natalia and Jill and that involved using cutadapt. The AS_pipeline is Ariana and Sam and involved using fastp. I am going to try this new STAR gff file on the NJ pipeline first since that is farther along (all the way to counts matrix) and so it can be directly compared.
+
