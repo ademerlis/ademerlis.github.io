@@ -67,6 +67,7 @@ I will adapt the above code to run on Pegasus:
 and="/scratch/projects/and_transcriptomics"
 
 module load samtools/1.3
+module load python/3.8.7
 
 /scratch/projects/and_transcriptomics/programs/hisat2-2.2.1/hisat2-build -f ${and}/genomes/Acer/Acerv_assembly_v1.0_171209.fasta ${and}/genomes/Acer/Acer_STAR_index_gffannotations.fixed_take3
 echo "Reference genome indexed. Starting alignment" $(date)
@@ -80,3 +81,7 @@ for i in ${array[@]}; do
         rm ${sample_name}.sam
 done
 ```
+
+It's weird, I keep getting an error that the trimmed files (i.e. "Acer-005_S23_L001_R1_001.fastq.gz") are not in gzipped format. But they have the end of ".gz". It makes me think I messed up the files somehow when I did the trimming. I'm going to re-run that step and make sure the naming convention doesn't add modifiers to the end of the file names.
+
+
