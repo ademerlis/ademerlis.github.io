@@ -120,3 +120,12 @@ I think the number that I was confused about was the X + 0 mapped, and that is s
 
 cool so I think the alignment went well! Time for stringtie.
 
+But before that, I just wanted to compare alignment rates of STAR versus HISAT2 and see how different it was. 
+
+What's annoying is that from hisat2 you can't multiqc it like you can from STAR (strike against hisat2 in my mind). 
+
+So here's a rough screenshot of the HISAT2 results in the terminal on the left, and the STAR alignment results on the right (for a subset of samples):
+
+<img width="926" alt="Screen Shot 2023-07-25 at 9 42 01 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/15fb67eb-1949-4dec-a9b4-628f407b2618">
+
+Overall alignment rates look pretty similar so that's good. 
