@@ -139,17 +139,18 @@ Here's how you can create a transcriptome index and perform alignment with HISAT
 Indexing the Transcriptome:
 To create a HISAT2 transcriptome index, you need to use the hisat2-build command with your transcriptome reference in FASTA format. The command would look like this:
 
-bash
-Copy code
+```{bash}
 # Assuming your transcriptome reference is in "transcriptome.fasta" and you want to create an index named "transcriptome_index"
 hisat2-build transcriptome.fasta transcriptome_index
+```
+
 This command will generate a set of files with the prefix "transcriptome_index" that constitute the HISAT2 index for your transcriptome.
 
 Alignment with HISAT2:
 To align your RNA-seq reads to the transcriptome using the HISAT2 index, you should use the hisat2 command with the appropriate options. Here's a basic example:
 
 ```{bash}
-# Assuming your HISAT2 index is named "transcriptome_index" and your paired-end reads are in "read1.fastq" and "read2.fastq"
+#Assuming your HISAT2 index is named "transcriptome_index" and your paired-end reads are in "read1.fastq" and "read2.fastq"
 hisat2 -x transcriptome_index -1 read1.fastq -2 read2.fastq -S alignment.sam
 ```
 
