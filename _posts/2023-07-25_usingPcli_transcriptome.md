@@ -28,3 +28,9 @@ Or what is we do something like this:
 (from [Dimos et al. 2022](https://doi.org/10.1101/2021.04.28.441826)).
 
 Is that how you make a gff file? 
+
+Let's try using eggNog mapper to annotate the transcriptome, because that's also what it says they did in Avila-Magana et al. 2021 (before the GO-MWU step).
+
+WELP. after all of this researching, I found the emapper annotation file on the dryad repository for the Avila-Magana et al. 2021 publication. https://datadryad.org/stash/dataset/doi:10.5061/dryad.k3j9kd57b
+
+So this was all a huge waste of time. oh well.
