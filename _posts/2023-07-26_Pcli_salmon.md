@@ -68,3 +68,6 @@ done
 
 I got this error: "/scratch/projects/and_transcriptomics/programs/salmon-1.5.2_linux_x86_64/bin/salmon quant was invoked improperly"
 
+I searched this on ChatGPT (Exception : [std::bad_alloc] was also part of the error message) and it said that it could be a memory allocation issue. So i changed the script to bigmem with 16 nodes, and that still got the same error message.
+
+I tried to run STAR index instead and see if that worked but I kept getting a fatal error due to not enough RAM. Salmon is supposed to be more efficient than STAR anyways, but I don't understand why the Salmon quant keeps failing. 
