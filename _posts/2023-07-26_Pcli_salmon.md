@@ -65,3 +65,6 @@ do \
 ${and}/programs/salmon-1.5.2_linux_x86_64/bin/salmon quant -i ${and}/genomes/Pcli/Pcli_transcriptome_index -l A -1 ${sample} -p 8 --validateMappings -o ${and}/Ch2_temperaturevariability2023/AS_pipeline/4_Pcli_specific/salmon_quant_files ; \
 done
 ```
+
+I got this error: "/scratch/projects/and_transcriptomics/programs/salmon-1.5.2_linux_x86_64/bin/salmon quant was invoked improperly"
+
