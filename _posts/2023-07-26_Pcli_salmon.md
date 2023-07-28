@@ -201,3 +201,5 @@ ${and}/programs/salmon-1.5.2_linux_x86_64/bin/salmon quant -i ${and}/genomes/Pcl
 done
 ```
 
+Ok well in the output file it says "[warning] Fragment GC bias correction is currently *experimental* in single-end libraries.  Please use this option with caution." so maybe this step isn't necessary after all? I'll compare how different the counts matrices are.
+
