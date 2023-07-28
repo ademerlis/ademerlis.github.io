@@ -164,3 +164,40 @@ do \
 ${and}/programs/salmon-1.5.2_linux_x86_64/bin/salmon quant -i ${and}/genomes/Pcli/Pcli_transcriptome_index -l U -r ${sample} --validateMappings -o ${and}/Ch2_temperaturevariability2023/AS_pipeline/4_Pcli_specific/salmon_quant_files ; \
 done
 ```
+
+Ok, so the code worked and I got the resulting file ("quant.sf"), however when I read the [DESeq2 vignette](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#transcript-abundance-files-and-tximport-tximeta) for how to import this into R, I see this:
+
+<img width="926" alt="Screen Shot 2023-07-28 at 10 06 59 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/1727efa1-77ae-45c8-9d0b-bc24cbcdb71f">
+
+When I look at the multiQC report of the trimmed fasta files, I see that all the Pcli samples "failed" the GC content thing. So I'm not sure if this means there is a bias or not, but in the [Salmon tutorial for adding -gcbias](https://salmon.readthedocs.io/en/latest/salmon.html#gcbias) it says that adding this flag when doing the quantification step "does not impair quantification for samples without GC bias, it just takes a few more minutes per sample". " For samples with moderate to high GC bias, correction for this bias at the fragment level has been shown to reduce isoform quantification errors."
+
+So I think I'll rerun the quant code with that flag just to be safe.
+
+
+<img width="1100" alt="Screen Shot 2023-07-28 at 10 07 37 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/e0d0e287-b03b-4bf1-880e-2360ed307c93">
+
+
+```{bash}
+#!/bin/bash
+#BSUB -J Pcli_transcriptome_salmon_quant
+#BSUB -q bigmem
+#BSUB -P and_transcriptomics
+#BSUB -n 16
+#BSUB -o Pcli_transcriptome_salmon_quant%J.out
+#BSUB -e Pcli_transcriptome_salmon_quant%J.err
+#BSUB -u and128@miami.edu
+#BSUB -N
+
+and="/scratch/projects/and_transcriptomics"
+
+cd "/scratch/projects/and_transcriptomics/Ch2_temperaturevariability2023/AS_pipeline/3_trimmed_fastq_files/Pcli_fastq_files"
+
+data=($(ls *.gz))
+
+for sample in ${data[@]} ;
+
+do \
+${and}/programs/salmon-1.5.2_linux_x86_64/bin/salmon quant -i ${and}/genomes/Pcli/Pcli_transcriptome_index -l U -r ${sample} --validateMappings --gcBias --reduceGCMemory -o ${and}/Ch2_temperaturevariability2023/AS_pipeline/4_Pcli_specific/salmon_quant_files ; \
+done
+```
+
