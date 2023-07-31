@@ -242,4 +242,9 @@ bsub < "${and}"/Ch2_temperaturevariability2023/AS_pipeline/4_Pcli_specific/scrip
 done
 ```
 
-ok that seems to be running ok!
+ok that seems to be running ok! 
+
+Wow that ran in no time at all. Good to know!! 
+
+Now i'm using scp to transfer all the salmon_quant_file folders onto my GitHub. 
+
