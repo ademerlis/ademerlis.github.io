@@ -141,5 +141,42 @@ write.table(mapping_rate_data, file = "mapping_rates.txt", sep = "\t", row.names
 
 All of my samples have > 50% alignment so yay. 
 
+**afternoon update:**
+I'm not sure if I'm going down a rabbit hole again, but when I was searching for how to determine mapping rates of salmon quant, I found [this GitHub issue thread](https://github.com/COMBINE-lab/salmon/issues/581) which basically says that when using tximport, you need to use "countsFromAbundance = "lengthScaledTPM" to do "bias corrected counts without an offset"? I don't really know what that means. 
+
+Ok I ended up asking ChatGPT and this is what it said: 
+
+"When performing differential gene expression analysis with RNA-seq data, using the correct quantification method is crucial to obtaining accurate and meaningful results. In the case of using Salmon for pseudoalignment and then importing the quant.sf files into R for DESeq2 analysis with tximport, the choice of the `countsFromAbundance` argument depends on the downstream analysis and the desired unit for differential expression testing.
+
+DESeq2 expects raw counts as input for differential expression analysis. However, Salmon quantifies transcript abundance in terms of TPM (Transcripts Per Million) by default. Therefore, you need to convert TPM values to raw counts using tximport before feeding the data to DESeq2.
+
+The `countsFromAbundance` argument in `tximport` specifies how you want to convert the transcript abundance (TPM) to raw counts. The available options are:
+
+- `"no"`: Do not convert the TPM values to raw counts. This is useful if you plan to perform downstream analyses that require transcript-level abundance information.
+
+- `"scaledTPM"`: Scale the TPM values by the total number of reads and then multiply by 1e6 to obtain counts per million (CPM). This option provides scaled counts, but it might not be appropriate for differential expression analysis with DESeq2, as it does not take into account the length bias and transcript length differences between samples.
+
+- `"lengthScaledTPM"`: Scale the TPM values by the transcript length and then multiply by the total number of reads and by 1e6 to obtain counts. This option takes into account both transcript length and sequencing depth and is more appropriate for differential expression analysis with DESeq2. It is the recommended option if you want to use DESeq2 for differential expression analysis.
+
+If you plan to use DESeq2 for differential expression analysis, it is advisable to use `countsFromAbundance = "lengthScaledTPM"` in `tximport` to obtain raw counts that consider both transcript length and sequencing depth. This way, the raw count data will be more suitable for normalization and differential expression testing using DESeq2.
+
+Here's an example of how to use `tximport` with the `countsFromAbundance` argument:
+
+```{R}
+# Assuming you have already read the quant.sf files and have them stored in the 'files' variable
+# Replace "lengthScaledTPM" with the appropriate option if needed
+
+library(tximport)
+
+# Create the tx2gene object if you have a transcript-to-gene mapping
+tx2gene <- YOUR_TRANSCRIPT_TO_GENE_MAPPING
+
+# Import the quant.sf files and convert TPM to raw counts
+txi <- tximport(files, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "lengthScaledTPM")
+```
+
+With this approach, you can ensure that you are using appropriate raw count data for differential gene expression analysis with DESeq2."
+
+So TL;DR yes I need to use countsFromAbundance = lengthScaledTPM because I want to import the counts into DESeq2 and DESeq2 requires un-normalized counts. 
 
 
