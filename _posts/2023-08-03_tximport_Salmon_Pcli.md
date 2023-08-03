@@ -93,5 +93,53 @@ dds <- DESeqDataSetFromMatrix(countsmatrix, samples_tidy, ~ treatment)
 
 I think I want to try to run 2 models though, because I should also see if Colony (genotype but we didn't genotype the corals) plays a role in gene expression (it likely does). 
 
+Ok wait but before I create the dds object, I need to make sure all the samples had good enough alignment and high enough reads. Because samples with really low alignment rates will mess with the DEG analysis. I'm not sure if the read count (i.e. at least 4 million reads) is a necessary flag for Salmon since it's pseudoalignment. But at least for obtaining mapping rates (reads from my samples that mapped to the reference transcriptome), that needs to be >50%. 
+
+To obtain this, I have to extract the mapping rates from the salmon_quant.log file from each sample.
+
+Check mapping rates for each sample
+```{r}
+list.dirs(sub_dir)
+
+#make a list of directories for logs
+log_dir <- list.dirs(sub_dir, recursive = F)
+
+log_files <- list.files(log_dir, pattern = "\\.log$", full.names = T)
+
+# Initialize an empty vector to store the mapping rates
+mapping_rate_lines <- character()
+file_names <- character()
+
+for (log_file in log_files) {
+  # Read all lines from the log file
+  log_lines <- readLines(log_file)
+  
+  # Find the line containing the mapping rate using the stringr package
+  mapping_rate_line <- log_lines[str_detect(log_lines, "Mapping rate")]
+  
+  # If the line is found, extract the mapping rate value
+  if (length(mapping_rate_line) > 0) {
+    mapping_rate_line <- gsub("\\[.*?\\]", "", mapping_rate_line)
+
+    # Modify the log_file name using sub
+    modified_log_file <- sub(".*/clean\\.([^_]*)_.*", "\\1", log_file)
+    
+    file_names <-c(file_names, modified_log_file) 
+    mapping_rate_lines <- c(mapping_rate_lines, mapping_rate_line)
+  }
+}
+
+# Print the mapping rates
+print(mapping_rate_lines)
+
+#create data frame with file names and mapping rate lines as separate columns
+mapping_rate_data <- data.frame(File_Name = file_names, Mapping_Rate_Line = mapping_rate_lines)
+
+# Write the data frame to a tab-separated file
+write.table(mapping_rate_data, file = "mapping_rates.txt", sep = "\t", row.names = FALSE)
+```
+
+All of my samples have > 50% alignment so yay. 
+
 
 
