@@ -518,6 +518,70 @@ resSig_LRT<-resLRT[which(resLRT$padj<0.05), ]
 
 Should I proceed with this model? I don't think the WGCNA part needs the LRT vs. Wald test distinction. And when I do the vst transformation, that is before I run the DESeq2 anyways so that shouldn't affect the PERMANOVA either. Or should I be running the PERMANOVA only on the significant DGEs????????? 
 
+**3:43 pm update**:
+
+So I looked through Kevin Wong's [Porites_Rim_Bleaching](https://github.com/kevinhwong1/Porites_Rim_Bleaching_2019/blob/master/scripts/TagSeq/TagSeq_PCA_WGCNA.Rmd) code and he didn't do a PERMANOVA on his DESeq2 stuff, so I'm not sure where I got that from to be honest. I think he did a PERMANOVA on physiological traits... [see his Rmd for the physiology analysis and PERMANOVA starting at line 1113](https://github.com/kevinhwong1/Porites_Rim_Bleaching_2019/blob/master/scripts/Physiology/Physiology_Analysis.Rmd). 
+
+Ok so I see what I did here. He had made a PCA code to make centroids and generally display all his physiology data as a PCA. Then he ran a PERMANOVA on that. I don't think I can do a PERMANOVA on differential gene expression analysis... even though I'm making a PCA? Or wait did I talk to him about this a long time ago and he said it was fine because a PERMANOVA is non-parametric?
+
+Yes, I think that's what it was, because when I presented the wound healing data as a PCA he asked what the stats of that was. So I then [added PERMANOVAs for them here but they were not significant](https://github.com/ademerlis/woundhealingPdam/blob/main/R_markdowns/PCA_permanovas_individ_hours.Rmd). 
+
+Ok circling back to the point of this. The goal is to create a *meaningful* differential expression analysis. I don't think the current formula I'm using is perfectly encapturing all the interactions I want to look at -- my reason for believing this is when I run `resultsNames(dds)` for the original dds object and the dds_LRT, I get the same names (which don't look right):
+
+<img width="279" alt="Screen Shot 2023-08-15 at 3 48 52 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/9bd604ec-e4b2-47f5-8e33-411427e76609">
+
+What I want it to look like is something like:
+
+control_day29 versus variable_day29
+genotype1_variable_day0 versus genotype1_variable_day29
+variable_day0 versus variable_day29 
+
+I would want the differences between control_day0 and variable_day0 to be accounted for -- which is I think why I use the LRT (and have that as the "reduced" factor). 
+
+I was looking for some DESeq code from [Dr. Carly Kenkel's lab group](https://dornsife.usc.edu/labs/carlslab/data/) because I know she does coral transcriptomics work, and I came across PhD student [Yingqi Zhang's GitHub repo](https://github.com/yingqizhang/OfavLarvae/blob/main/DESeq2/DESeq2.R) for transcriptomics of Ofav larvae. 
+
+In that, she does something that I hadn't thought about doing before for a DESeq2 model, but that makes complete sense:
+
+```{r}
+# combine the factors of interest into a single factor with all combinations of the original factors
+dds4 <- DESeqDataSetFromMatrix(countData = cts_ms[,1:46],colData = colData_ms,design = ~ 1)
+dds4$group <- factor(paste0(dds4$Trmt, dds4$Type))
+
+# change the design to include just this factor, e.g. ~ group
+design(dds4) <- ~ group
+dds4 <- DESeq(dds4)
+res4=results(dds4)
+summary(res4) # 405 up, 301 down, 7571 low count
+
+res_inshoretrmt <- results(dds4, contrast=c("group","HeatInshore","CtrlInshore"))
+summary(res_inshoretrmt) # 133 up, 144 down
+```
+
+So what I need to do is make a matrix that has like day_treatment_genotype and every combination of that. It looks like based on her code that you add that to the design after the fact.
+
+```{r}
+# combine the factors of interest into a single factor with all combinations of the original factors
+dds_combo <- DESeqDataSetFromMatrix(countData = genecounts_filt_ordered,colData = Acer_samples_4M,design = ~ 1)
+dds_combo$group <- factor(paste0(dds_combo$Treatment, "_", dds_combo$time_point, "_", dds_combo$Genotype)) #12 levels
+
+# change the design to include just this factor, e.g. ~ group
+design(dds_combo) <- ~ group
+
+dds_combo <- DESeq(dds_combo) #this is a wald test though of doing pairwise comparisons for all combos
+
+results_combo <- results(dds_combo)
+summary(results_combo) #427 up, 384 down
+```
+
+<img width="349" alt="Screen Shot 2023-08-15 at 4 01 42 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/dcfbd628-54be-4e20-84f7-d7c18c97698b">
+
+
+So that works and is great, but what about the "reduced" formula with LRT? I'm not sure how to specify that when genotype is in the formula. because I want it to be reduced by treatment + day_0 essentially. maybe I filter out everything with day 0? but then is that even informative? so maybe I don't need to do an LRT for this... unless I had an interaction term that was treatment x time point. 
+
+<img width="464" alt="Screen Shot 2023-08-15 at 4 07 54 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/f6f140f2-f4dd-4859-a224-798c729b862f">
+
+With these comparisons, I can't see doing a reduced model being informative. 
+
 
 
 
