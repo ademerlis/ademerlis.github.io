@@ -276,3 +276,248 @@ I wonder if it is appropriate/allowed to separate PCAs based on time point or ge
 The only thing would be that if I were to continue down that route, I think I would still need to account for all the variables in the stats. But visualization-wise, I can separate things right? 
 
 In any case I'm confused per usual. 
+
+**08.15.2023 update:** 
+
+Let's try separating the two time points into their own PCAs so it is easier to distinguish genotype x treatment. 
+
+filter for just the first time point
+```{r}
+Acer_samples_4M %>% filter(time_point == "Day_0") -> day_0_samples
+
+list_day0 <- rownames(day_0_samples)
+
+genecounts_filt_ordered %>% select(matches(list_day0)) -> day_0_genecounts
+```
+
+create matrix for DESeq
+```{r}
+day0_dds <- DESeqDataSetFromMatrix(countData = day_0_genecounts, colData = day_0_samples, design = ~ Treatment + Genotype)
+```
+
+estimate size factors
+```{r}
+SF_day0 <- estimateSizeFactors(day0_dds)
+print(sizeFactors(SF_day0)) # everything is less than 4, so I can use vst
+```
+
+
+Apply variance stabilizing transformation to minimize effects of small counts and normalize wrt library size
+```{r}
+vst_day0 <- vst(day0_dds, blind = FALSE) #accounts for within group variability
+```
+
+scree plot for variance
+```{r}
+pca_day0 <- prcomp(t(assay(vst_day0)))
+fviz_eig(pca_day0)
+```
+
+PCA
+```{r}
+plotPCA(vst_day0, intgroup = c("Treatment"))
+plotPCA(vst_day0, intgroup = c("Genotype"))
+
+vst_day0_PCAdata <- plotPCA(vst_day0, intgroup = c("Treatment", "Genotype"), returnData = TRUE)
+percentVar <- round(100*attr(vst_day0_PCAdata, "percentVar")) 
+
+#plot PCA of samples with all data
+pca.centroids_day0 <- vst_day0_PCAdata %>% 
+  dplyr::select(Treatment, Genotype, PC1, PC2)%>%
+  dplyr::group_by(Treatment, Genotype)%>%
+  dplyr::summarise(PC1.mean = mean(PC1),
+                   PC2.mean = mean(PC2))
+find_hull_day0 <- function(vst_day0_PCAdata) vst_day0_PCAdata[chull(vst_day0_PCAdata$PC1, vst_day0_PCAdata$PC2), ]
+hulls_day0 <- plyr::ddply(vst_day0_PCAdata, "group", find_hull_day0)
+
+ggplot(vst_day0_PCAdata, aes(PC1, PC2, color=Genotype, shape=Treatment)) + 
+   geom_point(size=3) +
+   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+   ggtitle("Day 0 Acer - all genes") +
+   theme_bw() + #Set background color
+   theme(panel.border = element_blank(), # Set border
+         axis.line = element_line(colour = "black"), #Set axes color
+         plot.background=element_blank()) #Set the plot background
+```
+
+<img width="504" alt="Screen Shot 2023-08-15 at 10 24 50 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/8f772705-97a5-4a1d-a559-7b2ccfb1b605">
+
+Let's try to make polygons around the treatments specifically.
+
+So if I try to make the polygons around the treatments, it looks weird because there is a huge separation of genotype and it's trying to connect all those dots:
+
+<img width="814" alt="Screen Shot 2023-08-15 at 10 35 59 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/8179d36f-6fd3-4f24-91db-fcd2dc0ed3d7">
+
+We don't want that. I'll try to flip it so it groups by genotype instead:
+
+<img width="804" alt="Screen Shot 2023-08-15 at 10 38 26 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/1b84baa1-7096-4da1-a611-89ebaa29916b">
+
+I don't get what this is doing either. It also looks weird?
+
+There is so much clustering of genotype. 
+
+Ok this is kind of getting to where I was envisioning, where the polygons are around the subgroupings. It just looks chaotic and messy.
+
+<img width="925" alt="Screen Shot 2023-08-15 at 10 48 42 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/5b1b100b-af5b-4a56-831f-0fcbe729dd98">
+
+```{r}
+plotPCA(vst, intgroup = c("Treatment"))
+plotPCA(vst, intgroup = c("Genotype"))
+plotPCA(vst, intgroup = c("time_point"))
+
+vst_PCAdata <- plotPCA(vst, intgroup = c("Treatment", "Genotype", "time_point"), returnData = TRUE)
+percentVar <- round(100*attr(vst_PCAdata, "percentVar")) 
+
+#plot PCA of samples with all data
+pca.centroids <- vst_PCAdata %>% 
+  dplyr::select(Treatment, Genotype, time_point, PC1, PC2)%>%
+  dplyr::group_by(Treatment, Genotype, time_point)%>%
+  dplyr::summarise(PC1.mean = mean(PC1),
+                   PC2.mean = mean(PC2))
+find_hull <- function(vst_PCAdata) vst_PCAdata[chull(vst_PCAdata$PC1, vst_PCAdata$PC2), ]
+hulls <- plyr::ddply(vst_PCAdata, "group", find_hull)
+
+ggplot(vst_PCAdata, aes(PC1, PC2, color=Treatment, shape=Treatment)) + 
+   geom_point(size=3) +
+   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+   ggtitle("A. cervicornis - all genes") +
+   theme_bw() + #Set background color
+   theme(panel.border = element_blank(), # Set border
+         axis.line = element_line(colour = "black"), #Set axes color
+         plot.background=element_blank()) + #Set the plot background
+  geom_polygon(data = hulls, alpha = 0.2, aes(color = group, fill = group))
+```
+
+I might need to look more into what the hulls code is actually calculating, and that could make the polygons cleaner. 
+
+What about that ellipse code?
+
+<img width="566" alt="Screen Shot 2023-08-15 at 10 56 24 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/ae598579-109d-4b0f-afd2-9e48902f9381">
+
+```{r}
+ggplot(vst_PCAdata, aes(PC1, PC2, color=Genotype, shape=Treatment)) + 
+   geom_point(size=3) +
+   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+   ggtitle("A. cervicornis - all genes") +
+   theme_bw() + #Set background color
+   theme(panel.border = element_blank(), # Set border
+         axis.line = element_line(colour = "black"), #Set axes color
+         plot.background=element_blank()) + 
+  stat_ellipse(aes(PC1, PC2, group=Genotype), type = "norm")
+```
+
+<img width="567" alt="Screen Shot 2023-08-15 at 10 58 08 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/fc719563-4a64-4622-bb7b-60173ac40968">
+
+
+```{r}
+ggplot(vst_PCAdata, aes(PC1, PC2, color=Treatment, shape=Genotype)) + 
+   geom_point(size=3) +
+  scale_color_manual(labels=c("Control", "Variable"), values = c( "#60DBDB", "#F54A34")) +
+   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+   ggtitle("A. cervicornis - all genes") +
+   theme_bw() + #Set background color
+   theme(panel.border = element_blank(), # Set border
+         axis.line = element_line(colour = "black"), #Set axes color
+         plot.background=element_blank()) + 
+  stat_ellipse(aes(PC1, PC2, group=time_point, lty = time_point), type = "norm")
+```
+
+<img width="567" alt="Screen Shot 2023-08-15 at 10 59 34 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/b10c7c2f-d7d8-466e-b82d-3d22b953f5f0">
+
+```{r}
+ggplot(vst_PCAdata, aes(PC1, PC2, color=Genotype, shape=time_point)) + 
+   geom_point(size=3) +
+   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+   ggtitle("A. cervicornis - all genes") +
+   theme_bw() + #Set background color
+   theme(panel.border = element_blank(), # Set border
+         axis.line = element_line(colour = "black"), #Set axes color
+         plot.background=element_blank()) + 
+  stat_ellipse(aes(PC1, PC2, group=Treatment, lty = Treatment), type = "norm")
+```
+
+## Building PERMANOVA model
+
+Conduct PERMANOVA
+```{r}
+test<-t(assay(vst)) #remember that formula is ~ Treatment*time_point + Genotype
+test<-as.data.frame(test)
+
+test$Sample_ID <-rownames(test)
+test$Treatment <- Acer_samples_4M$Treatment[match(test$Sample_ID, rownames(Acer_samples_4M))]
+test$Genotype <- Acer_samples_4M$Genotype[match(test$Sample_ID, rownames(Acer_samples_4M))]
+test$time_point <- Acer_samples_4M$time_point[match(test$Sample_ID, rownames(Acer_samples_4M))]
+```
+
+Build PERMANOVA model
+```{r}
+dim(test) #45 4150
+scaled_test <-prcomp(test[c(1:4146)], scale=TRUE, center=TRUE) #subtract 4 from the dim because you made 4 columns for metadata
+fviz_eig(scaled_test)
+vegan <- scale(test[c(1:4146)])
+
+permanova<-adonis2(vegan ~ Treatment*time_point + Genotype, data = test, method = 'eu')
+
+print(permanova) #everything is significant woooooo
+```
+
+<img width="453" alt="Screen Shot 2023-08-15 at 12 17 11 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/a0c651b4-e31a-453b-ace7-2c27035845a8">
+
+
+## Running DESeq2
+
+un DESeq2
+```{r}
+DEG_all <- DESeq(data)
+DEG_all_res <- results(DEG_all, alpha = 0.05)
+summary(DEG_all_res)
+
+resultsNames(DEG_all)
+
+DEG_treatment <- results(DEG_all, contrast = c("Treatment", "variable", "control"), alpha = 0.05)
+summary(DEG_treatment)
+
+DEG_timepoint <- results(DEG_all, contrast = c("time_point", "Day_29", "Day_0"), alpha = 0.05)
+summary(DEG_timepoint)
+```
+DEG_treatment
+<img width="355" alt="Screen Shot 2023-08-15 at 12 18 09 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/f54683c1-d965-4596-9d3d-6ba094bb32c6">
+
+DEG_timepoint
+<img width="393" alt="Screen Shot 2023-08-15 at 12 18 27 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/26ce9c33-09a0-41df-84e5-c06b0ed346b0">
+
+
+I don't think these results are informative. I want a result that says "variable versus control at day 29 (so after the treatment to get an effect of treatment?)". or do I want to also see what they looked like at day 0? or do I do an LRT where I use day 0 as the "baseline" and then compare the effect of treatment after the 29 days. I don't necessarily care about the differential gene expression on day 0. That would be the sort of "baseline" gene expression differences between genotypes.
+
+Let's try running LRT to see if the reduced model of treatment + time_point is versus the full model is significant? (essentially accounting for the baseline differences of both at the start of the experiment that are not due to treatment)
+
+DESeq2 with LRT
+```{r}
+data <- DESeqDataSetFromMatrix(countData = genecounts_filt_ordered, colData = Acer_samples_4M, design = ~ Treatment*time_point + Genotype)
+
+ddsLRT <- DESeq(data, test="LRT", reduced = ~Treatment + time_point)
+
+ #this reduced function is including treatment + time_point (but not the interaction), which means than any differences at time point 0 will be controlled for. (see Michael Love's response on this thread: https://support.bioconductor.org/p/62684/  "Using a reduced formula of ~ time + treat means that genes which show a consistent difference from time 0 onward will not have a small p value. This is what we think you want, because differences between groups at time 0 should be controlled for, e.g. random differences between the individuals chosen for each treatment group which are observable before the treatment takes effect.")
+
+resLRT <- results(ddsLRT)
+summary(resLRT, alpha = 0.05)
+
+resultsNames(ddsLRT)
+
+#identifying significant genes
+resSig_LRT<-resLRT[which(resLRT$padj<0.05), ]
+```
+
+<img width="368" alt="Screen Shot 2023-08-15 at 12 19 57 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/f427ae0a-7b43-4bf6-9f88-ea535ae8f6dd">
+
+
+Should I proceed with this model? I don't think the WGCNA part needs the LRT vs. Wald test distinction. And when I do the vst transformation, that is before I run the DESeq2 anyways so that shouldn't affect the PERMANOVA either. Or should I be running the PERMANOVA only on the significant DGEs????????? 
+
+
+
+
