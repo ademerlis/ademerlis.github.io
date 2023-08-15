@@ -582,6 +582,42 @@ So that works and is great, but what about the "reduced" formula with LRT? I'm n
 
 With these comparisons, I can't see doing a reduced model being informative. 
 
+Also, wait these are not all the possible comparisons that can be made. It is actually every other comparison versus the first one, which is "control_day0_BC-8b". So I'm confused actually how this design was made. 
+
+Maybe this doesn't work.
+
+Ok wait I just played around with the formula and combinations, and this might have worked.
+
+```{r}
+# Trying to create a combination where genotype is not part of each comparison, just the main factors of treatment and time point are created as a combo factor so I can do every comparison of those combinations
+
+Acer_samples_4M$Genotype <- as.factor(Acer_samples_4M$Genotype)
+
+dds_combo <- DESeqDataSetFromMatrix(countData = genecounts_filt_ordered,colData = Acer_samples_4M,design = ~ 1)
+dds_combo$group <- factor(paste0(dds_combo$Treatment, "_", dds_combo$time_point)) #12 levels
+
+# change the design to include just this factor, e.g. ~ group
+design(dds_combo) <- ~ (group + Genotype + group:Genotype)
+
+dds_combo <- DESeq(dds_combo) #this is a wald test though of doing pairwise comparisons for all combos
+
+results_combo <- results(dds_combo)
+summary(results_combo) #9 up, 0 down
+
+resultsNames(dds_combo)
+```
+
+<img width="585" alt="Screen Shot 2023-08-15 at 4 40 08 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/56d539ce-dcc7-420b-8a95-2aa635b0e64d">
+
+So that looks kind of like what I was envisioning, except I'm not really sure what the genotypes are doing. (like what does "groupcontrol_Day_29.GenotypeMB_B" mean? the interaction of untreated_day29 and genotype MB-B?). 
+
+But something preliminary that is exciting (but seems too good to be true). When I run the comparison of control day 0 versus variable day 0, i get NO DGES!!!! which is insane? maybe if i were to do within genotype comparisons that wouldn't be the case and would make more sense. 
+
+<img width="620" alt="Screen Shot 2023-08-15 at 4 42 17 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/7902423c-347d-4b4c-a493-2557d349fb4d">
 
 
+But when I do variable vs control on day 29, I get a bunch of DGEs!
 
+<img width="593" alt="Screen Shot 2023-08-15 at 4 43 14 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/348a09fd-0ce3-489c-8227-719deffa79d6">
+
+So that's something anyways.
