@@ -621,3 +621,28 @@ But when I do variable vs control on day 29, I get a bunch of DGEs!
 <img width="593" alt="Screen Shot 2023-08-15 at 4 43 14 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/348a09fd-0ce3-489c-8227-719deffa79d6">
 
 So that's something anyways.
+
+
+**8.16.23 update**:
+
+I wanted to make a PCA to visualize this new group variable, and the PC axes only changed slightly in percent variance, so that's good its not super different.
+Here's the code I used and the PCA I made that I think I'll move forward with.
+
+```{r}
+vst_combo <- vst(dds_combo, blind = FALSE)
+
+plotPCA(vst_combo, intgroup = c("Treatment","time_point"))
+
+vst_combo_PCAdata <- plotPCA(vst_combo, intgroup = c("Treatment","time_point"), returnData = TRUE)
+percentVar <- round(100*attr(vst_combo_PCAdata, "percentVar"))
+ggplot(vst_combo_PCAdata, aes(PC1, PC2, color=group, shape=Treatment)) + 
+   geom_point(size=3) +
+   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
+   ggtitle("A. cervicornis - all genes") +
+   theme_bw() +
+  stat_ellipse(aes(PC1, PC2, group=group, lty = time_point), type = "norm") +
+  scale_color_manual(values = c("#00CCCC","#33CCCC", "#FF6633", "#FF3333"))
+```
+
+<img width="630" alt="Screen Shot 2023-08-16 at 3 59 21 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/311916f0-d210-4a27-9f3e-5e62ab1b55f7">
