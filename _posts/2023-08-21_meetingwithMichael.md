@@ -33,3 +33,20 @@ But, there are still high duplication levels I think post-trimming.
 ![image](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/9d1f0aad-dccb-4275-ae5c-251f6cf6f93f)
 
 
+**12pm meeting with Michael**:
+
+- found several different genomes/transcriptomes for Acer, Pcli, symbiodinium, breviolum, then ran alignment tests to all the ones out there
+- alignment tests:
+   - first row is overall alignment, second row is percentage of reads that aligned multiple times
+   - he also used the mRNA fasta files from the Baums Acer and Apal, not the original fasta file that I used.
+   - so low alignment rates from Baums could be an artefact of the fact that our samples have everything (more than just mRNA), but you're trying align to a file of just mRNA.
+- majority of alignments for Acer were for Symbiodinium, and majority for Pcli were Breviolum. So, that is what he used for downstream gene expression analyses. But, you wouldn't use those percent alignment rates as reporting quantitative data for symbiont typing (still need to do qPCR).
+- so the Baums only had 700 genes that aligned and had counts for Acer. That's really low and suspect, so them he tried to align Polato genome. But only 159 genes that mapped. Libro alignment had ~50,000 genes. So that's good.
+- for symbiont alignments, they are all going to be low percentages, and that's normal. The best one was the Shogushi genome.
+- Bowtie2 -- can feed 2 different transcriptome assemblies, and it will pick the best alignment.
+- for symbiodinium, got 41,000 genes.
+- overall feel most confident in the Libro for Acer.
+- For Pcli it's a different story:
+    - aligned to Avila-Magna 2021 very high alignment rates, but lost a lot initially in trimming.
+    - 50,000 genes for host, and 28,000 genes for symbiont.
+- for Ch 3 -- read Kenkel et al. 2017 Past RT exp paper. Use DAPC analysis, perfect for RT. it is a way to statistically test whether transplantation resulted them being more similar to the opposite group (home:home vs. home:away). 
