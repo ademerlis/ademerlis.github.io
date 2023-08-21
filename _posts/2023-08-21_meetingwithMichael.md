@@ -24,4 +24,12 @@ For Acer, the duplication rates are "lower" (30-50%), but the %PF is still reall
 
 <img width="810" alt="Screen Shot 2023-08-21 at 10 48 24 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/1bd918db-093c-4fd9-b035-7a9fa53c9c9e">
 
-Going back through my [Ch4_AcerCCC multiqc reports](), it looks like TrimGalore/cutadapt 
+Going back through my [Ch4_AcerCCC multiqc reports](https://github.com/ademerlis/AcerCCC#2-trimmed-reads-adapters-script), it looks like TrimGalore/cutadapt actually trimmed a good chunk of base pairs (28-80%). 
+
+![image](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/edb12491-88a1-42d0-83d8-3936bb3a8158)
+
+But, there are still high duplication levels I think post-trimming.
+
+![image](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/9d1f0aad-dccb-4275-ae5c-251f6cf6f93f)
+
+
