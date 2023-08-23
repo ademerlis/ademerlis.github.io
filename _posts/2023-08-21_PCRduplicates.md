@@ -1,6 +1,6 @@
 ---
 layout: post
-title: meeting with Michael
+title: PCR duplicates
 date: '2023-08-21'
 categories: coding
 tags: [coding]
