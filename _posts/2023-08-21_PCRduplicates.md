@@ -49,4 +49,23 @@ But, there are still high duplication levels I think post-trimming.
 - For Pcli it's a different story:
     - aligned to Avila-Magna 2021 very high alignment rates, but lost a lot initially in trimming.
     - 50,000 genes for host, and 28,000 genes for symbiont.
-- for Ch 3 -- read Kenkel et al. 2017 Past RT exp paper. Use DAPC analysis, perfect for RT. it is a way to statistically test whether transplantation resulted them being more similar to the opposite group (home:home vs. home:away). 
+- for Ch 3 -- read Kenkel et al. 2017 Past RT exp paper. Use DAPC analysis, perfect for RT. it is a way to statistically test whether transplantation resulted them being more similar to the opposite group (home:home vs. home:away).
+
+
+**August 23 updates**:
+
+I don't think the duplication plots from FastQC that I attached in the above sections are very meaningful. I came across some good explanations on the UC Davis Genome Center website that have been helping me better understand everything. Here is [their explanation on why FastQC duplication isn't important to pay attention to](https://dnatech.genomecenter.ucdavis.edu/faqs/why-does-fastqc-show-unexpectedly-high-sequence-duplication-levels-pcr-duplicates/). They specifically say: "FASTQC only analyses 50 nt of the first 100,000 reads for each file for the duplication analysis and extrapolates the dedication rates from this limited number of reads." 
+
+And I believe that is different than the issue of PCR duplication that we are concerned with here. 
+
+But, what is concerning and difficult to understand is the concept of PCR duplication in RNA-seq data. While Michael said it is important to remove PCR duplicates from RNA-seq data, because it is artificially enhancing the amount of counts for random reads, the UC Davis Genome Center [article says no you shouldn't remove PCR duplicates](https://dnatech.genomecenter.ucdavis.edu/faqs/should-i-remove-pcr-duplicates-from-my-rna-seq-data/) unless you do RAD-seq. But, they say that if there are unique molecular identifiers (UMIs), it is possible to remove PCR duplicates and may be helpful in some scenarios. 
+
+I am not sure if I have UMIs in my data, but Michael refers to the Illumina adapters and headers a lot. Those could be similar concepts (things that are added during cDNA library prep to help distinguish between different samples). 
+
+[This article from molecularecologist.com](https://www.molecularecologist.com/2016/08/25/the-trouble-with-pcr-duplicates/) linked by UC Davis Genome Center does a good job of explaining how PCR duplicates occur (but in the context of RAD data, although I think the process is the same for RNA-seq):
+
+"There are two main steps in RAD prep that are important in generating PCR duplicates: fragmentation and PCR amplification. During fragmentation DNA is sheared randomly. PCR is then performed on these fragments to incorporate the correct adaptors for sequencing and to generate sufficient library quantity. Typical library prep uses around 10 PCR cycles. This means that the majority of your library consists of reads generated via PCR. That is, basically all of the fragments are identical to at least one other fragment in the library. This means that we will almost certainly sequence some fragments that came from the same starting DNA. Moreover, the more cycles of PCR, the higher percentage of PCR duplicates you’ll likely see."
+
+The conclusion from the UC Davis Genome Center is that "Several studies (among them Parekh et al.  2016; below) have shown that retaining PCR- and Illumina clustering duplicates does not cause significant artifacts as long as the library complexity is sufficient.  The library complexity is in most cases directly related to the amount of starting material available for the library preparation. Chemical inhibitors present in the sample could also cause low conversion efficiency and thus reduced library complexities." I'm not sure how complex my libaries are and whether they are sufficient or not. 
+
+I think I will move forward with Michael's pipeline for now since he adapted it from Misha Matz's lab, which developed the 3' TagSeq protocol for corals at UT Austin. 
