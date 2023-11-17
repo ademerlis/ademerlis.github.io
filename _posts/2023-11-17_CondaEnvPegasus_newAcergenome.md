@@ -206,29 +206,29 @@ def process_sequence(header, sequence, min_gap_length):
 check_for_gaps('/scratch/projects/and_transcriptomics/genomes/Acer_2023/GCA_032359415.1_NEU_Acer_K2_genomic.fna')
 ```
 
-Long gap found in >JARQWQ010000013.1 Acropora cervicornis isolate K2 Acerv_scaffold_12, whole genome shotgun sequence
-Long gap found in >JARQWQ010000018.1 Acropora cervicornis isolate K2 Acerv_scaffold_17, whole genome shotgun sequence
-Long gap found in >JARQWQ010000021.1 Acropora cervicornis isolate K2 Acerv_scaffold_20, whole genome shotgun sequence
-Long gap found in >JARQWQ010000026.1 Acropora cervicornis isolate K2 Acerv_scaffold_25, whole genome shotgun sequence
-Long gap found in >JARQWQ010000032.1 Acropora cervicornis isolate K2 Acerv_scaffold_31, whole genome shotgun sequence
-Long gap found in >JARQWQ010000036.1 Acropora cervicornis isolate K2 Acerv_scaffold_35, whole genome shotgun sequence
-Long gap found in >JARQWQ010000041.1 Acropora cervicornis isolate K2 Acerv_scaffold_40, whole genome shotgun sequence
-Long gap found in >JARQWQ010000054.1 Acropora cervicornis isolate K2 Acerv_scaffold_53, whole genome shotgun sequence
-Long gap found in >JARQWQ010000080.1 Acropora cervicornis isolate K2 Acerv_scaffold_79, whole genome shotgun sequence
-Long gap found in >JARQWQ010000083.1 Acropora cervicornis isolate K2 Acerv_scaffold_82, whole genome shotgun sequence
-Long gap found in >JARQWQ010000091.1 Acropora cervicornis isolate K2 Acerv_scaffold_90, whole genome shotgun sequence
-Long gap found in >JARQWQ010000095.1 Acropora cervicornis isolate K2 Acerv_scaffold_94, whole genome shotgun sequence
-Long gap found in >JARQWQ010000096.1 Acropora cervicornis isolate K2 Acerv_scaffold_95, whole genome shotgun sequence
-Long gap found in >JARQWQ010000097.1 Acropora cervicornis isolate K2 Acerv_scaffold_96, whole genome shotgun sequence
-Long gap found in >JARQWQ010000125.1 Acropora cervicornis isolate K2 Acerv_scaffold_124, whole genome shotgun sequence
-Long gap found in >JARQWQ010000130.1 Acropora cervicornis isolate K2 Acerv_scaffold_129, whole genome shotgun sequence
-Long gap found in >JARQWQ010000157.1 Acropora cervicornis isolate K2 Acerv_scaffold_156, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000013.1 Acropora cervicornis isolate K2 Acerv_scaffold_12, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000018.1 Acropora cervicornis isolate K2 Acerv_scaffold_17, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000021.1 Acropora cervicornis isolate K2 Acerv_scaffold_20, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000026.1 Acropora cervicornis isolate K2 Acerv_scaffold_25, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000032.1 Acropora cervicornis isolate K2 Acerv_scaffold_31, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000036.1 Acropora cervicornis isolate K2 Acerv_scaffold_35, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000041.1 Acropora cervicornis isolate K2 Acerv_scaffold_40, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000054.1 Acropora cervicornis isolate K2 Acerv_scaffold_53, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000080.1 Acropora cervicornis isolate K2 Acerv_scaffold_79, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000083.1 Acropora cervicornis isolate K2 Acerv_scaffold_82, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000091.1 Acropora cervicornis isolate K2 Acerv_scaffold_90, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000095.1 Acropora cervicornis isolate K2 Acerv_scaffold_94, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000096.1 Acropora cervicornis isolate K2 Acerv_scaffold_95, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000097.1 Acropora cervicornis isolate K2 Acerv_scaffold_96, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000125.1 Acropora cervicornis isolate K2 Acerv_scaffold_124, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000130.1 Acropora cervicornis isolate K2 Acerv_scaffold_129, whole genome shotgun sequence
+- Long gap found in >JARQWQ010000157.1 Acropora cervicornis isolate K2 Acerv_scaffold_156, whole genome shotgun sequence
 
 and for cladocopium:
 
-Long gap found in >TRINITY_DN21683_c0_g1_i5.p1
-Long gap found in >TRINITY_DN21683_c0_g1_i1.p1
-Long gap found in >TRINITY_DN8648_c1_g2_i2.p1
+- Long gap found in >TRINITY_DN21683_c0_g1_i5.p1
+- Long gap found in >TRINITY_DN21683_c0_g1_i1.p1
+- Long gap found in >TRINITY_DN8648_c1_g2_i2.p1
 
 I'm unsure as of right now what to do about that. Do I need to remove them?
 
