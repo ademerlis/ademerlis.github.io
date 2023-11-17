@@ -152,4 +152,88 @@ Now I'm trying to install something that is supposed to make the solving depende
 conda install -n base conda-libmamba-solver
 ```
 
+While that's running, should I just try running bowtie2 with the unmodified gtf files?
+
+```{bash}
+#download bowtie2-2.5.2-linux-x86_64.zip from https://sourceforge.net/projects/bowtie-bio/
+# added to export PATH variable as well in ~/.bash_profile
+
+#!/bin/bash
+#BSUB -J bowtie2-build
+#BSUB -q general
+#BSUB -P and_transcriptomics
+#BSUB -n 8
+#BSUB -W 120:00
+#BSUB -o bowtie2-build.out
+#BSUB -e bowtie2-build.err
+#BSUB -u and128@miami.edu
+#BSUB -N
+
+workdir="/scratch/projects/and_transcriptomics/genomes"
+
+bowtie2-build ${workdir}/Acer_2023/GCA_032359415.1_NEU_Acer_K2_genomic.fna, \
+${workdir}/Symbiodinium/syma_transcriptome_37.fasta,\
+${workdir}/Breviolum/Symb_Dip.fna,\
+${workdir}/Cladocopium/C124.annotated.fa,\
+${workdir}/Durusdinium/102_symbd_transcriptome_nucl.fa \
+Host_concat
+```
+
+I got some warnings when I ran this code: 'Warning: Encountered reference sequence with only gaps'. When asking ChatGPT, that means there are gaps and long stretches of dashes or Ns in the fasta file. I ran this python code "check_gaps.py" in the command line and identified the scaffolds in Acer genome and Cladocopium genome that had long gaps:
+
+```{py}
+def check_for_gaps(filename, min_gap_length=10):
+    with open(filename, 'r') as file:
+        sequence = ''
+        header = ''
+        for line in file:
+            line = line.strip()
+            if line.startswith('>'):
+                if sequence:
+                    process_sequence(header, sequence, min_gap_length)
+                header = line
+                sequence = ''
+            else:
+                sequence += line
+        if sequence:
+            process_sequence(header, sequence, min_gap_length)
+
+def process_sequence(header, sequence, min_gap_length):
+    if 'N' * min_gap_length in sequence or '-' * min_gap_length in sequence:
+        print(f"Long gap found in {header}")
+
+# Replace 'path_to_your_fasta_file.fasta' with the path to your FASTA file
+check_for_gaps('/scratch/projects/and_transcriptomics/genomes/Acer_2023/GCA_032359415.1_NEU_Acer_K2_genomic.fna')
+```
+
+Long gap found in >JARQWQ010000013.1 Acropora cervicornis isolate K2 Acerv_scaffold_12, whole genome shotgun sequence
+Long gap found in >JARQWQ010000018.1 Acropora cervicornis isolate K2 Acerv_scaffold_17, whole genome shotgun sequence
+Long gap found in >JARQWQ010000021.1 Acropora cervicornis isolate K2 Acerv_scaffold_20, whole genome shotgun sequence
+Long gap found in >JARQWQ010000026.1 Acropora cervicornis isolate K2 Acerv_scaffold_25, whole genome shotgun sequence
+Long gap found in >JARQWQ010000032.1 Acropora cervicornis isolate K2 Acerv_scaffold_31, whole genome shotgun sequence
+Long gap found in >JARQWQ010000036.1 Acropora cervicornis isolate K2 Acerv_scaffold_35, whole genome shotgun sequence
+Long gap found in >JARQWQ010000041.1 Acropora cervicornis isolate K2 Acerv_scaffold_40, whole genome shotgun sequence
+Long gap found in >JARQWQ010000054.1 Acropora cervicornis isolate K2 Acerv_scaffold_53, whole genome shotgun sequence
+Long gap found in >JARQWQ010000080.1 Acropora cervicornis isolate K2 Acerv_scaffold_79, whole genome shotgun sequence
+Long gap found in >JARQWQ010000083.1 Acropora cervicornis isolate K2 Acerv_scaffold_82, whole genome shotgun sequence
+Long gap found in >JARQWQ010000091.1 Acropora cervicornis isolate K2 Acerv_scaffold_90, whole genome shotgun sequence
+Long gap found in >JARQWQ010000095.1 Acropora cervicornis isolate K2 Acerv_scaffold_94, whole genome shotgun sequence
+Long gap found in >JARQWQ010000096.1 Acropora cervicornis isolate K2 Acerv_scaffold_95, whole genome shotgun sequence
+Long gap found in >JARQWQ010000097.1 Acropora cervicornis isolate K2 Acerv_scaffold_96, whole genome shotgun sequence
+Long gap found in >JARQWQ010000125.1 Acropora cervicornis isolate K2 Acerv_scaffold_124, whole genome shotgun sequence
+Long gap found in >JARQWQ010000130.1 Acropora cervicornis isolate K2 Acerv_scaffold_129, whole genome shotgun sequence
+Long gap found in >JARQWQ010000157.1 Acropora cervicornis isolate K2 Acerv_scaffold_156, whole genome shotgun sequence
+
+and for cladocopium:
+
+Long gap found in >TRINITY_DN21683_c0_g1_i5.p1
+Long gap found in >TRINITY_DN21683_c0_g1_i1.p1
+Long gap found in >TRINITY_DN8648_c1_g2_i2.p1
+
+I'm unsure as of right now what to do about that. Do I need to remove them?
+
+ChatGPT: In summary, while it's not typical to remove gaps without good reason, the approach to dealing with them depends on the specific circumstances of your research and the nature of the gaps in your reference genome. It's always important to consider the potential implications of modifying a reference genome on your study's results and conclusions.
+
+
+
 
