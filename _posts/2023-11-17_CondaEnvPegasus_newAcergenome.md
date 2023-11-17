@@ -234,6 +234,39 @@ I'm unsure as of right now what to do about that. Do I need to remove them?
 
 ChatGPT: In summary, while it's not typical to remove gaps without good reason, the approach to dealing with them depends on the specific circumstances of your research and the nature of the gaps in your reference genome. It's always important to consider the potential implications of modifying a reference genome on your study's results and conclusions.
 
+Running bowtie2 alignment on the Host concatenated reference transcriptome index that was generated above.
+
+```{bash}
+#!/usr/bin/env bash
+#BSUB -e bowtie2map.err
+#BSUB -o bowtie2map.out
+#BSUB -P and_transcriptomics
+#BSUB -q general
+#BSUB -n 8
+
+
+name_position=$1
+
+cd "/scratch/projects/and_transcriptomics/Ch2_temperaturevariability2023/2_trimmed_reads/take_4/trimmed_files/Acer"
+
+glob="\.trim"
+
+if [ ! -z "$1" ]; then
+    glob="$1"
+fi
+# Loop through files matching the pattern
+for f in *$glob*; do
+    if [ -n "$name_position" ]; then
+        # Split the filename and extract the part based on the provided position
+        IFS='._' read -ra parts <<< "$f"
+        outname="${parts[$((name_position - 1))]}.sam"
+    else
+        # Use the entire filename if no position is provided
+        outname="${f}.sam"
+    fi
+    bowtie2 --local -x Host_concat -U $f -S $outname --no-hd --no-sq --no-unal -k 5
+done
+```
 
 
 
