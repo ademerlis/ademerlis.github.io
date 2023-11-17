@@ -88,7 +88,58 @@ This approach allows you to align RNA-Seq reads directly to the transcriptome, w
 
 So, I had gffread downloaded already and tried running it on the new Acer genome files, and I got this error: "no valid ID found for GFF record." That means the gtf file itself is having issues and gffread isn't recognizing the header/labels. I googled the error and found that .gtf files sometimes have 'transcript_id=""' or a blank transcript id, which is tripping up gffread because it expects something there. After googling how to fix that, I came across the tool [AGAT](https://github.com/NBISweden/AGAT/tree/master) that fixes attributes in gtf and gff files.
 
-Now this is where I'm currently stuck: I haven't been able to run any of the AGAT scripts. They are perl scripts, but there are a lot of dependencies that I don't have installed. And that's because when I tried to install agat the "traditional" way, using bioconda, it didn't actually download any of the agat packages. I think the issue is because I was trying to use the anaconda environment/module that is on the shared program space (i.e. Pegasus creators download and maintain it). So I finally bit the bullet and downloaded anaconda3 to my nethome on Pegasus, so I could have admin privileges for updates and such. 
+Now this is where I'm currently stuck: I haven't been able to run any of the AGAT scripts. They are perl scripts, but there are a lot of dependencies that I don't have installed. And that's because when I tried to install agat the "traditional" way, using bioconda, it didn't actually download any of the agat packages. 
+
+Here are the ways I've tried to run AGAT and it **hasn't** worked:
+```{bash}
+# Need to convert new UTR gtf files into fasta files, then create reference transcriptomes.
+
+source /share/apps/anaconda/anaconda3_build/bin/activate
+
+# only run the commented lines once if installing for the first time
+# conda install -c bioconda agat
+# conda create -n agat
+
+# so even though I ran the above two lines, when I look at the packages within agat, there is nothing listed (run code: `conda list` after activating env)
+# I when I run `conda create -n agat -c bioconda agat -vvv` it just starts taking forever.
+# so i'm wondering if it's better to just manually install the perl scripts i need
+
+# conda install -c bioconda agat
+
+# manually downloaded the entire agat package:
+
+wget https://anaconda.org/bioconda/agat/1.2.0/download/noarch/agat-1.2.0-pl5321hdfd78af_0.tar.bz2 --no-check-certificate
+tar -xvjf agat-1.2.0-pl5321hdfd78af_0.tar.bz2
+mkdir agat-1.2.0-pl5321hdfd78af_0
+mv bin/ agat-1.2.0-pl5321hdfd78af_0
+mv info/ agat-1.2.0-pl5321hdfd78af_0
+mv lib/ agat-1.2.0-pl5321hdfd78af_0
+
+# perl scripts are stored here: 
+
+/nethome/and128/.conda/pkgs/agat-1.2.0-pl5321hdfd78af_0/bin/
+
+# try running script with the full path to the perl scripts 
+
+# needed to first get the path to AGAT modules correct for perl 
+
+export PERL5LIB=/nethome/and128/.conda/pkgs/agat-1.2.0-pl5321hdfd78af_0/lib/perl5/site_perl:$PERL5LIB
+
+# i also added the export line to my ~/.bash_profile and sourced it, this still didn't WORK
+
+# going to try to manually add this line to the perl scripts i need to run from agat: use lib /nethome/and128/.conda/pkgs/agat-1.2.0-pl5321hdfd78af_0/lib/perl5/site_perl;
+echo '#! /usr/bin/env bash' > agat_step1.sh
+echo '#BSUB -e agat_step1.err' >> agat_step1.sh
+echo '#BSUB -o agat_step1.out' >> agat_step1.sh
+echo 'cd /scratch/projects/and_transcriptomics/genomes/Acer_2023' >> agat_step1.sh
+echo ''
+echo '/nethome/and128/.conda/pkgs/agat-1.2.0-pl5321hdfd78af_0/bin/agat_sp_manage_attributes.pl --gff GCA_032359415.1_NEU_Acer_K2_genomic.gtf_ext_by_5000.gtf -p gene --att transcript_id -o Acer_K2_genomic_ext_by_5000.gff' >> agat_step1.sh
+echo '/nethome/and128/.conda/pkgs/agat-1.2.0-pl5321hdfd78af_0/bin/agat_sp_manage_attributes.pl --gff GCA_032359415.1_NEU_Acer_K2_genomic.gtf -p gene --att transcript_id -o Acer_K2_genomic_original.gff' >> agat_step1.sh
+echo '/nethome/and128/.conda/pkgs/agat-1.2.0-pl5321hdfd78af_0/bin/agat_sp_manage_attributes.pl --gff Acer_K2_genomic_parsed.gtf -p gene --att transcript_id -o Acer_K2_genomic_parsed.gff' >> agat_step1.sh
+```
+
+
+I think the issue is because I was trying to use the anaconda environment/module that is on the shared program space (i.e. Pegasus creators download and maintain it). So I finally bit the bullet and downloaded anaconda3 to my nethome on Pegasus, so I could have admin privileges for updates and such. 
 
 ```{bash}
 wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
