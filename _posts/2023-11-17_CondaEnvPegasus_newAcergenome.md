@@ -268,10 +268,36 @@ for f in *$glob*; do
 done
 ```
 
+This script ran, but there are several output files that I'm not sure what they do.
+
+- core.10257 and 47 other "core.#" files (one for each sample)/ all are the same size: 588 MB
+- sample.trim.sam file for each sample. ~1-2 GB size
+- sample.trim.sam.sam file for each sample. 0 MB (empty file)
+
+When I run "head core.#" on one of the files. it looks like a zipped file or something, you can't read most of it.
+
+When I head "sample.trim.sam" file, it looks like the format of a fasta file so I think it worked?
+
+When I look at the bowtie2map.err file, there are two errors (even though it still ran): 
+1. Error: reads file does not look like a FASTQ file
+terminate called after throwing an instance of 'int'
+2. (ERR): bowtie2-align died with signal 6 (ABRT) (core dumped)
+
 Going back to converting gtf to fasta, I am trying to use a different package instead of agat. This one is called BEDtools. 
 
 ```{bash}
 awk '{ if ($1 !~ /^#/) print $1 "\t" $4-1 "\t" $5 "\t" $3 "\t" $6 "\t" $7; }' your_file.gtf > your_file.bed
+
+bedtools getfasta -fi GCA_032359415.1_NEU_Acer_K2_genomic.fna -bed NEU_Acer_K2_genomic.gtf_ext_by_5000.bed -fo Acer_genomic_output.fasta
 ```
+
+I think this worked?
+
+Should I re-run alignment of .trim files on just this? Or on this + concatenated fasta files of all the symbiont ones? 
+
+First I need to look and see if the UTR regions even got extended. I need to look for "introns" and "three_prime_UTR" in the categories.
+
+**There are no 3' UTRs or introns in any of the GTF files.**
+
 
 
