@@ -268,5 +268,10 @@ for f in *$glob*; do
 done
 ```
 
+Going back to converting gtf to fasta, I am trying to use a different package instead of agat. This one is called BEDtools. 
+
+```{bash}
+awk '{ if ($1 !~ /^#/) print $1 "\t" $4-1 "\t" $5 "\t" $3 "\t" $6 "\t" $7; }' your_file.gtf > your_file.bed
+```
 
 
