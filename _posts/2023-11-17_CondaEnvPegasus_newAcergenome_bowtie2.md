@@ -9,8 +9,8 @@ tags: [Coding]
 There are a lot of sections here, so here are links to specific topics:
 
 1. [Pegasus with Perl and Python, new Acer genome, extending UTRs](https://github.com/ademerlis/ademerlis.github.io/edit/master/_posts/2023-11-17_CondaEnvPegasus_newAcergenome.md#1-pegasus-with-perl-and-python-new-acer-genome-extending-utrs)
-2. []()
-3. 
+2. [Converting updated gtf to a fasta file (gffread, agat, BEDtools)](https://github.com/ademerlis/ademerlis.github.io/blob/master/_posts/2023-11-17_CondaEnvPegasus_newAcergenome_bowtie2.md#2-converting-updated-gtf-to-a-fasta-file-again-gffread-agat-bedtools)
+3. []()
 
 ## 1. Pegasus with Perl and Python, new Acer genome, extending UTRs
 This whole saga started when I met with Dr. Nick Kron about using perl and python scripts in Pegasus, as I am trying to adapt [Dr. Michael Studivan's bioinformatics pipeline](https://github.com/mstudiva/tag-based_RNAseq/blob/master/tagSeq_processing_README.txt) to work on Pegasus and have been having lots of issues.
