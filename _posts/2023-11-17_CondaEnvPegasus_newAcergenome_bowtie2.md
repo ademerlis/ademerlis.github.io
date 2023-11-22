@@ -1,11 +1,18 @@
 ---
 layout: post
-title: Conda Environment on Pegasus and new Acer genome
+title: Conda Environment on Pegasus, new Acer genome, and bowtie2
 date: '2023-11-17'
 categories: Coding
 tags: [Coding]
 ---
 
+There are a lot of sections here, so here are links to specific topics:
+
+1. [Pegasus with Perl and Python, new Acer genome, extending UTRs](https://github.com/ademerlis/ademerlis.github.io/edit/master/_posts/2023-11-17_CondaEnvPegasus_newAcergenome.md#1-pegasus-with-perl-and-python-new-acer-genome-extending-utrs)
+2. []()
+3. 
+
+## 1. Pegasus with Perl and Python, new Acer genome, extending UTRs
 This whole saga started when I met with Dr. Nick Kron about using perl and python scripts in Pegasus, as I am trying to adapt [Dr. Michael Studivan's bioinformatics pipeline](https://github.com/mstudiva/tag-based_RNAseq/blob/master/tagSeq_processing_README.txt) to work on Pegasus and have been having lots of issues.
 
 I got some great tips from Nick about how to submit jobs on Pegasus with .pl and .py scripts. There are a few important things to remember:
@@ -64,6 +71,7 @@ python3 gtf_advanced_parser.py --input ../Acer_2023/GCA_032359415.1_NEU_Acer_K2_
 # next submit the process_them.sh to bsub to extend the UTRs by a threshold of 5000 (based on what Dr. Nick Kron did)
 ```
 
+## 2. Converting updated gtf to a fasta file again (gffread, agat, BEDtools)
 But then the next step which is important is that I need to convert the updated gtf file to a fasta file, because the alignment tool Michael used (bowtie2) requires a fasta file. This is because I asked ChatGPT and it gave me this:
 
 "Yes, you can use Bowtie2 in combination with a .gtf file to build a transcriptome index, but not directly. Bowtie2 itself is designed to build indexes from genomic DNA sequences (typically in FASTA format), and it doesn't natively support the .gtf file format, which contains gene annotation data.
@@ -152,6 +160,7 @@ Now I'm trying to install something that is supposed to make the solving depende
 conda install -n base conda-libmamba-solver
 ```
 
+## 3. Bowtie2 to build index and run alignment 
 While that's running, should I just try running bowtie2 with the unmodified gtf files?
 
 ```{bash}
