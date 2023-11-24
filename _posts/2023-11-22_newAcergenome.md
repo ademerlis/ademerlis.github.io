@@ -31,3 +31,4 @@ https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_032359415.1/
 
 <img width="541" alt="Screen Shot 2023-11-22 at 12 59 58 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/eea43af1-0053-4bdf-b49d-9888f6901b59">
 
+I downloaded it this way and it's the exact same as running the "curl" script above. the files are the same.
