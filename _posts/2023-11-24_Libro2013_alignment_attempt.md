@@ -6,6 +6,11 @@ categories: Coding
 tags: [Coding]
 ---
 
+1. [first attempt (Host_sym concatenated)](https://github.com/ademerlis/ademerlis.github.io/edit/master/_posts/2023-11-24_Libro2013_alignment_attempt.md#1-libro-and-shoguchi-genomes-concatenated)
+2. [second attempt (running alignment on Host and symbiont separately and recursively to eliminate reads that align to both)]()
+
+## 1) Libro and Shoguchi genomes concatenated
+
 I'm going to try to run the bowtie2 scripts from [Dr. Michael Studivan](https://github.com/mstudiva/tag-based_RNAseq/blob/master/tagSeq_processing_README.txt) and see how the alignment rates come out. I'm going to concatenate the Acer genome with the Shoguchi et la. 2018 Symbiodinium genome. 
 
 First, run bowtie2-build:
@@ -143,6 +148,8 @@ foreach $f(@fqs){
 countreads_align.pl > countreads_align.txt (ran this in the command line)
 
 My numbers and Michael's numbers don't match at all. I am going to need him to show me what he did exactly.
+
+## 2) Running alignment on Libro and Shoguchi separately
 
 Ok, I found this from his github repo for the tag-seq pipeline, and I think it has the full code for aligning to symbiont, then host, then symbiont again, and separating it all out.
 
