@@ -363,8 +363,63 @@ done
 
 The final .sam files will be ".host.sam" and ".sym.clean.sam". 
 
-To count the number of mapped host and symbiont reads for mapping efficiency, run the .pl script on the .clean files. I'm not sure if the .clean files are the exact same as the .sam files because their sizes differ. But maybe it's the file format of .sam versus the .fastq. 
+To count the number of mapped host and symbiont reads for mapping efficiency, run the .pl script on the .clean files. I'm not sure if the .clean files are the exact same as the .sam files because their sizes differ. But maybe it's the file format of .sam versus the .fastq. Oh looking at the .pl script below, maybe it's because this script specifically works on the fastq files.
 
+The countreads.pl script is:
 
+```{perl}
+#!/usr/bin/perl
+
+print "
+
+countreads_align.pl : counts the number of mapped reads in a bunch of fastq files
+argument - glob to fastq files, default \.trim.al
+
+";
+
+my $glob="\.host.clean";
+if ($ARGV[0]) { $glob=$ARGV[0];}
+
+opendir THIS, ".";
+my @fqs=grep /$glob/,readdir THIS;
+my $f;
+my $nrd;
+foreach $f(@fqs){
+	$nrd=`cat $f | wc -l`;
+	$nrd=$nrd/4;
+	print "$f\t$nrd\n";
+} 
+```
+then run this in the command line: 
+
+perl countreads_host.pl > countreads_host.txt
+
+Then the script for the symbiont reads is: 
+
+```{perl}
+#!/usr/bin/perl
+
+print "
+
+countreads_align.pl : counts the number of mapped reads in a bunch of fastq files
+argument - glob to fastq files, default \.trim.al
+
+";
+
+my $glob="\.sym.clean";
+if ($ARGV[0]) { $glob=$ARGV[0];}
+
+opendir THIS, ".";
+my @fqs=grep /$glob/,readdir THIS;
+my $f;
+my $nrd;
+foreach $f(@fqs){
+	$nrd=`cat $f | wc -l`;
+	$nrd=$nrd/4;
+	print "$f\t$nrd\n";
+} 
+```
+
+perl countreads_sym.pl > countreads_sym.txt
 
 
