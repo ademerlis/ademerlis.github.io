@@ -7,7 +7,7 @@ tags: [Coding]
 ---
 
 1. [first attempt (Host_sym concatenated)](https://github.com/ademerlis/ademerlis.github.io/edit/master/_posts/2023-11-24_Libro2013_alignment_attempt.md#1-libro-and-shoguchi-genomes-concatenated)
-2. [second attempt (running alignment on Host and symbiont separately and recursively to eliminate reads that align to both)]()
+2. [second attempt (running alignment on Host and symbiont separately and recursively to eliminate reads that align to both)](https://github.com/ademerlis/ademerlis.github.io/blob/master/_posts/2023-11-24_Libro2013_alignment_attempt.md#2-running-alignment-on-libro-and-shoguchi-separately)
 
 ## 1) Libro and Shoguchi genomes concatenated
 
