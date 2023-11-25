@@ -113,3 +113,32 @@ done
 ```
 
 Ok that's currently running so it might be working.
+
+It ran and created .sam files and .sam.unaligned files for each Acer sample. Now I need to run the mapping efficiency code that Michael used and see how my numbers and his numbers matched up for Libro et al. 2013. 
+
+```{perl}
+#!/usr/bin/perl
+
+print "
+
+countreads_align.pl : counts the number of mapped reads in a bunch of fastq files
+argument - glob to fastq files, default \.trim.al
+
+";
+
+my $glob="\.sam";
+if ($ARGV[0]) { $glob=$ARGV[0];}
+
+opendir THIS, ".";
+my @fqs=grep /$glob/,readdir THIS;
+my $f;
+my $nrd;
+foreach $f(@fqs){
+	$nrd=`cat $f | wc -l`;
+	$nrd=$nrd/4;
+	print "$f\t$nrd\n";
+}
+```
+
+countreads_align.pl > countreads_align.txt (ran this in the command line)
+
