@@ -142,3 +142,4 @@ foreach $f(@fqs){
 
 countreads_align.pl > countreads_align.txt (ran this in the command line)
 
+My numbers and Michael's numbers don't match at all. I am going to need him to show me what he did exactly.
