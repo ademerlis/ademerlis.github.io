@@ -139,6 +139,35 @@ export HDF5_DIR=$(brew --prefix hdf5)
 
 export PATH=/Users/allysondemerlis/Library/Python/3.9/bin:$PATH #command line told me to do this
 
+curl https://www.ncei.noaa.gov/data/oceans/pathfinder/Version5.3/
 
+python3 #activate python
+
+import netCDF4 as nc
+import xarray as xr
+
+dataset = xr.open_dataset('~/Downloads/19811231141339-NCEI-L3C_GHRSST-SSTskin-AVHRR_Pathfinder-PFV5.3_NOAA07_G_1981365_day-v02.0-fv01.0.nc')
+
+sst_data = dataset['sea_surface_temperature'
+
+sst_df = sst_data.to_dataframe()
+
+print(sst_df.head())  # Displays the first 5 row
+
+#longitude boundaries: -80.001, -80.17
+#latitude boundaries: 25.60, 25.80
+
+# Define your latitude and longitude range
+lat_range = [26, 25]  # Replace with your desired range
+lon_range = [-81, -80]  # Replace with your desired range
+
+# Filter the data
+filtered_data = sst_data.sel(lat=slice(*lat_range), lon=slice(*lon_range))
+
+print(filtered_data)
+
+import pandas as pd
+df = filtered_data.to_dataframe()
+df.to_csv('output_filename.csv')
 
 ```
