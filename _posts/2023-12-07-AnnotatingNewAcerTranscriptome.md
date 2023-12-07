@@ -46,6 +46,23 @@ Now I run this with the updated script:
 ```{bash}
 seq_stats.pl /scratch/projects/and_transcriptomics/genomes/Acer/Locatelli_2023/Acer_Genome/Acropora_cervicornis.mrna-transcripts.fa  > seqstats_Acer.txt
 ```
+Results: 
+-------------------------
+36455 sequences.
+1678 average length.
+65308 maximum length.
+61 minimum length.
+N50 = 2747
+61.2 Mb altogether (61163689 bp).
+0 ambiguous Mb. (100 bp, 0%)
+0 Mb of Ns. (100 bp, 0%)
+-------------------------
 
 
+Next step is to get the uniprot annotations with blast.
+
+```{bash}
+# getting uniprot_swissprot KB database
+wget ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+```
 
