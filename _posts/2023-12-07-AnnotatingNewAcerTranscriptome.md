@@ -64,5 +64,27 @@ Next step is to get the uniprot annotations with blast.
 ```{bash}
 # getting uniprot_swissprot KB database
 wget ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+
+gunzip uniprot_sprot.fasta.gz
 ```
 
+Then I created a script for the makedatabase part.
+
+```{bash}
+#!/usr/bin/bash
+#BSUB -P and_transcriptomics
+#BSUB -n 8
+#BSUB -W 120:00
+#BSUB -o makedatabase.out
+#BSUB -e makedatabase.err
+
+module load blast/2.2.29+
+makeblastdb -in uniprot_sprot.fasta -dbtype prot
+```
+
+
+That ran. 
+
+Now, I need to split up the fasta file so the blast code runs quickly.
+
+ 
