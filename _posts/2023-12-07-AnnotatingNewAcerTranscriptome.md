@@ -3,7 +3,9 @@ layout: post
 title: Annotating new Acer transcriptome
 date: '2023-12-07'
 categories: Coding
-tags: [Coding]
+tags:
+  - Coding
+published: true
 ---
 
 I'm going to be following [Michael Studivan's code](https://github.com/mstudiva/Acropora-cervicornis-annotated-transcriptome/blob/main/tagSeq_TranscriptomeAnnotation_README.txt) for annotating the new Acer transcriptome. 
