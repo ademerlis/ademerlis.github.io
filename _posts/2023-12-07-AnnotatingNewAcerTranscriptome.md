@@ -15,4 +15,8 @@ Step 1 is installing bioperl. I had trouble doing this, but I didn't realize I c
 ```{bash}
 # To install Bioperl as a conda environment
 conda create -y -n bioperl perl-bioperl
+
+conda activate bioperl
+
+
 ```
