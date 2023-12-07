@@ -22,7 +22,7 @@ git clone https://github.com/z0on/annotatingTranscriptomes.git
 
 git clone https://github.com/z0on/emapper_to_GOMWU_KOGMWU.git
 
-seq_stats.pl /scratch/projects/and_transcriptomics/genomes/Acer/Locatelli_2023/Acer_Genome/Acropora_cervicornis.mrna-transcripts.fa 
+seq_stats.pl /scratch/projects/and_transcriptomics/genomes/Acer/Locatelli_2023/Acer_Genome/Acropora_cervicornis.mrna-transcripts.fa  > seqstats_Acer.txt
 
 ```
 
@@ -40,4 +40,12 @@ So the seq_stats.pl script beginning looks like this now:
 use lib "~/anaconda3/envs/bioperl";
 use Bio::SeqIO;
 ```
+
+Now I run this with the updated script:
+
+```{bash}
+seq_stats.pl /scratch/projects/and_transcriptomics/genomes/Acer/Locatelli_2023/Acer_Genome/Acropora_cervicornis.mrna-transcripts.fa  > seqstats_Acer.txt
+```
+
+
 
