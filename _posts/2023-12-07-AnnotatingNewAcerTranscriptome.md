@@ -140,3 +140,85 @@ bsub < ${projdir}/${file}_blast_uniprot.job
 
 done
 ```
+
+This took ~ l hr to complete.
+
+To make sure it worked, run the following line and you should end up with the same number of queries as there are sequences from the seqstats_Acer.txt file (created from running seq_stats.pl). 
+
+```{bash}
+grep "Query= " subset*.br | wc -l
+```
+
+I get 36,455, which equals the number of sequences in the seqstats_Acer.txt file.
+
+
+Next, combine all blast results:
+
+```{bash}
+cat subset*br > myblast.br
+```
+
+Then, extract coding sequences and corresponding protein translations using the perl script **CDS_extractor_v2.pl**. 
+
+This is a really long script so I'm not going to paste it in here. I'm first going to try to run it as-is. It looks like it requires Bio::SeqIO so we'll see how that goes.
+
+I should probably create a job script and submit this as a job just in case it takes awhile.
+
+Michael runs CDS_extractor_v2.pl on a file he made called "Acervicornis_iso.fasta". It looks like he ran this code on the original fasta file:
+
+```{bash}
+cat Acervicornis.fasta | perl -pe 's/>Acropora(\d+)(\S+).+/>Acropora$1$2 gene=Acropora$1/'>Acervicornis_iso.fasta
+```
+
+He had flagged this line of code for only being specific to Trinity-assembled transcriptomes.
+
+The one I'm using was generating using "funannotate." So, each header of the fasta file looks something like this:
+
+```{bash}
+>FUN_000006-T1 FUN_000006
+```
+
+I can try to adapt Michael's code so it does the same thing, which is basically substituting the trinity header to be named an arbitrary gene name (i.e. Acropora00001). 
+
+Remember the Acer_2023.fasta is the mrna_transcripts.fa file that I just copied over from the original genome download folder.
+
+Also, I noticed the other line of code for trinity-assembled transcriptomes creates the file "Acervicornis_seq2iso.tab" which is the necessary file for generating read counts per gene back in the tagSeq bioinformatics pipeline (which is the whole reason i'm running this annotatingTranscriptomes pipeline).
+
+So i should run both lines to get both files: Acervicornis_seq2iso.tab and Acervicornis_iso.fasta.
+
+```{bash}
+grep ">" 
+```
+
+```{bash}
+conda activate bioperl #if not active already
+
+
+
+```
+
+Do I have to do all of this on the symbiodinium fasta file too and then concatenate them??
+
+Yes. Ok I found the lines of code that say that:
+
+```{bash}
+## Generating read counts per gene
+
+# NOTE: Must have a tab-delimited file giving correspondence between contigs in the transcriptome fasta file and genes
+cp ~/annotate/Host_concat_seq2iso.tab ~/db/
+# if working with multiple reference transcriptomes, concatenate the seq2iso tables
+cat Host_seq2iso.tab Sym_seq2iso.tab > Host_concat_seq2iso.tab
+
+```
+
+So, I need to make the seq2iso.tab files for each. When I look at what Michael's Acervicornis_seq2iso.tab file looks like, it looks like this:
+
+![Screen Shot 2023-12-08 at 1.44.35 PM.png]({{site.baseurl}}/_posts/Screen Shot 2023-12-08 at 1.44.35 PM.png)
+
+
+So, these are the files I need to generate for Acer and Symbiodinium.
+
+The GO, KEGG and KOG part of the annotatingTranscriptomes part is useful for adding more annotations, because the annotations text file that came with the genome just has GO terms. So it will be important for me to finish this pipeline.
+
+But for the sake of getting gene counts, I just need to get the seq2iso.tab files.
+
