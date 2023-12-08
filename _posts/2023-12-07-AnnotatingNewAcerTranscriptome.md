@@ -87,4 +87,17 @@ That ran.
 
 Now, I need to split up the fasta file so the blast code runs quickly.
 
- 
+```{bash}
+#navigate to wd where splitFasta.pl is located 
+#copy fasta file into this directory
+cp /scratch/projects/and_transcriptomics/genomes/Acer/Locatelli_2023/Acer_Genome/Acropora_cervicornis.mrna-transcripts.fa Acer2023.fasta
+
+#run split Fasta code
+perl splitFasta.pl Acer2023.fasta 200
+```
+
+This created 200 subset.fasta files. Now, need to create a script to submit a job to pegasus that blasts all 200 chunks to uniprot in parallel.
+
+I think I'll need to create a for-loop so it creates individual jobs for each chunk, so that they can run simultaneously. 
+
+```{bash}
