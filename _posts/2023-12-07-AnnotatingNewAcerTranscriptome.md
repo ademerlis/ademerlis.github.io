@@ -47,7 +47,7 @@ Now I run this with the updated script:
 seq_stats.pl /scratch/projects/and_transcriptomics/genomes/Acer/Locatelli_2023/Acer_Genome/Acropora_cervicornis.mrna-transcripts.fa  > seqstats_Acer.txt
 ```
 Results: 
--------------------------
+
 36455 sequences.
 1678 average length.
 65308 maximum length.
@@ -56,7 +56,6 @@ N50 = 2747
 61.2 Mb altogether (61163689 bp).
 0 ambiguous Mb. (100 bp, 0%)
 0 Mb of Ns. (100 bp, 0%)
--------------------------
 
 
 Next step is to get the uniprot annotations with blast.
@@ -180,21 +179,47 @@ The one I'm using was generating using "funannotate." So, each header of the fas
 
 I can try to adapt Michael's code so it does the same thing, which is basically substituting the trinity header to be named an arbitrary gene name (i.e. Acropora00001). 
 
+**update**: actually i'm not sure I want to do that, because then I would also have to edit the enitre gff3 file (the gene IDs in there are FUN_#). I'm going to leave it as is and change the Acervicornis_seq2iso.tab code to grep and awk FUN instead of Acropora.
+
 Remember the Acer_2023.fasta is the mrna_transcripts.fa file that I just copied over from the original genome download folder.
 
-Also, I noticed the other line of code for trinity-assembled transcriptomes creates the file "Acervicornis_seq2iso.tab" which is the necessary file for generating read counts per gene back in the tagSeq bioinformatics pipeline (which is the whole reason i'm running this annotatingTranscriptomes pipeline).
+"Acervicornis_seq2iso.tab"  is the necessary file for generating read counts per gene back in the tagSeq bioinformatics pipeline (which is the whole reason i'm running this annotatingTranscriptomes pipeline).
 
 So i should run both lines to get both files: Acervicornis_seq2iso.tab and Acervicornis_iso.fasta.
 
 ```{bash}
-grep ">" 
+grep ">" Acer2023.fasta | perl -pe 's/>FUN(\d+)(\S+)\s.+/FUN$1$2\tFUN$1/'>Acervicornis_seq2iso.tab
+
+cat Acer2023.fasta | perl -pe 's/>FUN(\d+)(\S+).+/>FUN$1$2 gene=FUN$1/'>Acervicornis_iso.fasta
 ```
 
+Ok the second line doesn't do anything because the original fasta file is already listed in this exact format. So i'm not sure if any of this code is actually useful.
+
+
 ```{bash}
+# extracting coding sequences and corresponding protein translations:
 conda activate bioperl #if not active already
+echo "perl ~/bin/CDS_extractor_v2.pl Acervicornis_iso.fasta myblast.br allhits bridgegaps" >cds
 
+#! /usr/bin/env bash
+#BSUB -P and_transcriptomics
+#BSUB -J CDS_extractor
+#BSUB -e /scratch/projects/and_transcriptomics/genomes/Acer/annotatingTranscriptomes-master/CDS_extractor.err
+#BSUB -o /scratch/projects/and_transcriptomics/genomes/Acer/annotatingTranscriptomes-master/CDS_extractor.out
+#BSUB -W 12:00
+#BSUB -n 8
+#BSUB -q general
 
+cd "/scratch/projects/and_transcriptomics/genomes/Acer/annotatingTranscriptomes-master"
 
+perl CDS_extractor_v2.pl Allyson_Created_Files/Acer2023.fasta Allyson_Created_Files/myblast.br allhits bridgegaps
+
+```
+
+To run the above job script, I had to manually install the perl module "Bio::DB::Fasta:. I ran this:
+
+```{bash}
+cpan Bio::DB::Fasta
 ```
 
 Do I have to do all of this on the symbiodinium fasta file too and then concatenate them??
@@ -213,7 +238,7 @@ cat Host_seq2iso.tab Sym_seq2iso.tab > Host_concat_seq2iso.tab
 
 So, I need to make the seq2iso.tab files for each. When I look at what Michael's Acervicornis_seq2iso.tab file looks like, it looks like this:
 
-![image](https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/Screen%20Shot%202023-12-08%20at%201.44.35%20PM.png)
+![Screen Shot 2023-12-08 at 1.44.35 PM.png]({{site.baseurl}}/_posts/Screen Shot 2023-12-08 at 1.44.35 PM.png)
 
 
 So, these are the files I need to generate for Acer and Symbiodinium.
@@ -221,4 +246,3 @@ So, these are the files I need to generate for Acer and Symbiodinium.
 The GO, KEGG and KOG part of the annotatingTranscriptomes part is useful for adding more annotations, because the annotations text file that came with the genome just has GO terms. So it will be important for me to finish this pipeline.
 
 But for the sake of getting gene counts, I just need to get the seq2iso.tab files.
-
