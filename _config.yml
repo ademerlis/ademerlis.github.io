@@ -15,7 +15,9 @@ avatar: https://avatars.githubusercontent.com/u/56000927?s=400&u=9c19614b1d0c18b
 # Flags below are optional
 # 
 
-theme: minima
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
 
 # Includes an icon in the footer for each username you enter
 footer-links:
