@@ -221,28 +221,5 @@ To run the above job script, I had to manually install the perl module "Bio::DB:
 ```{bash}
 cpan Bio::DB::Fasta
 ```
+But this doesn't work because there are a ton of other dependencies it needs. I'm going to abandon this pipeline at this step because there is an annotation file that came with the Locatelli 2023 Acer genome and it has GO terms in it. I'll just move forward with that for right now.
 
-Do I have to do all of this on the symbiodinium fasta file too and then concatenate them??
-
-Yes. Ok I found the lines of code that say that:
-
-```{bash}
-## Generating read counts per gene
-
-# NOTE: Must have a tab-delimited file giving correspondence between contigs in the transcriptome fasta file and genes
-cp ~/annotate/Host_concat_seq2iso.tab ~/db/
-# if working with multiple reference transcriptomes, concatenate the seq2iso tables
-cat Host_seq2iso.tab Sym_seq2iso.tab > Host_concat_seq2iso.tab
-
-```
-
-So, I need to make the seq2iso.tab files for each. When I look at what Michael's Acervicornis_seq2iso.tab file looks like, it looks like this:
-
-![Screen Shot 2023-12-08 at 1.44.35 PM.png]({{site.baseurl}}/_posts/Screen Shot 2023-12-08 at 1.44.35 PM.png)
-
-
-So, these are the files I need to generate for Acer and Symbiodinium.
-
-The GO, KEGG and KOG part of the annotatingTranscriptomes part is useful for adding more annotations, because the annotations text file that came with the genome just has GO terms. So it will be important for me to finish this pipeline.
-
-But for the sake of getting gene counts, I just need to get the seq2iso.tab files.
