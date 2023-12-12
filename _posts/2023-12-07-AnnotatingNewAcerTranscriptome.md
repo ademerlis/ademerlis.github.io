@@ -213,7 +213,7 @@ cat Host_seq2iso.tab Sym_seq2iso.tab > Host_concat_seq2iso.tab
 
 So, I need to make the seq2iso.tab files for each. When I look at what Michael's Acervicornis_seq2iso.tab file looks like, it looks like this:
 
-![Screen Shot 2023-12-08 at 1.44.35 PM.png]({{site.baseurl}}/_posts/Screen Shot 2023-12-08 at 1.44.35 PM.png)
+![image](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/e19142ae-151d-4ec2-8f3d-02f988946ddb)
 
 
 So, these are the files I need to generate for Acer and Symbiodinium.
