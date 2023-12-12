@@ -171,3 +171,5 @@ df = filtered_data.to_dataframe()
 df.to_csv('output_filename.csv')
 
 ```
+
+**unresolved issue**: when I open this csv in R, it only contains data from 1981. WHY?
