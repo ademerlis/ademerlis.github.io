@@ -1,6 +1,13 @@
 ---
-published: false
+layout: post
+title: Acer gene counts using samtools
+date: '2023-12-07'
+categories: Coding
+tags:
+  - Coding
+published: true
 ---
+
 ## Finally getting the gene counts for Acer samples from Chapter 2
 
 Following the last section of [Michael Studivan's code](https://github.com/mstudiva/tag-based_RNAseq/blob/master/tagSeq_processing_README.txt). 
