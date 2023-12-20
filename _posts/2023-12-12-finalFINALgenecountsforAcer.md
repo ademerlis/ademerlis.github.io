@@ -150,3 +150,24 @@ grep ">" syma_transcriptome_37.fasta | perl -pe 's/>comp(\d+)(\S+)\s.+/comp$1$2\
 
 cat Acer/Locatelli_2023/Acer_Genome/Acervicornis_seq2iso.tab Symbiodinium/Symbiodinium_seq2iso.tab > Host_concat_seq2iso.tab
 ```
+
+Ok I think that worked?! yay
+
+I just ran this in the terminal and it worked fast.
+
+```{bash}
+perl expression_compiler.pl *.counts > allcounts.txt
+
+# let's remove those annoying chains of extensions from sample names
+cat allcounts.txt | perl -pe 's/\.trim\.sam\.counts//g'> counts.txt
+
+# i also need to remove sample name extensions "i.e. _S25_L001_R1_001"
+
+cat counts.txt | perl -pe 's/(_S\d+_L\d+_R\d+_\d+)//g' > count.txt
+
+#and rename FUN -> Acropora and comp -> symbiodinium
+sed -i 's/FUN/Acropora/g' count.txt
+sed -i 's/comp/Symbiodinium/g' count.txt
+```
+
+Ok now that it's all tidied up, I used scp to move it onto my local drive. All done with Pegasus?!!?!!
