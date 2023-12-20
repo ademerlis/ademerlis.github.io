@@ -92,6 +92,7 @@ sed -i 's/comp/Acropora/g' Acer2023.fasta > Acer2023_edited.fasta
 sed -i 's/isogroup/Acropora/g' Acervicornis.fasta
 ```
 
+It doesn't help because there is nothing labeled "comp" or "isogroup in the fasta file I'm using from Locatelli, which is called Acropora_cervicornis.mrna-transcripts.fa. I looked through the other file types (.gff3, protein.fa, scaffolds.fa) and none of them have the comp or isogroup headers.
 
 
 
