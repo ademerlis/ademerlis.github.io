@@ -105,6 +105,74 @@ This essentially just extracts the header line from each gene and puts it in a t
 
 But then when I run samcount.pl using this seq2iso.tab file, I get no results.
 
+**December 20 update:**
 
+I had Michael take a look at the seq2iso.tab file, and the issue is that each line starts with ">" but it shouldn't. It's messing up the gene names.
+
+So two things I need to do: First, update the Acropora one to have the genes be named "Acropora_000001" instead of "FUN_000001", and then update the Symbiodinium fasta file to say Symbiodinium_000001 for those genes. Then create the seq2iso.tab files for both species, concatenate them, then re-run the samcount.pl job.
+
+```{bash}
+# Renaming gene identifiers for ease
+
+#make new file
+cp Acropora_cervicornis.mrna-transcripts.fa Acer_edited.fasta
+cp syma_transcriptome_37.fasta Symbiodinium_edited.fasta
+
+sed -i 's/FUN/Acropora/g' Acer_edited.fasta
+
+sed -i 's/comp/Symbiodinium/g' Symbiodinium_edited.fasta
+sed -i 's/isogroup/Symbiodinium/g' Symbiodinium_edited.fasta
+
+
+# making seq2iso.tab files
+grep ">" Acer_edited.fasta | perl -pe 's/>Acropora_(\d+)(\S+)\s.+/Acropora_$1$2\t Acropora_$1/'>Acervicornis_seq2iso.tab
+grep ">" Symbiodinium_edited.fasta | perl -pe 's/>Symbiodinium(\d+)(\S+)\s.+/Symbiodinium$1$2\t Symbiodinium$1/'>Symbiodinium_seq2iso.tab
+
+# create combo file
+
+cat Acer/Locatelli_2023/Acer_Genome/Acervicornis_seq2iso.tab Symbiodinium/Symbiodinium_seq2iso.tab > Host_concat_seq2iso.tab
+```
+
+Now i should be able to re-run this script with no changes:
+
+  
+```{bash}
+#! /usr/bin/env bash
+
+#define variables for directories and files
+and="/scratch/projects/and_transcriptomics"
+project="and_transcriptomics"
+projdir=
+
+cd "/scratch/projects/and_transcriptomics/Ch2_temperaturevariability2023/2_trimmed_reads/take_4/trimmed_files/Acer/bowtie2align_LocatelliShoguchi/sam_files"
+
+data=($(ls *.sam))
+
+for samp in "${data[@]}" ; do \
+
+#build script
+echo "making sam_counts script for ${samp}..."
+echo "
+#! /usr/bin/env bash
+#BSUB -P ${project}
+#BSUB -J ${samp}_samcounts
+#BSUB -e ${and}/Ch2_temperaturevariability2023/3_genecounts/logs/${samp}_samcounts.err
+#BSUB -o ${and}/Ch2_temperaturevariability2023/3_genecounts/logs/${samp}_samcounts.out
+#BSUB -W 12:00
+#BSUB -n 8
+#BSUB -q general
+
+cd \"/scratch/projects/and_transcriptomics/Ch2_temperaturevariability2023/2_trimmed_reads/take_4/trimmed_files/Acer/bowtie2align_LocatelliShoguchi/sam_files\"
+
+module load samtools/1.3
+
+perl samcount.pl ${samp} /scratch/projects/and_transcriptomics/genomes/Host_concat_seq2iso.tab aligner=bowtie2 >${samp}.counts
+
+" > ${and}/Ch2_temperaturevariability2023/3_genecounts/${samp}_samcounts.job
+
+bsub < ${and}/Ch2_temperaturevariability2023/3_genecounts/${samp}_samcounts.job
+
+done
+```
 
 
