@@ -88,14 +88,22 @@ I didn't initially run this on my fasta file but I'll try it now and see if it h
 
 ```{bash}
 # Renaming gene identifiers for ease
-sed -i 's/comp/Acropora/g' Acer2023.fasta > Acer2023_edited.fasta
-sed -i 's/isogroup/Acropora/g' Acervicornis.fasta
+sed -i 's/comp/Acropora/g' Acropora_cervicornis.mrna-transcripts.fa > Acer2023_edited.fasta
+sed -i 's/isogroup/Acropora/g' Acropora_cervicornis.mrna-transcripts.fa > Acer2023_edited.fasta
 ```
 
 It doesn't help because there is nothing labeled "comp" or "isogroup in the fasta file I'm using from Locatelli, which is called Acropora_cervicornis.mrna-transcripts.fa. I looked through the other file types (.gff3, protein.fa, scaffolds.fa) and none of them have the comp or isogroup headers.
 
+I ended up running this code to create a seq2iso.tab file.
 
+```{bash}
+grep ">" Acropora_cervicornis.mrna-transcripts.fa | perl -pe 's/>FUN(\d+)(\S+)\s.+/FUN$1$2\tFUN$1/'>Acervicornis_seq2iso.tab
+```
+This essentially just extracts the header line from each gene and puts it in a tab-delimited text file. 
 
+<img width="384" alt="Screen Shot 2023-12-20 at 9 04 34 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/a07fbb1b-cc5b-4361-a87c-0d2949be5f32">
+
+But then when I run samcount.pl using this seq2iso.tab file, I get no results.
 
 
 
