@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Fv/Fm CBASS code
+title: Fv/Fm GLMMs
 date: '2023-12-23'
 categories: Coding, IPAM
 tags: [Coding, IPAM]
