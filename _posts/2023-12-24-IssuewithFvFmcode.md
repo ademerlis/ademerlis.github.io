@@ -16,3 +16,6 @@ So what happened there? I guess let me screenshot to keep record of which ones w
 
 ![Screen Shot 2023-12-24 at 8 17 01 AM](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/d4da8990-c05a-41dd-9b2c-c826ce4cf5df)
 
+UPDATE: I figured out the issue. The IPAM2R code has a line in it that uses the reshape2 function, and some of my csv files had two rows of identical IPAM data instead of one row - one row is what the IPAM2R code expects. I guess if you export your IPAM data twice on accident it will add another row to your csv file. But, when the function in R tries to reshape the data frame after tidying the AOI and other variable info, it basically extracts the wrong information and the Y(II) values end up being incorrect. For the Acer samples that were messed up, they had valuess of 2.00 instead of 0.646 etc that they were supposed to be. So I added a if-then statement within the IPAM2R data which basically removes the second row if there are two rows present in the csv file. 
+
+When I looked through the updated dataset that was created in R, I no longer had so many NAs as I did before. I cross-validated the values from the original csv files to make sure they matched, and they did. Yay problem solved!
