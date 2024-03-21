@@ -26,6 +26,35 @@ I can see in the header that I think it includes all lat, lon coordinates.
 
 Now, I read it into R using Ana's code:
 
-```{r}
+```{r Extract_OISST_data, cache=TRUE}
+ library(raster)
+  library(parallel)
+library(ncdf4)
 
+
+  # Read climatology file
+  Climatology_MMM <- "ct5km_climatology_v3.1.nc"
+  MMM.data <- brick(Climatology_MMM) 
+  #MMM.data
+  
+  # KB Nursery
+  lat_KB <- (25.6763)
+  lon_KB <- (-80.0987)
+  extract.pts_KB <- cbind(lon_KB,lat_KB)
+  
+  #CCC 
+  lat.CCC <- (25.766626)
+  lon.CCC <- (-80.144812)
+  extract_CCC <- cbind(lon.CCC, lat.CCC)
+
+  
+  #MMM <- raster::extract(MMM.data, extract.pts,method="bilinear")
+  MMM <- raster::extract(MMM.data, extract.pts_KB,method="simple")
+  MMM_CCC <- raster::extract(MMM.data, extract_CCC,method="simple")
+
+  write.csv(MMM, "KB_CRW_MMM_1985-2012.csv", row.names=FALSE)
+
+  write.csv(MMM_CCC, "CCC_CRW_MMM_1985-2012.csv", row.names=FALSE)
+  
+# MMM for both sites (they're within 5 km of each other) is 29.54
 ```
