@@ -12,6 +12,8 @@ When I take all the DGEs (p-adjusted<0.05) from this dataset, and input their KO
 
 <img width="507" alt="Screen Shot 2024-04-27 at 3 45 25 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/94102489-c653-4a45-9735-3932aadc0c2a">
 
-Which is the same as what I get from the results table linked above. Estrogen signaling doesn't have the most KO terms in this list, but it ends up being the most significant. The significance test to obtain p-values is the hypergeometric test, which is essentially testing if the number of genes in a given pathway is more than what would be expected by chance. This number is determined based on the "universe," which is the number of KEGG terms in your dataset from the total number of genes in your dataset. In my dataset, there were 
+Then, when you click on estrogen signaling specifically, these are the genes and associated KEGG terms from my list of DGEs.
 
 <img width="559" alt="Screen Shot 2024-04-27 at 3 53 19 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/4010c271-7b81-4cc4-a123-e6d30d5c922b">
+
+Which is the same as what I get from the results table linked above. Estrogen signaling doesn't have the most KO terms in this list, but it ends up being the most significant. The significance test to obtain p-values is the hypergeometric test, which is essentially testing if the number of genes in a given pathway is more than what would be expected by chance. This number is determined based on the "universe," which is the number of KEGG terms in your dataset from the total number of genes in your dataset. In my dataset, there were 12,344 KO terms from the *A.cervicornis* genome. Then, of my 819 DGEs, 413 of them had KO terms associated with them. 
