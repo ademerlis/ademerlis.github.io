@@ -21,3 +21,33 @@ I tried that already from downloading them from the Basespace website to my loca
 <img width="815" alt="Screen Shot 2024-10-18 at 12 20 48 PM" src="https://github.com/user-attachments/assets/b20affa1-a8ff-4bec-a49c-794b8c14d244">
 
 What's annoying is it doesn't seem to show me the full list of samples. So I really can't tell if it's all the Pcli samples, or just the ones listed there. 
+
+I'm going to try to download all the Pcli files directly from Basespace using Michael's command line code ([here](https://github.com/mstudiva/tag-based_RNAseq/blob/master/tagSeq_processing_README.txt)).
+
+I think Michael's code is outdated, so I found the BaseSpace CLI tutorial on Illumina [here](https://developer.basespace.illumina.com/docs/content/documentation/cli/cli-overview).
+
+```{bash}
+# if you have not previously, download BaseSpaceCLI
+wget "https://api.bintray.com/content/basespace/BaseSpaceCLI-EarlyAccess-BIN/latest/\$latest/amd64-linux/bs?bt_package=latest" -O $HOME/bin/bs # this didn't work
+chmod +x ~/bin/bs
+
+#download via homebrew
+brew tap basespace/basespace && brew install bs-cli
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+echo '#!/bin/bash' > downloadReads.sh
+echo 'bs download project --concurrency=high -q -n JA23031 -o . | grep "Pcli" ' >> downloadReads.sh
+# -n is the BaseSpace project name and -o is the output directory
+
+chmod +x downloadReads.sh
+
+bs --version
+# BaseSpaceCLI 1.6.1 -- built on 2024-07-23 at 09:33
+
+bs auth
+# has you go to the illumina website and sign in
+
+./downloadReads.sh
+
+```
