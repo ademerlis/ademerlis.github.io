@@ -51,3 +51,12 @@ bs auth
 ./downloadReads.sh
 
 ```
+
+the grep Pcli part didn't work but all the files are downloading very slowly. It looks like you can't specify which files to download 
+
+```{bash}
+bs list datasets --filter-term=".*Pcli.*"
+#this lists only the basespace files for Pcli
+
+bs download project -n JA23031 --exclude '.*Acer.*'
+```
