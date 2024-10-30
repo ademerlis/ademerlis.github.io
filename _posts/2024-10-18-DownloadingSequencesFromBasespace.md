@@ -6,6 +6,8 @@ categories: Analysis, Processing
 tags: [coding]
 ---
 
+NOTE: There is a great tutorial and overview from Danielle Becker in Dr. Hollie Putnam's lab on their GitHub lab notebook [here](https://github.com/Putnam-Lab/Lab_Management/blob/master/Bioinformatics_%26_Coding/Data_Mangament/SRA-Upload_Protocol.md).
+
 I got these errors for some of the sequence files when I tried to upload them to NCBI:
 
 <img width="844" alt="Screen Shot 2024-10-18 at 10 20 17 AM" src="https://github.com/user-attachments/assets/7c7d0ba2-cf22-48f5-9213-957fcc5ac44c">
