@@ -3,10 +3,10 @@
 #
 
 # Name of your site (displayed in the header)
-name: Allyson DeMerlis
+name: Dr. Allyson DeMerlis
 
 # Short bio or description (displayed in the header)
-description: PhD candidate at the University of Miami Rosenstiel School of Marine, Atmospheric, and Earth Science
+description: PhD from the University of Miami Rosenstiel School of Marine, Atmospheric, and Earth Science
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars.githubusercontent.com/u/56000927?s=400&u=9c19614b1d0c18bd4039777d2f33139c73c60242&v=4
@@ -15,7 +15,10 @@ avatar: https://avatars.githubusercontent.com/u/56000927?s=400&u=9c19614b1d0c18b
 # Flags below are optional
 # 
 
-theme: jekyll-theme-dinky
+remote_theme: pages-themes/dinky@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
+
 
 # Includes an icon in the footer for each username you enter
 footer-links:
