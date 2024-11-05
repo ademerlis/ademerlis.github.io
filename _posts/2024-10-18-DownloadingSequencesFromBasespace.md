@@ -62,3 +62,7 @@ bs list datasets --filter-term=".*Pcli.*"
 
 bs download project -n JA23031 --exclude '.*Acer.*'
 ```
+
+I also don't have space on my computer to download them locally. I have about 10 GB left of space on my computer. I can't decide whether it is worth it to try gunzipping and reuploading all the Pcli ones as fastq files to NCBI, or whether it is better to just try to redownload all the sample files from Illumina Basespace using the command line interface (CLI). I'm going to try to redownload all the files directly to an external hard drive and see how that goes.
+
+
