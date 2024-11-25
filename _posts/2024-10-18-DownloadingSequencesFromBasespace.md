@@ -72,3 +72,9 @@ find . -name '*.gz' -exec mv {} . \;
 rmdir SA*
 ```
 
+Nov 25 - I finally finished uploading all the sequence files using ftp from the external hard drive, and I am still getting the same error on NCBI.
+![Screen Shot 2024-11-25 at 11 33 46 AM](https://github.com/user-attachments/assets/7a430a66-6dc9-4c5a-9e20-b9fcc9211838)
+
+I have no idea what else to do besides gunzipping all the files and then re-uploading them as .fastq files instead. Maybe I should just try this for the Pcli first and see if it accepts the Acer as is.
+
+
