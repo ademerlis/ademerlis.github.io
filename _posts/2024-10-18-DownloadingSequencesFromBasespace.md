@@ -77,4 +77,12 @@ Nov 25 - I finally finished uploading all the sequence files using ftp from the 
 
 I have no idea what else to do besides gunzipping all the files and then re-uploading them as .fastq files instead. Maybe I should just try this for the Pcli first and see if it accepts the Acer as is.
 
+December 2 -- I started going through and running "gunzip" to each of the files that NCBI listed as an error in the screenshot above. It had me do this twice for a number of Pcli samples, and after re-uploading those as .fastq files, I got this list of flags (which I was anticipating at this point):
+<img width="874" alt="Screen Shot 2024-12-02 at 2 17 09 PM" src="https://github.com/user-attachments/assets/f9f7455d-682b-4799-81e8-ab1c57498a5f">
+
+aka all the files are "corrupted." 
+
+Which I don't understand since I downloaded them straight from Basespace. So now I'm running "gunzip" on all of the files, and seeing if I re-upload them all as .fastq files, whether they will be flagged. It looks like based on the recent list that the .fastq files for the PCli samples I recently did were successfully uploaded without an error. But we shall see once I do all the rest of them.
+
+
 
