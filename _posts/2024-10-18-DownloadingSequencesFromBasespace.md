@@ -77,7 +77,7 @@ Nov 25 - I finally finished uploading all the sequence files using ftp from the 
 
 I have no idea what else to do besides gunzipping all the files and then re-uploading them as .fastq files instead. Maybe I should just try this for the Pcli first and see if it accepts the Acer as is.
 
-December 2 -- I started going through and running "gunzip" to each of the files that NCBI listed as an error in the screenshot above. It had me do this twice for a number of Pcli samples, and after re-uploading those as .fastq files, I got this list of flags (which I was anticipating at this point):
+December 2 -- I started going through and running "gunzip" to each of the files that NCBI listed as an error in the screenshot above. It had me do this twice for a number of Pcli samples, and after re-uploading those as .fastq files, I got this list of flags (which I was anticipating at this point): (note that this is just a screenshot of the first few listed -- all of the samples are listed on the NCBI website as having this same error)
 
 <img width="874" alt="Screen Shot 2024-12-02 at 2 17 09 PM" src="https://github.com/user-attachments/assets/f9f7455d-682b-4799-81e8-ab1c57498a5f">
 
