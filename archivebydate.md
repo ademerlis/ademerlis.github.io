@@ -3,7 +3,7 @@ layout: page
 title: Post by Month
 permalink: /monthview/
 active: archivebydate
-sitemap: false
+sitemap: true
 ---
 
 <div id="index">
