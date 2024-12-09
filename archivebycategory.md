@@ -2,7 +2,7 @@
 title: Post by Category
 permalink: /categoryview/
 active: archivebycategory
-sitemap: false
+sitemap: true
 layout: page
 ---
 
