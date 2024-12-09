@@ -28,7 +28,7 @@ I'm going to try to download all the Pcli files directly from Basespace using Mi
 
 I think Michael's code is outdated, so I found the BaseSpace CLI tutorial on Illumina [here](https://developer.basespace.illumina.com/docs/content/documentation/cli/cli-overview).
 
-```{bash}
+~~~ bash
 # if you have not previously, download BaseSpaceCLI
 wget "https://api.bintray.com/content/basespace/BaseSpaceCLI-EarlyAccess-BIN/latest/\$latest/amd64-linux/bs?bt_package=latest" -O $HOME/bin/bs # this didn't work
 chmod +x ~/bin/bs
@@ -52,7 +52,7 @@ bs auth
 
 ./downloadReads.sh
 
-```
+~~~
 
 the grep Pcli part didn't work but all the files are downloading very slowly. It looks like you can't specify which files to download 
 
