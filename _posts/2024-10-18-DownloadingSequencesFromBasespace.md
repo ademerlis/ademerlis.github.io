@@ -28,7 +28,8 @@ I'm going to try to download all the Pcli files directly from Basespace using Mi
 
 I think Michael's code is outdated, so I found the BaseSpace CLI tutorial on Illumina [here](https://developer.basespace.illumina.com/docs/content/documentation/cli/cli-overview).
 
-```bash
+
+```
 # if you have not previously, download BaseSpaceCLI
 wget "https://api.bintray.com/content/basespace/BaseSpaceCLI-EarlyAccess-BIN/latest/\$latest/amd64-linux/bs?bt_package=latest" -O $HOME/bin/bs # this didn't work
 chmod +x ~/bin/bs
@@ -51,16 +52,16 @@ bs auth
 # has you go to the illumina website and sign in
 
 ./downloadReads.sh
-```
+``` 
 
 The grep Pcli part didn't work but all the files are downloading very slowly. It looks like you can't specify which files to download 
 
-```bash
+```
 bs list datasets --filter-term=".*Pcli.*"
 #this lists only the basespace files for Pcli
 
 bs download project -n JA23031 --exclude '.*Acer.*'
-```
+``` 
 
 I also don't have space on my computer to download them locally. I have about 10 GB left of space on my computer. I can't decide whether it is worth it to try gunzipping and reuploading all the Pcli ones as fastq files to NCBI, or whether it is better to just try to redownload all the sample files from Illumina Basespace using the command line interface (CLI). I'm going to try to redownload all the files directly to an external hard drive and see how that goes.
 
@@ -70,10 +71,10 @@ I also don't have space on my computer to download them locally. I have about 10
 **Update:** I think I successfully downloaded all 96 sequence files (.fastq.gz) onto the 2TB external hard drive on Nov 5.
 When they download from Basespace, each sequence file is in its own subdirectory. For uploading to NCBI, all the sequence files have to be in one directory, no subfolders. So, I ran these two lines of code from Michael to easily fix that:
 
-```bash
+```
 find . -name '*.gz' -exec mv {} . \;
 rmdir SA*
-```
+``` 
 
 ***
 
