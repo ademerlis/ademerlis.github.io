@@ -2,8 +2,8 @@
 layout: post
 title: Downloading sequences from Basespace
 date: '2024-10-18'
-categories: Analysis, Processing
-tags: [coding]
+categories: Bioinformatics
+tags: [Basespace, NCBI, SRA]
 ---
 
 NOTE: There is a great tutorial and overview from Danielle Becker in Dr. Hollie Putnam's lab on their GitHub lab notebook [here](https://github.com/Putnam-Lab/Lab_Management/blob/master/Bioinformatics_%26_Coding/Data_Mangament/SRA-Upload_Protocol.md).
