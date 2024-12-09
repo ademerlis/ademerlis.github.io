@@ -2,7 +2,7 @@
 title: Post by Tag
 permalink: /tagview/
 active: archivebytag
-sitemap: false
+sitemap: true
 layout: page
 ---
 
