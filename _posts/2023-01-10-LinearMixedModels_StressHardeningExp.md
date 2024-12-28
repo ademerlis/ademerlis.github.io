@@ -3,7 +3,7 @@ layout: post
 title: Figuring out Linear Mixed Models using Stress-Hardening Data
 date: '2023-01-10'
 categories: [Dissertation notes, Statistics]
-tags: [Linear Mixed Models, Stress-Hardening, Statistics]
+tags: [Linear Mixed Models, Stress-Hardening, Statistics, Kevin]
 ---
 
 I am revisiting the 2022 stress-hardneing experiment to finally tackle the unknown, which is how to incorporate so many different variables into one statistical test (tank replicates, biological replicates, species, genotypes, treatments, time points).
