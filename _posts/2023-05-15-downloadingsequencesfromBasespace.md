@@ -2,8 +2,8 @@
 layout: post
 title: Downloading stress-hardening sequences from BaseSpace
 date: '2023-05-15'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics]
+tags: [Sequencing, Basespace]
 ---
 
 I think I found the way to use the BaseSpace Downloader GUI - I got two sample sequences to download successfully (Acer_005 and Acer_019). I think trying to download the project itself doesn't work for whatever reason, as it keeps failing repeatedly. It could be because I'm trying to download it straight to an external hard drive, but it's 49GB so I can't download that to my computer.
