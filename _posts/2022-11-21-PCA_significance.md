@@ -3,7 +3,7 @@ layout: post
 title: PCA plot significance
 date: '2022-11-21'
 categories: [Trialing code]
-tags: [R, PCA, wound healing, DESeq2, PERMANOVA]
+tags: [R, PCA, wound healing, DESeq2, PERMANOVA, Kevin]
 ---
 
 I have made my PCA plots for each hour of the differential expression analysis (Figure below).
