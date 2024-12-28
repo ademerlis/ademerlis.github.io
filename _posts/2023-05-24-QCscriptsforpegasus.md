@@ -2,16 +2,13 @@
 layout: post
 title: QC scripts for Pegasus Stress-Hardening RNA-Seq Experiment
 date: '2023-05-24'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics, Dissertation]
+tags: [Stress-Hardening, Transcriptomics, Pegasus, FastQC, CCC]
 ---
 
 These scripts are what I want to use for QC once I get access to Pegasus and can move all my sequences onto the project space. 
 
-#!/bin/bash
-#/ this second line in the job script is the relative path, then the next line is the absolute path
 ```{bash}
-
 #!/bin/bash
 #~/scripts/fastqc/fastqc_stresshardening2022.job 
 #/scratch/projects/and_transcriptomics/{foldername}/scripts/fastqc/fastqc_stresshardening2022.job
