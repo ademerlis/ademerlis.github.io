@@ -2,8 +2,8 @@
 layout: post
 title: Uploading files to Pegasus
 date: '2023-05-31'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics]
+tags: [Pegasus, bash, CCC]
 ---
 
 After trying several different codes, this is what I got to work:
