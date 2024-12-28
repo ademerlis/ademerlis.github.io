@@ -99,5 +99,8 @@ aka all the files are "corrupted."
 
 Which I don't understand since I downloaded them straight from Basespace. So now I'm running "gunzip" on all of the files, and seeing if I re-upload them all as .fastq files, whether they will be flagged. It looks like based on the recent list that the .fastq files for the PCli samples I recently did were successfully uploaded without an error. But we shall see once I do all the rest of them.
 
+***
+## December 9
 
+I got it to work FINALLY!! What ended up working was turning them all into .fastq files on the external hard drive, then uploading them one by one using FileZilla. FileZilla ended up helping a lot because I could visualize which ones had been successfully uploaded completely by looking at the size of each file. I also had to update the metadata file on NCBI so that all the file names were now .fastq instead of .fastq.gz. The files are now on NCBI SRA here under ["PRJNA1196005 : Temperature variability differentially alters gene expression of two Caribbean reef-building corals"](https://submit.ncbi.nlm.nih.gov/subs/sra/SUB14778585/overview). 
 
