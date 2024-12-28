@@ -2,8 +2,8 @@
 layout: post
 title: GO Analysis
 date: '2022-11-22'
-categories: Coding
-tags: [Coding]
+categories: [Trialing code]
+tags: [Transcriptomics, wound healing, Pocillopora damicornis, topGO, R, GO Enrichment]
 ---
 
 In doing the gene ontology enrichment analysis for biological processes (comparing control vs. wounded at each time point), we don't get any meaningful GO terms that pop up.
