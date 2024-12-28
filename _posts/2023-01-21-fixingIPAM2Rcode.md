@@ -2,8 +2,8 @@
 layout: post
 title: Figuring out why R code for importing PAM data stopped working
 date: '2023-01-21'
-categories: Coding
-tags: [Coding]
+categories: [Successful code]
+tags: [R, PAM, Stress-Hardening]
 ---
 
 I realized that there were some issues with the RStudio on my AOML desktop versus my laptop. First, I had updated the RStudio on my computer, so it messed up one of the packages that was needed for Ross Cunning's IPAMtoR custom program. I tried to install devtools to install this package (called "joeyr") but AOML wasn't letting me do that for some reason, or something else needed to be updated or something. I got it to work on my laptop though. Then, once I actually got it to work, I have been having issues importing the csv files that were downloaded from the IPAM software. 
