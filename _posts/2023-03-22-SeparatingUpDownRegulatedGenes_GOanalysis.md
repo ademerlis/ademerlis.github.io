@@ -2,8 +2,8 @@
 layout: post
 title: Separating Up- and Down-Regulated Genes for GO Analysis?
 date: '2023-02-08'
-categories: RNA Sequencing
-tags: [RNA, Sequencing]
+categories: [GO Analysis]
+tags: [GO Enrichment, Transcriptomics, Kevin]
 ---
 
 I have returned to the GO analysis for each hour, as I was talking with Kevin and he mentioned to separate the up and down-regulated gene lists so that you know which pathways are being upregulated versus downregulated. But then I ended up in a deep-dive of GO enrichment analysis, and whether it's appropriate to split up the DEG list by directionality. Turns out this is a contested debate and ultimately depends on your question (I think). 
