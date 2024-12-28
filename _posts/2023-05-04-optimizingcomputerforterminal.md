@@ -2,8 +2,8 @@
 layout: post
 title: Optimizing command line on new laptop for bash scripts for downloading raw sequences
 date: '2023-05-04'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics]
+tags: [bash, Basespace, Sequencing]
 ---
 
 Today I received the sequences from UT Austin GSAF via Illumina Basespace. Now I need to download them. 
