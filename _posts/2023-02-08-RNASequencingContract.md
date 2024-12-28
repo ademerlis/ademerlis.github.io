@@ -2,8 +2,8 @@
 layout: post
 title: RNA Sequencing Contract with Dr. Michael Studivan
 date: '2023-02-08'
-categories: RNA Sequencing
-tags: [RNA, Sequencing]
+categories: [RNA-Seq, Budgeting, Dissertation]
+tags: [RNA, Sequencing, RNA-Seq, Stress-Hardening, Reciprocal Transplant, Michael, Budgeting]
 ---
 
 Prepping metadata from RNA extractions for 2022 Stress-Hardening Experiment and 2022-2023 Urban Coral Reciprocal Transplant (Carly+Rich Experiment)
