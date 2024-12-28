@@ -2,8 +2,8 @@
 layout: post
 title: topGO Analysis
 date: '2022-11-15'
-categories: Coding
-tags: [Coding]
+categories: Coding, R
+tags: [Transcriptomics, wound healing, Pocillopora damicornis, topGO, R]
 ---
 
 I am working on understanding the topGO R package (Alexa et al. 2006) to test for gene ontology enrichment from the *Pocillopora damicornis* wound healing transcriptomics study.
