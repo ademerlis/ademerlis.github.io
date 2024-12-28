@@ -2,7 +2,7 @@
 layout: post
 title: topGO Analysis
 date: '2022-11-15'
-categories: Coding, R
+categories: [Coding, R]
 tags: [Transcriptomics, wound healing, Pocillopora damicornis, topGO, R]
 ---
 
