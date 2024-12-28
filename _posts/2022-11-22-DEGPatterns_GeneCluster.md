@@ -2,8 +2,8 @@
 layout: post
 title: DEGPatterns Gene Clustering 
 date: '2022-11-22'
-categories: Coding
-tags: [Coding]
+categories: [Trialing code]
+tags: [DESeq2, wound healing, Transcriptomics, R]
 ---
 
 I have been trying to recreate this figure but I'm having a lot of trouble getting it.
