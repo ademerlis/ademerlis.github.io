@@ -2,8 +2,8 @@
 layout: post
 title: Venn Diagrams
 date: '2022-11-22'
-categories: Coding
-tags: [Coding]
+categories: [Trialing code]
+tags: [wound healing, Transcriptomics, R, venn diagrams]
 ---
 
 Today's goal is to make a venn diagram showing overlap of any significant DGEs between the time points. Similar to something like this from [Traylor-Knowles et al. 2021](https://www.frontiersin.org/articles/10.3389/fmars.2021.681563/full) and [Connelly et al. 2020](https://www.sciencedirect.com/science/article/pii/S0145305X20300094)
