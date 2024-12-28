@@ -2,8 +2,8 @@
 layout: post
 title: More notes on GLMMs (with Dr. Kevin Wong!)
 date: '2023-01-31'
-categories: Coding
-tags: [Coding]
+categories: [Trialing code, Statistics]
+tags: [GLMM, Linear Mixed Models, PAM, Stress-Hardening, glmmTMB, Kevin]
 ---
 
 We looked through my PAM_stresshardening.Rmd code that I wrote for running glmmTMB (fvfm ~ Treatment + (1|Colony) + (1|Tank/Date), family = list(family="beta", link="logit")).
