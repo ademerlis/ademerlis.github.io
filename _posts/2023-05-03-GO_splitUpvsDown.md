@@ -2,8 +2,8 @@
 layout: post
 title: Re-running TopGO with Up vs. Downregulated genes split up
 date: '2023-02-08'
-categories: RNA
-tags: [RNA]
+categories: [GO Analysis]
+tags: [topGO, R, wound healing, Transcriptomics, Fisher Exact Test, GO Enrichment]
 ---
 
 I just checked and I did use Fisher's Exact Test (re: last post), so I don't need to redo that. But I need to redo a couple things. First, I need to split up the Up and Downregulated gene lists and run TopGO separately. Next, I need to make sure that i filtered L2FC < or > 0, instead of 2 which I did for the volcano plots. 2 is very, very strict, and all the papers I'm reading count differential expression as p-adjusted < 0.05 and L2FC < or > 0. 
