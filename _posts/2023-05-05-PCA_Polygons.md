@@ -2,8 +2,8 @@
 layout: post
 title: Creating Polygons for PCAs
 date: '2023-02-08'
-categories: RNA
-tags: [RNA]
+categories: [Trialing code]
+tags: [PCA, R, wound healing, Transcriptomics, MDS, PERMANOVA]
 ---
 
 ![Screen Shot 2023-05-05 at 11 37 11 AM](https://user-images.githubusercontent.com/56000927/236503510-e0fbf806-a960-4bc4-82f9-513c279b28e3.png)
