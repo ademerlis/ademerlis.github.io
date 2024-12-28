@@ -2,7 +2,7 @@
 layout: post
 title: Figuring out Linear Mixed Models using Stress-Hardening Data
 date: '2023-01-10'
-categories: [Dissertation notes, Statistics]
+categories: [Statistics]
 tags: [Linear Mixed Models, Stress-Hardening, Statistics, Kevin]
 ---
 
