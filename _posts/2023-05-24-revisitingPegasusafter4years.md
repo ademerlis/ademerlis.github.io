@@ -2,8 +2,8 @@
 layout: post
 title: Revisiting Pegasus (UM Supercomputer) after 4 years
 date: '2023-05-24'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics]
+tags: [Pegasus, Transcriptomics, bash]
 ---
 
 What has changed with Pegasus since 2019? Time to find out.
