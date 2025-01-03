@@ -2,8 +2,8 @@
 layout: post
 title: installing MultiQC on pegasus
 date: '2023-06-01'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics]
+tags: [Pegasus, multiqc, bash]
 ---
 
 I want to install multiqc so I can look at all the fastQC results at once and compare them to one another. 
