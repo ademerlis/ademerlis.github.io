@@ -2,8 +2,8 @@
 layout: post
 title: writing a script to create multiple jobs at once for trimming
 date: '2023-06-03'
-categories: coding
-tags: [coding, CCC_ch4]
+categories: [Trialing code, Bioinformatics]
+tags: [Pegasus, bash, parallel, trim_galore]
 ---
 
 This is the code I have right now for the trimming script (note: the parallel flag didn't work, so it ran each file individually one at a time on Pegasus in the general queue, which was very slow):
