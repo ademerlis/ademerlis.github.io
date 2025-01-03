@@ -2,8 +2,8 @@
 layout: post
 title: Helpful articles for quality control and pre-processing of RNA-seq data
 date: '2023-06-05'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics]
+tags: [FastQC, Sequencing, RNA-Seq]
 ---
 
 1. Quality Control and Preprocessing of Sequencing Reads: https://bio-protocol.org/exchange/protocoldetail?id=4454&type=1
