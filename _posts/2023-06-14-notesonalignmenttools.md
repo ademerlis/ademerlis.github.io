@@ -2,8 +2,8 @@
 layout: post
 title: notes on alignment tools
 date: '2023-06-14'
-categories: coding
-tags: [coding, CCC_ch4, temperaturevariability2023]
+categories: [Bioinformatics]
+tags: [STAR, Bowtie, Michael, Natalia, wound healing, AcerCCC, stress-hardening, Kevin, alignment, bash, Pegasus]
 ---
 
  In the past, for the Pdamicornis wound healing paper, I used STAR to align the 3' RNAseq reads to the genome, not the transcriptome. 
