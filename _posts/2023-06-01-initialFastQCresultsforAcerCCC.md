@@ -2,8 +2,8 @@
 layout: post
 title: initial FastQC results for Acer CCC samples (untrimmed)
 date: '2023-06-01'
-categories: coding
-tags: [coding]
+categories: [Bioinformatics, Dissertation]
+tags: [Pegasus, FastQC, AcerCCC, bash, Sequencing, multiqc]
 ---
 
 So I got the multiqc report for the CCC Acer samples to work, and it seems like they are all over the place.
