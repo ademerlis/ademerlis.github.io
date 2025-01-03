@@ -2,8 +2,8 @@
 layout: post
 title: WGCNA for wound healing manuscript
 date: '2023-06-06'
-categories: RNA, coding, woundhealingPdam
-tags: [RNA, coding, woundhealingPdam]
+categories: [WGCNA]
+tags: [WGCNA, wound healing]
 ---
 
 I'm currently working through the WGCNA tutorial for the wound healing dataset (following https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html and I specifically did the step-by-step network construction, not the automatic one).
