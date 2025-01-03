@@ -2,8 +2,8 @@
 layout: post
 title: some wins against Pegasus
 date: '2023-06-07'
-categories: coding
-tags: [coding, CCC_ch4, temperaturevariability2023]
+categories: [Successful code]
+tags: [Pegasus, bash, stress-hardening, AcerCCC]
 ---
 
 After meeting with Anthony Bonacolta, I finally got some help as to why my job submissions to Pegasus weren't working. First, the alias "compute" that I created includes "bsub -P and_transcriptomics" and I was trying to do compute .sh every time I submitted a job. When I did it this way, it also wasn't recognizing when i put something in the bigmem queue and would put it in the general queue. 
