@@ -35,13 +35,11 @@ echo "You entered $PHRASE3"
 FORMATTED_PHRASE="$(echo -ne "${PHRASE}" | tr [:space:] '-')"
 
 # Save new filename using POST_DATE and FORMATTED_PHRASE variables.
-NEW_MD_FILE="$(echo -n "${POST_DATE}"-"${FORMATTED_PHRASE}")".md
-
+NEW_MD_FILE="${POST_DATE}-${FORMATTED_PHRASE}.md"
 
 # Prints formatted Jekyll header utilizing POST_DATE and user-entered PHRASE.
 # Writes contents to NEW_MD_FILE
-printf "%s\n%s\n%s%s\n%s'%s'\n%s%s\n%s%s\n%s%s\n" "$MD_LINE" "$LAYOUT" "$TITLE" "$PHRASE" "$DATE_LINE" "$POST_DATE" "$CATEGORIES" "$PHRASE2" "$TAGS" "$PHRASE3" "$MD_LINE" >> \
-"$NEW_MD_FILE"
+printf "%s\n%s\n%s%s\n%s'%s'\n%s%s\n%s%s\n%s\n" "$MD_LINE" "$LAYOUT" "$TITLE" "$PHRASE" "$DATE_LINE" "$POST_DATE" "$CATEGORIES" "$PHRASE2" "$TAGS" "$PHRASE3" "$MD_LINE" > "$NEW_MD_FILE"
 
 # Opens NEW_MD_FILE in nano text editor for editing.
 nano "$NEW_MD_FILE"
