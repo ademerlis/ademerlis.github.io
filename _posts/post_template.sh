@@ -31,8 +31,8 @@ echo "Enter tags: include []"
 read PHRASE3
 echo "You entered $PHRASE3"
 
-# Remove spaces from PHRASE and replace with hyphens
-FORMATTED_PHRASE="$(echo -ne "${PHRASE}" | tr [:space:] '-')"
+# Remove spaces from PHRASE
+FORMATTED_PHRASE="$(echo "${PHRASE}" | tr '[:space:]' '')"
 
 # Save new filename using POST_DATE and FORMATTED_PHRASE variables.
 NEW_MD_FILE="${POST_DATE}-${FORMATTED_PHRASE}.md"
