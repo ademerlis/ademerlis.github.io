@@ -6,7 +6,7 @@ categories: Processing
 tags: [Coding, git, GitHub]
 ---
 
-I recently had to make all of my files for the (temperaturevariabilityAcerPcli)[https://github.com/ademerlis/temperaturevariabilityAcerPcli/tree/main]
+I recently had to make all of my files for the [temperaturevariabilityAcerPcli](https://github.com/ademerlis/temperaturevariabilityAcerPcli/tree/main)
 publicly available because I was making my repository public for publication, and I needed to transfer a bunch of the files from one computer to the other.
 
 To do this, I deleted my .gitignore file on the old computer which had all the files saved locally, and then pushed everything to GitHub and downloaded it all to my new computer. But then I was having trouble removing those files listed in my .gitignore file again.
