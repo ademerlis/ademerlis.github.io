@@ -89,4 +89,5 @@ Essentially, there is going to be inherent variation between samples. I don't kn
 
 I think I will attach the PCA graph as another visualization, which shows much less spread and may be what the reviewer is more used to seeing. 
 
-[combined_PCA_plot.pdf](https://github.com/user-attachments/files/20999067/combined_PCA_plot.pdf)
+
+![Screenshot 2025-07-01 at 9 13 04 AM](https://github.com/user-attachments/assets/3195827e-e1a4-467a-936a-f8a852befcee)
