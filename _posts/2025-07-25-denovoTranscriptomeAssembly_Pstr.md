@@ -28,6 +28,11 @@ From [Grabherr et al. 2011 (the first Trinity publication)](https://www.nature.c
 
 ## Coral papers that construct *de novo* transcriptomes
 
+1. [Alderdice et al. 2022](https://www.nature.com/articles/s41598-022-22604-3) -
+   - Paired end reads (150bp) from *Acropora*
+   - SOAPdenovo-Trans for 23-kmer length was used for de novo transcriptome assembly from **all samples**.
+   - Number of samples: 
+   - 
 
 
 
