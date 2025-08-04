@@ -88,7 +88,7 @@ Also, as per Lexogen's suggestion, read 2 (R2) is pretty much useless for downst
 
 I may need to complete my literature review before I keep going through this.
 
-The lower-quality reads of R2 is in agreement with what is seen in the multiQC report even following trimming (see screenshot below and MultiQC report [here]()), at least for the mean quality scores. The 97 green sequences are all the R1s.
+The lower-quality reads of R2 is in agreement with what is seen in the multiQC report even following trimming (see screenshot below and MultiQC report [here](https://github.com/ademerlis/reciprocaltransplant/blob/main/gene_expression/multiqc_reports/multiqc_report_trimmedreads.html)), at least for the mean quality scores. The 97 green sequences are all the R1s.
 
 <img width="1453" height="668" alt="Screenshot 2025-08-04 at 4 10 57 PM" src="https://github.com/user-attachments/assets/a9bc84fe-225d-4788-92eb-c67400341fcd" />
 
