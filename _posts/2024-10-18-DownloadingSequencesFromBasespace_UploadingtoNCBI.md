@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Downloading sequences from Basespace
+title: Downloading sequences from Basespace and uploading sequences to NCBI
 date: '2024-10-18'
 categories: Bioinformatics
 tags: [Basespace, NCBI, SRA]
