@@ -20,7 +20,8 @@ There are a few GitHub workflows I have been looking at for using Trinity:
 4) [Trinity de novo Transcriptome assembly workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki/Trinity-De-novo-Transcriptome-Assembly-Workshop)
 5) [Shrimp project](https://github.com/MaineINBRE/Trinity2.8.4Marconi/blob/master/assembly.md)
 
-None of the above workflows specify if there is a min/max amount of sequence files to use. Dr. Jill Ashey used 12 samples (6 forward, 6 reverse). 
+None of the above workflows specify if there is a min/max amount of sequence files to use. Dr. Jill Ashey used 12 samples (6 forward, 6 reverse). I emailed Jill and she recommended: 
+> "I think that for Trinity, the number of samples isn't as important as the number of reads. Typically, RNAseq samples have about 20-50M reads per sample. If we are going off the Trinity recommendation that 50M is saturated, we would only need a few samples for the transcriptome. When creating a de novo transcriptome for a species that doesn't have any genomic resources, I personally think that it's better to include more samples across a range of conditions (n=3-5 per condition) so that more transcripts can be captured across the board and a proper meta-transcriptome can be assembled."
 
 From [Grabherr et al. 2011 (the first Trinity publication)](https://www.nature.com/articles/nbt.1883#MOESM13), they state that 50 M pairs of reads is enough for Trinity to fully reconstruct 86% of annotated transcripts. The authors say that after 50 M paired reads, it is "saturated" or doesn't require any more data. 
 
