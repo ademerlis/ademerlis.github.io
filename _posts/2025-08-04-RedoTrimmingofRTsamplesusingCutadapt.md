@@ -182,3 +182,9 @@ Submitted this, and it seems to be working!
 Update: this was submitted on 1 core for cutadapt rather than 4 cores (thanks ChatGPT...) so it's taking a really long time. I'm debating killing the jobs and re-running it since it's 3 passes too. 
 
 I killed it and rewrote it to use 4 cores. This just requires adding "-j 4" after "cutadapt"
+
+Update: I don't think this did anything because in the job script it already specified 4 nodes. 
+
+from job submission time to finished trimmed read for a sample = 67 minutes
+
+
