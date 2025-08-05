@@ -33,6 +33,43 @@ From [Grabherr et al. 2011 (the first Trinity publication)](https://www.nature.c
    - Paired end reads (150bp) from *Acropora*
    - SOAPdenovo-Trans for 23-kmer length was used for de novo transcriptome assembly from **all samples**.
    - Number of samples: 32
+   - Extraction protocol: Qiagen RNeasy mini kit 
+   - Sequencing: NovaSeq 6000
+
+2. [Lock et al. 2022](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.9345) - 
+   - Paired end reads (150bp) from *Porites lobata*
+   - All reads combined and normalized using in-silico normalization from Trinity
+   - All samples/reads used for de novo transcriptome assembly with Trinity
+   - Number of samples: 60
+   - Extraction protocol: NEBNext Ultra RNA Library Prep Kit (New England Biolabs)
+   - Sequencing: NextSeq 500
+
+3. [Poquita-Du et al. 2019](https://doi.org/10.3389/fmars.2019.00121) -
+   - *Pocillopora acuta*
+   - All sequence reads from the same genotype (so 12 samples?) were combined and assembled de novo using Trinity -- each genotype got their own individual reference assembly
+   - Number of samples: 36
+   - Extraction protocol: TRIzol following Barshis et al. 2013
+   - Sequencing: Illumina-based cDNA library prep + Illumina HiSeq 2500
+
+4. [Poquita-Du et al. 2020](https://doi.org/10.1007/s00338-020-01902-0) -
+   - they used the same sequencing data as in #3, but this paper focuses on the symbiont reads (which they obtained from the same de novo assembly)
+
+5. [Anderson et al. 2016](http://dx.doi.org/10.7717/peerj.1616) -
+   - *Orbicella faveolata*
+   - TRIzol extractions
+   - Illumina GAIIx sequencing
+   - Trinity used for de novo assembly
+   - 6 samples were used, with 3 of them being from diseased coral and 1 being from a bleached coral
+
+6. [Veglia et al. 2018](https://doi.org/10.1016/j.margen.2018.08.003 - 
+   - high quality reference genome of *Agaricia lamarcki*
+   - TRIzol extraction
+   - Total RNA sequenced on Illumina Highseq4000 for poly-A tail seelction and 150bp paired-end reads
+   - They used a de novo transcriptome assembly pipeline (http://github.com/NCGAS/de-novo-transcriptome-assembly-pipeline) that tests all the different assembly softwares (Trinity, SOAPdenovo-Trans, Velvet, Oases, Trans-ABySS) - combines all those assemblies together. Then, a "clean consensus" transcriptome was generated using EvidentialGene.
+   - Looks like it is just 1 tissue sample
+
+
+
 
    
 

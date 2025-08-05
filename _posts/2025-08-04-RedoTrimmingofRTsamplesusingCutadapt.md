@@ -92,3 +92,93 @@ The lower-quality reads of R2 is in agreement with what is seen in the multiQC r
 
 <img width="1453" height="668" alt="Screenshot 2025-08-04 at 4 10 57 PM" src="https://github.com/user-attachments/assets/a9bc84fe-225d-4788-92eb-c67400341fcd" />
 
+
+## New Trimming Script Using Lexogen Parameters
+___
+
+ChatGPT suggests using this script to specifically trim the QuantSeq + NovaSeq specific artifacts.
+
+Lexogen QuantSeq FWD specific parameters: [link to their website](https://faqs.lexogen.com/faq/what-sequences-should-be-trimmed)
+
+- Trims specific adapters
+- Soft-clipping of read ends
+- removing polyA (20 As) and polyG (20 Gs) 
+- NextSeq trim of 10 (NovaSeq specific poly-G artifacts)
+
+```{bash}
+#!/usr/bin/env bash
+
+# Define project directories and paths
+and="/scratch/projects/and_transcriptomics"
+project="and_transcriptomics"
+projdir="${and}/reciprocaltransplant"
+rawdir="${projdir}/raw_seq_files/rawreads"
+logdir="${projdir}/logs/trimming_cutadapt"
+
+cd "${rawdir}"
+
+# Loop through R1 files
+for r1 in *_R1_001.fastq.gz; do
+  # Extract sample base name (e.g., "Pstr-Dec2022-202")
+  base=$(echo "${r1}" | sed -E 's/_S[0-9]+_L00[1-9]_R[12]_001\.fastq\.gz//')
+
+  r2="${r1/_R1_/_R2_}"
+
+    echo "Creating cutadapt trim script for ${base}..."
+
+    # Write the job script
+    cat <<EOF > "${projdir}/scripts/trimming_cutadapt/${base}_cutadapt_trim.job"
+
+#!/usr/bin/env bash
+#BSUB -P ${project}
+#BSUB -J ${base}_cutadapt_trim
+#BSUB -e ${logdir}/${base}_cutadapt_trim.err
+#BSUB -o ${logdir}/${base}_cutadapt_trim.out
+#BSUB -q general
+#BSUB -n 4
+
+cd "${rawdir}"
+
+# Step 1: Remove polyA tails and G homopolymers
+cutadapt -m 20 -O 20 \\
+  -a "polyA=A{20}" \\
+  -a "QUALITY=G{20}" \\
+  -n 2 \\
+  -o ${base}_R1.step1.fastq.gz \\
+  -p ${base}_R2.step1.fastq.gz \\
+  ${r1} ${r2}
+
+# Step 2: Trim NextSeq-specific poly-G tails and partial adapter sequences
+cutadapt -m 20 -O 3 --nextseq-trim=10 \\
+  -a "r1adapter=A{18}AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC;min_overlap=3;max_error_rate=0.1" \\
+  -A "r2adapter=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT;min_overlap=3;max_error_rate=0.1" \\
+  -o ${base}_R1.step2.fastq.gz \\
+  -p ${base}_R2.step2.fastq.gz \\
+  ${base}_R1.step1.fastq.gz ${base}_R2.step1.fastq.gz
+
+# Step 3: Remove full-length adapter contaminations
+cutadapt -m 20 -O 20 \\
+  -g "r1adapter=AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC;min_overlap=20" \\
+  -G "r2adapter=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT;min_overlap=20" \\
+  --discard-trimmed \\
+  -o ${base}_R1.trimmed.fastq.gz \\
+  -p ${base}_R2.trimmed.fastq.gz \\
+  ${base}_R1.step2.fastq.gz ${base}_R2.step2.fastq.gz
+
+# Clean up intermediate files (optional)
+rm ${base}_R1.step1.fastq.gz ${base}_R2.step1.fastq.gz
+rm ${base}_R1.step2.fastq.gz ${base}_R2.step2.fastq.gz
+
+EOF
+
+    # Submit the job
+    bsub < "${projdir}/scripts/trimming_cutadapt/${base}_cutadapt_trim.job"
+done
+
+```
+
+Submitted this, and it seems to be working! 
+
+Update: this was submitted on 1 core for cutadapt rather than 4 cores (thanks ChatGPT...) so it's taking a really long time. I'm debating killing the jobs and re-running it since it's 3 passes too. 
+
+I killed it and rewrote it to use 4 cores. This just requires adding "-j 4" after "cutadapt"
