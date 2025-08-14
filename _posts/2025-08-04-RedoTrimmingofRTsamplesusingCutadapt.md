@@ -187,4 +187,5 @@ Update: I don't think this did anything because in the job script it already spe
 
 from job submission time to finished trimmed read for a sample = 67 minutes
 
+It ended up finishing the last sample at 8:48 pm. so that took ~8 hours to complete.
 

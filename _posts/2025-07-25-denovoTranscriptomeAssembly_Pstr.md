@@ -27,6 +27,24 @@ From [Grabherr et al. 2011 (the first Trinity publication)](https://www.nature.c
 
 [Haas et al. 2014 (the newer Trinity publication)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3875132/) doesn't talk about this. 
 
+
+## *de novo* transcriptome assembly publications 
+
+1. [Raghavan et al. 2022](https://doi.org/10.1093/bib/bbab563) -
+   - this paper has good conceptual figures
+   - recommends in-silico normalization
+   - Trinity is De Bruijn graph-based 
+   - post-assembly QC is important
+      - N50 value is a common sequence length statistic
+      - however, N50 value should be used with caution - the ExN50 is a better modification for transcriptome assemblies because the recovery has been for short full-length sequences, rather than few, very long contigs
+      - ExN50 = expression-weighted sum of corresponding isoform lengths
+      - this metric is only implemented for Trinity 
+      - the fraction of all reads that map back to the assembly 
+      - proportion of reads that map to multiple sequences should be low
+      - BUSCO (Benchmarking Universal Single-Copy Orthologs) is another good tool to determine if a large majority of orthologs are found to the assembled transcriptome. Looking for "universal" genes. General rule is a good BUSCO completeness score is >80%
+      - Tools for QC include TransRate, DETONATE, and rnaQUAST
+
+
 ## Coral papers that construct *de novo* transcriptomes
 
 1. [Alderdice et al. 2022](https://www.nature.com/articles/s41598-022-22604-3) -
