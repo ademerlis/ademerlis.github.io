@@ -36,4 +36,10 @@ gracilis, and Uronemita sp.) to isolate non-coral RNA reads using **BBsplit**
 
 ### Using SortMeRNA for removing rRNA
 - Looking online, there seems to be some thoughts that removing rRNA reads is not required when Poly-A selection is performed during sequencing, as preferentially selecting polyA tails automatically creates a bias towards mRNA (see [this article](https://www.biostars.org/p/419845/) and [this article]()).
-- However, some suggest that removing rRNA would save computation time and lead to a cleaner assembly ([see here](https://www.researchgate.net/post/Should_I_remove_rRNAs_from_transcriptome_data_while_moving_on_to_Denovo_assembly)). 
+- However, some suggest that removing rRNA would save computation time and lead to a cleaner assembly ([see here](https://www.researchgate.net/post/Should_I_remove_rRNAs_from_transcriptome_data_while_moving_on_to_Denovo_assembly)).
+- This [tutorial/paper](https://trhvidsten.com/docs/Delhomme-EpiGeneSysProtocol2015.pdf) is a good resource - it says that if GC content is abnormal, it could be a sign of high rRNA content (GC content of over 50% is typical for rRNA) and then SortMeRNA should be used. They also said "if there is any doubt, this step should be performed."
+
+Based on the multiQC report of my trimmed reads, it looks like the average GC content is not normally distributed and is higher for some samples. To be safe, I'll follow Brad's code and run **SortMeRNA** on it.
+
+<img width="959" height="528" alt="Screenshot 2025-08-20 at 1 54 00 PM" src="https://github.com/user-attachments/assets/82bfdc4b-c67a-42c8-bafb-a946812b8e2f" />
+
