@@ -14,10 +14,12 @@ The sequencing he performed was "Poly-A capture/enrichment methodology by Novoge
 158 Illumina NovaSeq PE 150bp. The methodology follows a standard workflow of fragmentation, reverse
 159 transcription, cDNA synthesis, end-repair and A-tailing."
 
-So essentially 3' RNA-Seq (polyA enrichment), which is the same as what I did for my reciprocal transplant study. 
+3' RNA-Seq doesn't necessarily equate to Poly-A selection/capture/enrichment. 3' RNA-Seq can be done with no selection, meaning that it would just sequence the 3'ends of RNA molecules but isn't targeting molecules with polyA tails. Poly-A selection/capture/enrichment is performed to enrich mRNA molecules over other types or RNA (typically rRNA) that dominate total RNA content. 
 
-His pipeline: 
-1. FastQC
+The question is, did my reciprocal transplant reads get any sort of selection? Looking back through my notes, I don't see anything about Poly-A selection.
+
+## His pipeline: 
+1. **FastQC**
 2. Adapter trimming using **CutAdapt** wrapper script TrimGalore
 3. Ribosomal RNA partitioned from total RNA using **SortMeRNA** and default fasta reference database
 4. Remaining RNA mapped to index of genomes (Ostreobium quekettii,
@@ -32,3 +34,6 @@ gracilis, and Uronemita sp.) to isolate non-coral RNA reads using **BBsplit**
 10. Annotations using **EggNOG-mapper**
 11. Gene ontology (GO) annotations supplemented using GoPredSim ProtT5 protein language model 65 195 derived topGO terms using **FANTASIA**
 
+### Using SortMeRNA for removing rRNA
+- Looking online, there seems to be some thoughts that removing rRNA reads is not required when Poly-A selection is performed during sequencing, as preferentially selecting polyA tails automatically creates a bias towards mRNA (see [this article](https://www.biostars.org/p/419845/) and [this article]()).
+- However, some suggest that removing rRNA would save computation time and lead to a cleaner assembly ([see here](https://www.researchgate.net/post/Should_I_remove_rRNAs_from_transcriptome_data_while_moving_on_to_Denovo_assembly)). 
