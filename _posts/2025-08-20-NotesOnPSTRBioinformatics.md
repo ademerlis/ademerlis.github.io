@@ -43,3 +43,68 @@ Based on the multiQC report of my trimmed reads, it looks like the average GC co
 
 <img width="959" height="528" alt="Screenshot 2025-08-20 at 1 54 00 PM" src="https://github.com/user-attachments/assets/82bfdc4b-c67a-42c8-bafb-a946812b8e2f" />
 
+#### Update
+
+So I ran SortMeRNA. Now what? I don't want to do the BBSplit step because I'm not looking to see what aligns to members of the microbiome. I think I just want to skip to Trinity. But what files from SortMeRNA do I use to do that?
+
+When I look at Brad's next steps for BBSplit and Trinity, it looks like he renamed his fastq files from SortMeRNA. 
+
+The results of SortMeRNA are directories for each sample. 
+<img width="351" height="31" alt="Screenshot 2025-09-13 at 5 47 17 PM" src="https://github.com/user-attachments/assets/ceaf224e-c0bf-4bf2-ba30-9ab45732cd43" />
+
+According to the [SortMeRNA user manual](https://sortmerna.readthedocs.io/en/latest/manual4.0.html#usage): 
+- "kvdb" = "key-value datastore for alignment results"
+- idx = "index database"
+- "out" = "output files like aligned.blast"
+
+It doesn't mention the other folder I have, which is "readb", and that's the one I found .fq.gz files in, which look like what I would work with?
+
+Ok I found on [this website](https://hpc.nih.gov/apps/sortmerna.html) more info: it says that "readb" means "pre-processed reads/index". 
+
+ChatGPT said that my code isn't working because I didn't assign it a name for the aligned versus unaligned reads. Idk... Working on trying a new code it suggested now:
+
+```{bash}
+#!/usr/bin/env bash
+
+# Define project directories and paths
+and="/scratch/projects/and_transcriptomics"
+project="and_transcriptomics"
+projdir="${and}/reciprocaltransplant"
+readsdir="${projdir}/raw_seq_files/trimmed_cutadapt"
+logdir="${projdir}/logs/sortmeRNA"
+
+cd "${readsdir}"
+
+# Loop through R1 files
+for r1 in *_R1.trimmed.fastq.gz; do
+  # Extract sample base name (e.g., "Pstr-Dec2022-202")
+  base="${r1%_R1.trimmed.fastq.gz}"
+
+  # Submit the job directly
+  bsub <<EOF
+#!/usr/bin/env bash
+#BSUB -P ${project}
+#BSUB -J ${base}_sortmeRNA
+#BSUB -e ${logdir}/${base}_sortmeRNA.err
+#BSUB -o ${logdir}/${base}_sortmeRNA.out
+#BSUB -q bigmem
+#BSUB -n 10
+
+cd "${readsdir}"
+
+${and}/programs/sortmerna-4.3.6-Linux/bin/sortmerna \\
+  --ref ${and}/programs/sortmerna-4.3.6-Linux/database/smr_v4.3_default_db.fasta \\
+  --reads ${readsdir}/${base}_R1.trimmed.fastq.gz \\
+  --reads ${readsdir}/${base}_R2.trimmed.fastq.gz \\
+  --aligned ${base}_rRNA \\
+  --other ${base}_non_rRNA \\
+  --fastx \\
+  --out2 \\
+  --sout \\
+  --log \\
+  --workdir ${projdir}/raw_seq_files/sortmerna/${base}
+EOF
+done
+```
+
+
