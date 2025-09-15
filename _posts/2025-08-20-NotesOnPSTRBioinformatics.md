@@ -107,4 +107,8 @@ EOF
 done
 ```
 
+**Update**: this script sat in the job queue for 2 days. I don't think it will work. 
+
+I also realized that I don't think it's using the files that sortmeRNA already made. I'm having chatGPT write a few versions to try to see what will work. 
+
 
