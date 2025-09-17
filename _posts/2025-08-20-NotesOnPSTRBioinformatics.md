@@ -112,3 +112,66 @@ done
 I also realized that I don't think it's using the files that sortmeRNA already made. I'm having chatGPT write a few versions to try to see what will work. 
 
 
+**Sept 17 2025 Update**:
+- I realized in the original error files for sortmeRNA, I got "run time limit reached" flags for each job. So I think what happened was that they all timed out at around 6 hours. In an unrelated note, but may be related, the Pegasus technicians told me that I needed to start using pegasus2 rather than pegasus. I discovered this when I tried to check the status of my jobs, and the LSF "daemon" wasn't responding.
+
+- So I have done that, and I'm basically trying to re-run the original script that I got to work, but that timed out. I added the specific file names for --aligned and --other in the hopes that it would help. I also added a longer time limit request in the job submission, so hopefully that helps.
+
+The job I ran most recently is called "6_sortmerna.sh" on Pegasus and looks like this:
+
+```{bash}
+#!/usr/bin/env bash
+
+# Define project directories and paths
+and="/scratch/projects/and_transcriptomics"
+project="and_transcriptomics"
+projdir="${and}/reciprocaltransplant"
+readsdir="${projdir}/raw_seq_files/trimmed_cutadapt"
+logdir="${projdir}/logs/sortmeRNA"
+
+cd "${readsdir}"
+
+# Loop through R1 files
+for r1 in *_R1.trimmed.fastq.gz; do
+  # Extract sample base name (e.g., "Pstr-Dec2022-202")
+  base="${r1%_R1.trimmed.fastq.gz}"
+
+# Write the job script
+    cat <<EOF > "${projdir}/scripts/sortmeRNA/${base}_sortmeRNA.job"
+
+#!/usr/bin/env bash
+#BSUB -P ${project}
+#BSUB -J ${base}_sortmeRNA
+#BSUB -e ${logdir}/${base}_sortmeRNA.err
+#BSUB -o ${logdir}/${base}_sortmeRsNA.out
+#BSUB -q bigmem
+#BSUB -n 10
+#BSUB -W 48:00
+#BSUB -R "rusage[mem=6000]"
+
+cd "${readsdir}"
+
+${and}/programs/sortmerna-4.3.6-Linux/bin/sortmerna --ref ${and}/programs/sortmerna-4.3.6-Linux/database/smr_v4.3_default_db.fasta \
+--reads ${readsdir}/${base}_R1.trimmed.fastq.gz \
+--reads ${readsdir}/${base}_R2.trimmed.fastq.gz \
+--aligned --other --fastx --blast --out2 --sout \
+--workdir ${projdir}/raw_seq_files/sortmerna/${base}
+
+EOF
+
+    # Submit the job
+    bsub < "${projdir}/scripts/sortmerna/${r1}_sortmerna.job"
+done
+```
+
+but that last line about submitting the jobs doesn't work, so I'll need to manually submit all the jobs.
+
+I ran this in the command line: 
+
+```{bash}
+for f in *.job; do
+    bsub < "$f"
+done
+```
+
+
