@@ -174,4 +174,61 @@ for f in *.job; do
 done
 ```
 
+Ok, the "bigmem" queue ones never submitted and were still pending a day later, so I used `bjobs -p` to see why, and it said this: "Not enough processors to meet the job's spanning requirement: 1 host;"
+
+So I changed the parameters to "normal" queue and -8 processors, and it ran. But then all the jobs exited out because of the following issue: "Please, ensure the directory "/scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files/sortmerna/Pstr-Nov2023-198/kvdb" is Empty prior running 'sortmerna'".
+
+According to chatGPT, having a pre-filled "kvdb" folder is the only one that sortmerna cares about and will refuse to rewrite over.
+
+So now I'm running this script to erase those subfolders for all samples in advance, then trying again.
+
+```{bash}
+#!/usr/bin/env bash
+
+# Define project directories and paths
+and="/scratch/projects/and_transcriptomics"
+project="and_transcriptomics"
+projdir="${and}/reciprocaltransplant"
+readsdir="${projdir}/raw_seq_files/trimmed_cutadapt"
+logdir="${projdir}/logs/sortmeRNA"
+
+cd "${readsdir}"
+
+# Loop through R1 files
+for r1 in *_R1.trimmed.fastq.gz; do
+  # Extract sample base name (e.g., "Pstr-Dec2022-202")
+  base="${r1%_R1.trimmed.fastq.gz}"
+
+# Write the job script
+    cat <<EOF > "${projdir}/scripts/sortmeRNA/${base}_sortmeRNA.job"
+
+#!/usr/bin/env bash
+#BSUB -P ${project}
+#BSUB -J ${base}_sortmeRNA
+#BSUB -e ${logdir}/${base}_sortmeRNA.err
+#BSUB -o ${logdir}/${base}_sortmeRsNA.out
+#BSUB -q normal
+#BSUB -n 8
+#BSUB -W 48:00
+#BSUB -R "rusage[mem=6000]"
+
+
+# Clean up old SortMeRNA outputs for this sample
+rm -rf ${projdir}/raw_seq_files/sortmerna/${base}/kvdb
+
+cd "${readsdir}"
+
+${and}/programs/sortmerna-4.3.6-Linux/bin/sortmerna --ref ${and}/programs/sortmerna-4.3.6-Linux/database/smr_v4.3_default_db.fasta \
+--reads ${readsdir}/${base}_R1.trimmed.fastq.gz \
+--reads ${readsdir}/${base}_R2.trimmed.fastq.gz \
+--aligned --other --fastx --blast --out2 --sout \
+--workdir ${projdir}/raw_seq_files/sortmerna/${base}
+
+EOF
+
+    # Submit the job
+    bsub < "${projdir}/scripts/sortmerna/${r1}_sortmerna.job"
+done
+```
+
 
