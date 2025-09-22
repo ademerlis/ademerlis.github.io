@@ -283,3 +283,5 @@ EOF
 done
 
 ```
+
+Ok, this didn't work again. This time the error was "std::out_of_range / stoi". Apparently, ChatGPT is saying that version 4.3.6 of SortMeRNA is known to have a bug to cause crashes if there are any differences between reads 1 and 2 that it can't parse, I guess even if the length differ by 1 base pair. I checked my MultiQC report and I don't think that's the issue. But ChatGPT recommended removing these flags `--blast, --out2, --sout` and trying again. Otherwise, I may need to downgrade to a previous version of SortMeRNA. 
