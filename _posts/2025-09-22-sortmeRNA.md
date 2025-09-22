@@ -285,3 +285,9 @@ done
 ```
 
 Ok, this didn't work again. This time the error was "std::out_of_range / stoi". Apparently, ChatGPT is saying that version 4.3.6 of SortMeRNA is known to have a bug to cause crashes if there are any differences between reads 1 and 2 that it can't parse, I guess even if the length differ by 1 base pair. I checked my MultiQC report and I don't think that's the issue. But ChatGPT recommended removing these flags `--blast, --out2, --sout` and trying again. Otherwise, I may need to downgrade to a previous version of SortMeRNA. 
+
+## Sept 22
+
+Ok, I think now what's happening is I maxed out the space quota on my Pegasus account. I was at 2 T of files. I deleted the Trim Galore folder because I am using the cutadapt trimmed version files now, and that freed up ~500 GB of space. Now I'm re-running sortmeRNA, but I'm having it also delete all the subfolders for the samples that didn't work, because there could potentially be issues with having partial files written already in there. 
+
+
