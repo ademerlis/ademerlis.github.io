@@ -290,4 +290,39 @@ Ok, this didn't work again. This time the error was "std::out_of_range / stoi". 
 
 Ok, I think now what's happening is I maxed out the space quota on my Pegasus account. I was at 2 T of files. I deleted the Trim Galore folder because I am using the cutadapt trimmed version files now, and that freed up ~500 GB of space. Now I'm re-running sortmeRNA, but I'm having it also delete all the subfolders for the samples that didn't work, because there could potentially be issues with having partial files written already in there. 
 
+## Sept 23
+
+I discovered this [open thread on the sortmerna GitHub](https://github.com/sortmerna/sortmerna/issues/379) that has the error I keep getting. It looks like there is a bug. If the file is larger than 2 GB, it stops working. 
+
+Ok, I discovered anything greater than 20 million reads is not working in sortmerna. This equates to around 2 GB (see screenshot). Also, why is R2 larger than R1 if they have the same amount of reads?
+
+<img width="1000" height="444" alt="Screenshot 2025-09-23 at 10 31 10 AM" src="https://github.com/user-attachments/assets/510a5f70-a14e-4239-8528-a01bac673133" />
+
+Here are the other threads in sortmerna issues on GitHub:
+- https://github.com/sortmerna/sortmerna/issues/429
+- https://github.com/sortmerna/sortmerna/issues/445
+- https://github.com/sortmerna/sortmerna/issues/421
+- https://github.com/sortmerna/sortmerna/issues/419
+- https://github.com/sortmerna/sortmerna/issues/424
+- https://github.com/sortmerna/sortmerna/issues/340
+- https://github.com/sortmerna/sortmerna/issues/305
+- https://github.com/sortmerna/sortmerna/issues/405
+- https://github.com/sortmerna/sortmerna/issues/326
+  
+The last few are more related to resource allocation on HPCs.
+
+So far, the only suggestion I see is to update to use sortmerna v4.3.7. 
+
+Someone talked about running it in parallel on several split up files: https://github.com/sortmerna/sortmerna/issues/413 
+
+On this thread they seem to have made a good script for doing the split: https://github.com/sortmerna/sortmerna/issues/336 
+
+One flag i saw that could be helpful is the "--no-best" function, since I'm just trying to see if any sequence aligns to any rRNA, not what specific rRNA it is (see this thread: https://github.com/sortmerna/sortmerna/issues/437).
+
+Also I saw this flag get suggested: -threads 8
+
+And, I'm going to put this job back in bigmem instead of general because that could be an issue too. 
+
+
+
 
