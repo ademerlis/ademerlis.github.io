@@ -341,5 +341,121 @@ In my latest run, which it appears some worked:
 
 Based on Brad's code for next steps, he uses the other_paired_fwd.fq.gz and other_paired_rev files. So essentially i need the flags --out2 and -sout. I'm not sure if I need the --blast one. but the latest run i was doing only gave a _non_rRNA one. 
 
+## Note: 
+I'm using the default database that sortmerna recommended for alignment:
+**smr_v4.3_default_db.fasta**
+- Original source databases (clustering parameters given below):
+  - Silva 138 SSURef NR99 (16S, 18S)
+  - Silva 132 LSURef (23S, 28S)
+  - RFAM v14.1 (5S, 5.8S)
+bac-16S 90%, 5S & 5.8S seeds, rest 95% (benchmark accuracy: 99.899%)
 
+## nf-core
+This program is pre-built with scripts and uses sortmerna. There are a couple of versions:
+- rnaseq: https://github.com/nf-core/rnaseq/tree/3.21.0
+- denovotranscript: https://github.com/nf-core/denovotranscript/tree/main
 
+If you go into their GitHub and look at the modules (in the main.nf doc), you'll see the sortmerna parameters they use.
+
+For denovotranscript:
+```{bash}
+  sortmerna \\
+        ${'--ref '+fastas.join(' --ref ')} \\
+        $reads_input \\
+        --threads $task.cpus \\
+        --workdir . \\
+        --aligned rRNA_reads \\
+        --fastx \\
+        --other non_rRNA_reads \\
+        $paired_cmd \\
+        $out2_cmd \\
+        $args
+```
+
+For rnaseq:
+```{bash}
+ """
+    sortmerna \\
+        ${'--ref '+fastas.join(' --ref ')} \\
+        $refs_input \\
+        $reads_input \\
+        --threads $task.cpus \\
+        --workdir . \\
+        $reads_args \\
+        $paired_cmd \\
+        $out2_cmd \\
+        $args
+```
+
+This tells me that you don't need sortmerna to separate the paire-end reads. You can just get the output file of "_non_rRNA.fq.gz" and "_rRNA.fq.gz" and then Trinity can use those.
+
+only the nf denovotranscript one uses trinity, but it doesn't give a format for the input file. I would assume its using "reads" as the _non_rRNA fq file. But I need to make sure. 
+
+Ok it looks like the sortmerna commands for paired end reads require:
+--fastx 
+--aligned rRNA_reads
+--other non_rRNA_reads
+--paired_in
+--out2
+
+Then, Trinity will take the _non_rRNA_reads files and use that for assembly. 
+
+Also note that nf-core denovotranscript uses fastQC after sortmeRNA to check them.
+
+So in summary, I need to re-run my files because the most recent run did not separate forward and reverse reads. But I think I can keep the originals (<2 GB files) that did work, becuase they have _other_paired fwd and rev files. I would assume that means non rRNA reads.
+
+Ok, I got this script to start running (after removing all the base folders from the samples that didn't work initially):
+
+```{bash}
+#!/usr/bin/env bash
+
+# Define directories
+and="/scratch/projects/and_transcriptomics"
+project="and_transcriptomics"
+projdir="${and}/reciprocaltransplant"
+readsdir="${projdir}/raw_seq_files/trimmed_cutadapt"
+logdir="${projdir}/logs/sortmeRNA"
+sortdir="${projdir}/raw_seq_files/sortmerna"
+scriptdir="${projdir}/scripts/sortmerna"
+
+# Loop through R1 trimmed reads
+cd "${readsdir}" || exit
+
+for r1 in *_R1.trimmed.fastq.gz; do
+    base="${r1%_R1.trimmed.fastq.gz}"
+
+    # Check if the SortMeRNA out folder exists and has files
+    out_folder="${sortdir}/${base}/out"
+    if [ -d "$out_folder" ] && [ "$(ls -A "$out_folder" 2>/dev/null)" ]; then
+        echo "Skipping ${base} (output already exists)"
+        continue
+    fi
+
+    # Write the LSF job script
+    cat <<EOF > "${scriptdir}/${base}_sortmeRNA.job"
+#!/usr/bin/env bash
+#BSUB -P ${project}
+#BSUB -J ${base}_sortmeRNA
+#BSUB -e ${logdir}/${base}_sortmeRNA.err
+#BSUB -o ${logdir}/${base}_sortmeRNA.out
+#BSUB -q bigmem
+#BSUB -n 10
+#BSUB -W 48:00
+
+cd "${readsdir}"
+
+${and}/programs/sortmerna-4.3.6-Linux/bin/sortmerna \
+  --ref ${and}/programs/sortmerna-4.3.6-Linux/database/smr_v4.3_default_db.fasta \
+  --reads ${readsdir}/${base}_R1.trimmed.fastq.gz \
+  --reads ${readsdir}/${base}_R2.trimmed.fastq.gz \
+  --aligned ${sortdir}/${base}_rRNA \
+  --other ${sortdir}/${base}_non_rRNA \
+  --fastx --out2 \
+  --workdir ${sortdir}
+EOF
+
+    # Submit the job
+    bsub < "${scriptdir}/${base}_sortmeRNA.job"
+done
+
+```
