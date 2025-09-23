@@ -323,6 +323,23 @@ Also I saw this flag get suggested: -threads 8
 
 And, I'm going to put this job back in bigmem instead of general because that could be an issue too. 
 
+Ok now nothing is working, not even the original scripts. It actually looks like I may have pre-emptively killed the jobs that were running, because it did look like things were happening in some of the folders. 
+
+In the original run where I got the samples with under 2 GB of data to work:
+- the script had the following flags: --fastx --blast --out2 --sout 
+- they have /out directories
+- they have "aligned.blast.gz", "aligned_paired_fwd.fq.gz", and paired_rev, singleton, other_paired and other_singleton
+- their .out files (which have the weird RsNA in the name of the file) have something like "[writeReports:268] === done Reports in 2594.41 sec ==="
+- they have an aligned.log that has a date of completion at the very end
+
+In my latest run, which it appears some worked:
+- I had removed --blast --out2 --sout. 
+- they do not have /out directories
+- their .out files have [writeReports:268] === done Reports in 4303.29 sec ===
+- they only have "_non_rRNA.fq.gz" and "_rRNA.fq.gz"
+- they don't have an aligned.log, they have an _rRNA.log
+
+Based on Brad's code for next steps, he uses the other_paired_fwd.fq.gz and other_paired_rev files. So essentially i need the flags --out2 and -sout. I'm not sure if I need the --blast one. but the latest run i was doing only gave a _non_rRNA one. 
 
 
 
