@@ -459,3 +459,12 @@ EOF
 done
 
 ```
+
+### update: 
+the above script only worked for the first sample because there was no subdirectory for the sample folder name.............
+
+and also then I tried to run it with sortmerna 4.3.7 and it failed. so it has to be 4.3.6
+
+<img width="456" height="294" alt="Screenshot 2025-09-26 at 1 49 28 PM" src="https://github.com/user-attachments/assets/e5a890e1-f4ee-48a8-9e77-22d1bd47120f" />
+
+so close to abandoning this 
