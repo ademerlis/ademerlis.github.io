@@ -29,3 +29,21 @@ samples to rerun (all at 17kb):
 - Pstr_Nov2023_191
 - Pstr_Nov2023_195
 - Pstr_Nov2023_196
+
+This is what ended up working to install and activate trinity on pegasus (although some warnings and errors came up that may cause problems later):
+```{bash}
+conda update trinity
+#to get mamba to work on pegasus:
+module load mambaforge/1.5.8
+source /share/apps/mambaforge/install/etc/profile.d/conda.sh
+source /share/apps/mambaforge/install/etc/profile.d/mamba.sh
+mamba install trinity
+mamba update trinity
+conda activate /nethome/and128/anaconda3/envs/trinity
+which Trinity
+conda env create --name trinity --file /nethome/and128/anaconda3/envs/trinity/environment.yml
+conda env export > environment.yml
+conda env create --name trinity --file environment.yml
+```
+
+
