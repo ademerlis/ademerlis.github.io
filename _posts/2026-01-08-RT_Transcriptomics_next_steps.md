@@ -30,6 +30,8 @@ samples to rerun (all at 17kb):
 - Pstr_Nov2023_195
 - Pstr_Nov2023_196
 
+Jan 9, 2026: I reran sortmeRNA on these and it worked, so now they are all ready to go.
+
 This is what ended up working to install and activate trinity on pegasus (although some warnings and errors came up that may cause problems later):
 ```{bash}
 conda update trinity
@@ -45,5 +47,50 @@ conda env create --name trinity --file /nethome/and128/anaconda3/envs/trinity/en
 conda env export > environment.yml
 conda env create --name trinity --file environment.yml
 ```
+
+I ran this, and I keep running into errors:
+```{bash}
+command="Trinity --seqType fq --left pstr_fwd.fq.gz --right pstr_rev.fq.gz --CPU 10 --max_memory 100G --min_kmer_cov 2 --output /scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files/trinity/output"
+bsub -P and_transcriptomics -q bigmem -n 10 -R "rusage[mem=10000]" -W 120:00 -J trin_pstr -e trin_pstr.err -o trin_pstr.out eval ${command}
+```
+
+```{bash}
+#!/bin/bash
+#BSUB -P and_transcriptomics
+#BSUB -q bigmem
+#BSUB -n 10
+#BSUB -R "rusage[mem=10000]"
+#BSUB -W 120:00
+#BSUB -J trin_pstr
+#BSUB -e trin_pstr.err
+#BSUB -o trin_pstr.out
+
+# from pegasus docs
+module load miniforge3/24.3.0-0
+
+# Activate Trinity environment
+conda activate /nethome/and128/anaconda3/envs/trinity
+
+# Run Trinity
+Trinity --seqType fq \
+  --left /scratch/projects/and_transcriptomics/reciprocaltransplant/sortmerna/trinity/pstr_fwd.fq.gz \
+  --right /scratch/projects/and_transcriptomics/reciprocaltransplant/sortmerna/trinity/pstr_rev.fq.gz \
+  --CPU 10 \
+  --max_memory 100G \
+  --min_kmer_cov 2 \
+  --output /scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files/trinity/output
+```
+
+The most recent errors are:
+error while loading shared libraries: libncurses.so.5: cannot open shared object file: No such file or directory
+This Perl not built to support threads
+Compilation failed in require at /nethome/and128/anaconda3/envs/trinity/bin/Trinity line 5.
+BEGIN failed--compilation aborted at /nethome/and128/anaconda3/envs/trinity/bin/Trinity line 5.
+
+So i am trying this:
+`conda install -c bioconda -c conda-forge trinity samtools>=1.10 perl-threaded`
+
+It still is having issues. I wonder if it is because I have another conda environment with BioPerl. 
+
 
 
