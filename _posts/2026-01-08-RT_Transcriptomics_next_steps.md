@@ -93,4 +93,17 @@ So i am trying this:
 It still is having issues. I wonder if it is because I have another conda environment with BioPerl. 
 
 
+**Jan 23 2026**
+
+I was able to run Trinity in the trinity conda environment, and got the job submitted using this directly in the command line:
+```{bash}
+command="Trinity --seqType fq --left /scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files/trinity/pstr_fwd.fq.gz --right /scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files/trinity/pstr_rev.fq.gz --CPU 10 --max_memory 100G --min_kmer_cov 2 --output /scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files/trinity/trinity"
+bsub -P and_transcriptomics -q bigmem -n 10 -R "rusage[mem=10000]" -W 120:00 -J trin_pstr -e trin_pstr.err -o /scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files/trinity/output eval ${command}
+```
+
+However, it quit after a bit and gave me 2 output files, which basically had the error message:
+`Argument "error" isn't numeric in numeric ne (!=) at /nethome/and128/anaconda3/envs/trinity/bin/Trinity line 3812.
+Error, need samtools installed that is at least as new as version 1.3 at /nethome/and128/anaconda3/envs/trinity/bin/Trinity line 3813.`
+
+Now i'm trying to install samtools again and I'm running into the same issue as before.
 
