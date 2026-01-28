@@ -102,8 +102,13 @@ bsub -P and_transcriptomics -q bigmem -n 10 -R "rusage[mem=10000]" -W 120:00 -J 
 ```
 
 However, it quit after a bit and gave me 2 output files, which basically had the error message:
+
 `Argument "error" isn't numeric in numeric ne (!=) at /nethome/and128/anaconda3/envs/trinity/bin/Trinity line 3812.
 Error, need samtools installed that is at least as new as version 1.3 at /nethome/and128/anaconda3/envs/trinity/bin/Trinity line 3813.`
 
 Now i'm trying to install samtools again and I'm running into the same issue as before.
+
+**Jan 28 2026**
+
+`samtools: error while loading shared libraries: libncurses.so.5: cannot open shared object file: No such file or directory`
 
