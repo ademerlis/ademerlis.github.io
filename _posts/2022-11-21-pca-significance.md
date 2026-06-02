@@ -61,6 +61,7 @@ anno_h0<-na.omit(anno_h0)
 ```
 
 ## Principal component analysis plot and Scree plots
+
 ```r
 #need to transform the data for plotting
 dds_vst0<- vst(dds_0,blind=FALSE)
@@ -71,6 +72,7 @@ fviz_eig(pca_h0)
 ```
 
 ## PCA figures for manuscript
+
 ```r
 #plotting the PCA in ggplot
 pca12_0 <- plotPCA(dds_vst0,intgroup=c("condition"),returnData = TRUE)
@@ -178,6 +180,7 @@ PCA.h0.countsdata %>%
 
 # PERMANOVA 
 permanova<-adonis2(Count ~ `Gene ID`*condition, data = PCA.h0.countsdata_longformat, method='eu')
+
 ```
 Doesn't work.
 Error:Error in eval(YVAR, environment(formula), globalenv()) : 
@@ -211,6 +214,7 @@ vegan <- scale(PCA.h0.countsdata[c(5:19451)]) #we just want to scale the gene co
 # PERMANOVA 
 permanova<-adonis2(vegan ~ condition, data = PCA.h0.countsdata, method='eu', na.rm=TRUE, nperm = 999)
 permanova
+
 ```
 <img width="768" alt="Screen Shot 2022-11-21 at 3 19 19 PM" src="https://user-images.githubusercontent.com/56000927/203150692-50d84201-165b-46cc-946f-cdf85f904a1b.png">
 
@@ -227,6 +231,7 @@ vegan <- scale(PCA.h1.countsdata[c(5:19536)]) #we just want to scale the gene co
 # PERMANOVA 
 permanova<-adonis2(vegan ~ condition, data = PCA.h1.countsdata, method='eu', na.rm=TRUE, nperm = 999)
 permanova
+
 ```
 
 <img width="782" alt="Screen Shot 2022-11-21 at 3 19 37 PM" src="https://user-images.githubusercontent.com/56000927/203150747-0e2676bd-1c06-443b-9578-c4492268519b.png">
@@ -245,6 +250,7 @@ vegan <- scale(PCA.h2.countsdata[c(5:19779)]) #we just want to scale the gene co
 # PERMANOVA 
 permanova<-adonis2(vegan ~ condition, data = PCA.h2.countsdata, method='eu', na.rm=TRUE, nperm = 999)
 permanova
+
 ```
 <img width="766" alt="Screen Shot 2022-11-21 at 3 19 59 PM" src="https://user-images.githubusercontent.com/56000927/203150802-26b2f259-3f6f-4838-be0a-4c4f97e3b762.png">
 
@@ -261,6 +267,7 @@ vegan <- scale(PCA.h4.countsdata[c(5:19773)]) #we just want to scale the gene co
 # PERMANOVA 
 permanova<-adonis2(vegan ~ condition, data = PCA.h4.countsdata, method='eu', na.rm=TRUE, nperm = 999)
 permanova
+
 ```
 
 <img width="787" alt="Screen Shot 2022-11-21 at 3 23 15 PM" src="https://user-images.githubusercontent.com/56000927/203151271-c5ebae98-4616-4f2a-a78a-591f970910d7.png">

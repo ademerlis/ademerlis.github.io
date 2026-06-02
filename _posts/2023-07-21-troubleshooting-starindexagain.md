@@ -250,6 +250,7 @@ Now it looks like this. This might be right? Idk how much this changes things.
 Let's try now running the alignment on the samples. NOTE: I have two pipelines of trimmed sequences now: the NJ_pipeline is from Natalia and Jill and that involved using cutadapt. The AS_pipeline is Ariana and Sam and involved using fastp. I am going to try this new STAR gff file on the NJ pipeline first since that is farther along (all the way to counts matrix) and so it can be directly compared.
 
 updated STAR index script:
+
 ```bash
 #!/bin/bash
 #BSUB -J Acer_star_index_fixedannotations_take3

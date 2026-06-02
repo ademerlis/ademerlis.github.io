@@ -51,6 +51,7 @@ for (i in 1:length(GOterms_MF_h1_up))
 ```
 
 But right now I'm having trouble with these lines:
+
 ```r
 GOterms_MF_h1_up <- sigGO_MF_h1_up %>% dplyr::select(GO.ID) %>% distinct()
 

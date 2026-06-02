@@ -64,6 +64,7 @@ Thankfully ChatGPT also had a suggestion for that:
 "To use Trinity's transcriptome assembly output with HISAT2, you will need to generate a clean version of the reference transcriptome in standard FASTA format. You can do this by removing the len= and path= annotations from the original .fna file. Typically, Trinity provides a primary assembly file, such as Trinity.fasta, which contains the assembled transcript sequences without the additional annotations. This primary assembly file is the one you should use for downstream analyses, including read alignment with HISAT2.
 
 To convert the Trinity .fna file to a clean FASTA format suitable for HISAT2, you can use standard text-processing tools or scripting languages to parse the file and extract only the sequence information while discarding the len= and path= lines. Here's a simple example of how you can achieve this using the awk command in Linux:
+
 ```bash
 # Assuming the Trinity-generated .fna file is named "transcriptome.fna"
 awk '/^>/ {print $1}' transcriptome.fna > clean_transcriptome.fasta
@@ -74,6 +75,7 @@ So i'll make a new Dip_Host.fna file.
 Ok all that did was extract the gene/transcript IDs... and got rid of the sequences.
 
 Ok try this instead:
+
 ```bash
 awk '/^>/ {print; getline; print}' transcriptome.fna > clean_transcriptome.fasta
 ```

@@ -27,6 +27,7 @@ Nick said he used the new Vollmer lab Acer genome (Selwyn and Vollmer 2023). He 
 I downloaded the scripts from that GitHub link and ran them successfully on the Acer_K2_genomic.gtf file. 
 
 Here are the genomes I downloaded and code I used:
+
 ```bash
 ## Download and format reference transcriptome
 
@@ -99,6 +100,7 @@ So, I had gffread downloaded already and tried running it on the new Acer genome
 Now this is where I'm currently stuck: I haven't been able to run any of the AGAT scripts. They are perl scripts, but there are a lot of dependencies that I don't have installed. And that's because when I tried to install agat the "traditional" way, using bioconda, it didn't actually download any of the agat packages. 
 
 Here are the ways I've tried to run AGAT and it **hasn't** worked:
+
 ```bash
 # Need to convert new UTR gtf files into fasta files, then create reference transcriptomes.
 

@@ -11,6 +11,7 @@ After meeting with Anthony Bonacolta, I finally got some help as to why my job s
 Anthony said that because in my .sh file, I had already specified the -P flag in the # at the top, I don't need to do it again when I submit the job.
 
 Instead, just run:
+
 ```bash
 bsub < job.sh
 ```

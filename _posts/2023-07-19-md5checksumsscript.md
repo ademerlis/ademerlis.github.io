@@ -30,6 +30,7 @@ zcat ${and}/fastq_rawreads/*.fastq.gz | echo $((`wc -l`/4)) > ${and}/fastq_rawre
 ```
 
 I'm not sure what's wrong with it and why it hasn't started. Does it require a lot of memory or something? In Sam code, this was what they specified in the job:
+
 ```bash
 #!/bin/bash
 #SBATCH -t 120:00:00

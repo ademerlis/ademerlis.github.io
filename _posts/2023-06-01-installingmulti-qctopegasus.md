@@ -41,6 +41,7 @@ I found this tutorial on a cutadapt tutorial website: <https://gensoft.pasteur.f
 So I need to add the .local/bin directory to $PATH so that I can run it without having to use the whole path.
 
 Ok, I did this and it worked to run multiqc:
+
 ```bash
 nano ~/.bash_profile
 export PATH=$PATH:/nethome/and128/.local/bin
@@ -56,6 +57,7 @@ Then I navigated the the directory with all the fastqc results and ran "multiqc 
 I will transfer the multiqc_report.html to my local drive so I can open it and view it.
 
 this code worked from transferring from pegasus to local (first navigated on local to the folder i wanted the report to go in):
+
 ```bash
 Allysons-MacBook-Pro-2:AcerCCC allysondemerlis$ scp and128@pegasus.ccs.miami.edu:/scratch/projects/and_transcriptomics/Allyson_CCC/multiqc_report.html .
 ```

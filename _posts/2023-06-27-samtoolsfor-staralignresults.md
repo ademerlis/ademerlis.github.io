@@ -32,6 +32,7 @@ done
 ```
 
 But then I found this biostar thread online that had different samtools commands (https://www.biostars.org/p/138116/) and I ran this and it "worked" but didn't print the sample info with it:
+
 ```bash
 #!/bin/bash
 #BSUB -J samtools_aligned_trimmed
@@ -54,6 +55,7 @@ done
 ```
 
 The output file printed this:
+
 ```bash
 451173
 14339859

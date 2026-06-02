@@ -79,6 +79,7 @@ write_rds(countData_4M, "countData_4M.rds")
 ```
 
 Plot read counts
+
 ```r
 ggplot(samples_selected_4M, aes(million_uniq)) + geom_histogram()
 
@@ -105,6 +106,7 @@ I wonder if I can remove genotype from the analysis and just focus on location?
 Well for the first part of the DESeq2 code, I already made the DESeq2 object using both location and genotype. So here is the code for all of that (I followed [Kevin's](https://github.com/kevinhwong1/Porites_Rim_Bleaching_2019/blob/master/scripts/TagSeq/TagSeq_PCA_WGCNA.Rmd), [Ariana's](https://github.com/AHuffmyer/EarlyLifeHistory_Energetics/blob/master/Mcap2020/Scripts/TagSeq/Genome_V3/1_WGCNA_Mcap_V3.Rmd), [Jill's](https://github.com/JillAshey/SedimentStress/blob/master/RAnalysis/acerv/acerv_sub_DESeq2.Rmd), and [Natalia's](https://github.com/China2302/SCTLD_RRC/blob/main/06a_gene_expression_analysis.Rmd)):
 
 Load libraries
+
 ```r
 library(tidyverse)
 library(DESeq2)
@@ -115,6 +117,7 @@ library(pheatmap)
 ```
 
 Import data frames
+
 ```r
 countData_4M<- readRDS("countData_4M.rds")
 #remove ID 1096 because it is does not have any replicates
@@ -140,6 +143,7 @@ sample_metadata_4M$Genotype <- gsub(" ", "", sample_metadata_4M$Genotype)
 ```
 
 Check that there are no genes with 0 counts across all samples
+
 ```r
 nrow(countData_4M)
 countData_4M_filt <-countData_4M %>%
@@ -152,6 +156,7 @@ nrow(countData_4M_filt)
 ```
 
 Filter reads by proportion of samples containing cutoff value
+
 ```r
 filt <- filterfun(pOverA(0.85,5)) #this means keep 85% of samples that have a count >5
 
@@ -167,6 +172,7 @@ genecounts_filt <- as.data.frame(countData_4M_filt[which(rownames(countData_4M_f
 ```
 
 Quality check of datasets to make sure row and column names match
+
 ```r
 all(rownames(sample_metadata_4M$Sample_ID) %in% colnames(genecounts_filt))
 all(rownames(sample_metadata_4M$Sample_ID) == colnames(genecounts_filt))
@@ -174,12 +180,14 @@ all(rownames(sample_metadata_4M$Sample_ID) == colnames(genecounts_filt))
 ```
 
 Display order of metadata and gene count matrix
+
 ```r
 sample_metadata_4M$Sample_ID
 colnames(genecounts_filt)
 ```
 
 set location and genotype as factors
+
 ```r
 sample_metadata_4M$Location <- factor(sample_metadata_4M$Location)
 sample_metadata_4M$Genotype <- factor(sample_metadata_4M$Genotype)
@@ -188,6 +196,7 @@ sample_metadata_4M$Genotype <- factor(sample_metadata_4M$Genotype)
 ### 1. DESeq accounting for both location and genotype ###
 
 create matrix for DESeq
+
 ```r
 data <- DESeqDataSetFromMatrix(countData = genecounts_filt, colData = sample_metadata_4M, design = ~ Location + Genotype)
 ```
@@ -197,6 +206,7 @@ Expression visualization
 Text from Jill: "First we are going to log-transform the data using a variance stabilizing transforamtion (vst). This is only for visualization purposes. Essentially, this is roughly similar to putting the data on the log2 scale. It will deal with the sampling variability of low counts by calculating within-group variability (if blind=FALSE). Importantly, it does not use the design to remove variation in the data, and so can be used to examine if there may be any variability do to technical factors such as extraction batch effects. To do this we first need to calculate the size factors of our samples. This is a rough estimate of how many reads each sample contains compared to the others. In order to use VST (the faster log2 transforming process) to log-transform our data, the size factors need to be less than 4. Otherwise, there could be artefacts in our results."
 
 My samples are all less than 4, so I'm good.
+
 ```r
 SF.data <- estimateSizeFactors(data)
 SF.data
@@ -211,6 +221,7 @@ abline(lm(colSums(counts(SF.data)) ~ sizeFactors(SF.data) + 0))
 <img width="455" alt="Screen Shot 2023-07-28 at 12 24 46 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/f2669051-d0af-4e04-8777-4bebbe3a870a">
 
 Apply variance stabilizing transformation to minimize effects of small counts and normalize wrt library size
+
 ```r
 vst <- vst(data, blind = FALSE, fitType = 'local') #accounts for within group variability
 head(assay(vst), 3)
@@ -233,6 +244,7 @@ pheatmap(gsampleDistMatrix, #plot matrix
 Idk what this plot means
 
 2. Scree plot
+
 ```r
 pca <- prcomp(t(assay(vst)))
 fviz_eig(pca)
@@ -240,6 +252,7 @@ fviz_eig(pca)
 <img width="452" alt="Screen Shot 2023-07-28 at 12 53 38 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/617fb077-666a-441b-996e-4e1fd84dafdf">
 
 3. PCA
+
 ```r
 plotPCA(vst, intgroup = c("Location"))
 plotPCA(vst, intgroup = c("Genotype"))
@@ -266,6 +279,7 @@ acerv_PCAplot
 This is the PCA for all genes, but what about the PCA for just DGEs? Jill separates out the DEGs at the end of her DESeq2 code and creates PCAs for just those. I'll try to follow the code step-by-step but I can't forget to do that at the end.
 
 I also followed Kevin's code to try to add polygons, and this is what I got:
+
 ```r
 pca.centroids <- vst_PCAdata %>% 
   dplyr::select(Location, Genotype, PC1, PC2)%>%
@@ -308,6 +322,7 @@ acerv_PCAplot + geom_polygon(data=hulls, alpha = 0.2, aes(color = Location, fill
 Which at first glance looks good, but then when you look to the far right you see a tiny triangle and I think it is trying to create polygons based on the Genotype:Location combinations (i.e. MiamiBeach_C at CCC is the large red triangle). I want to create polygons for just location, because I think that's the important separator, but when I try just removing genotype from the code, I get straight lines instead. So idk how to do that/if it's even meaningful because Kevin uses this code to then compare shifts of expression patterns over time. 
 
 He then runs a PERMANOVA:
+
 ```r
 test<-t(assay(vst))
 test<-as.data.frame(test)
@@ -331,6 +346,7 @@ Result: not significant
 But then the number of replicates per Location:Genotype is very low, only 1 in some cases. So I don't think this statistical test is even meaningful. After I run the DESeq I will redo this whole part with just Location as a variable.
 
 Run DESeq
+
 ```r
 DEG_locgen <- DESeq(data, fitType = 'local')
 DEG_locgen_res <- results(DEG_locgen, alpha = 0.05)
@@ -342,6 +358,7 @@ Results:
 L. O. L. 
 
 But when I specify the contrast of interest (Location nursery vs. CCC), I get:
+
 ```r
 resultsNames(DEG_locgen)
 [1] "Intercept"                         
@@ -357,6 +374,7 @@ summary(DEG_Nursery_vs_CCC)
 I get some numbers so that's good.
 
 Compare Nursery vs. CCC
+
 ```r
 DEG_Nursery_vs_CCC <- as.data.frame(DEG_Nursery_vs_CCC)
 DEG_Nursery_vs_CCC["Location_Compare"] <- "NurseryvsCCC"
@@ -375,6 +393,7 @@ write.csv(DEG_Nursery_vs_CCC.sig.list_full, file = "DEG_Nursery_vs_CCC.sig.list_
 ```
 
 Variance stabilized transformation for just DEGs
+
 ```r
 DEG_Nursery_vs_CCC.sig.list <- data[which(rownames(data) %in% rownames(DEG_Nursery_vs_CCC.sig.list)),] 
 # turn back into formal class DESeqTransform or else vst will not run
@@ -386,6 +405,7 @@ DEG_Nursery_vs_CCC.sig.vst <- varianceStabilizingTransformation(DEG_Nursery_vs_C
 ```
 
 PCA plot of DEGs
+
 ```r
 acerv_sub_DEG_PCA <- plotPCA(DEG_Nursery_vs_CCC.sig.vst, intgroup = c("Location"), returnData=TRUE)
 percentVar_pca_acerv_sub <- round(100*attr(acerv_sub_DEG_PCA, "percentVar")) #plot PCA of samples with all data
@@ -411,12 +431,14 @@ acerv_sub_DEG_PCA_plot # PCA plot is of differentially expressed genes only
 <img width="453" alt="Screen Shot 2023-07-28 at 2 46 56 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/8fe078da-c486-4c93-94cc-e5af2e0f8c28">
 
 2. Dispersion Plot
+
 ```r
 plotDispEsts(DEG_locgen, main="Dispersion plot")
 ```
 <img width="450" alt="Screen Shot 2023-07-28 at 2 48 15 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/d7ace87e-9837-4d56-bd81-4b7045127e86">
 
 3. Cook's Distance
+
 ```r
 boxplot(log10(assays(DEG_locgen)[["cooks"]]), range=0, las=0, main="Cook's distance")
 ```

@@ -11,6 +11,7 @@ I am now going to try the stringtie scripts on the stress-hardening Acer samples
 I still get the same error: "/projects/lsf_spool/1688568095.27980042.shell: line 21:  : command not found"
 
 this is the script I ran:
+
 ```bash
 #!/bin/bash
 #BSUB -J stringtie
@@ -67,6 +68,7 @@ ${and}/programs/stringtie-2.2.1/stringtie --merge -p 8 -G ${and}/genomes/Acer/Ac
 ```
 
 Next, assess assembly quality using gffcompare:
+
 ```bash
 cd /scratch/projects/and_transcriptomics/Allyson_stresshardening_RNAseq/aligned/stringtie_gtf_files
 
@@ -168,6 +170,7 @@ done
 I think then we use the .merged_gtf files produced from this stringtie analysis for each sample to extract read count information.
 
 (ran this in command line no job)
+
 ```bash
 F="/scratch/projects/and_transcriptomics/Allyson_stresshardening_RNAseq/aligned/stringtie_reestimatedmerged_gtf_files/"
 

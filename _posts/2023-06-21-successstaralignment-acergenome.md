@@ -82,6 +82,7 @@ What's weird is "--runMode" isn't used in the second example.
 
 I tried doing a frankenstein version of the two scripts and I still got an error (EXITING: FATAL INPUT ERROR: unrecoginzed parameter name "outSAMtype" in input "Command-Line-Initial"
 SOLUTION: use correct parameter name (check the manual)).
+
 ```bash
 #!/bin/bash
 #BSUB -J star_align_trimmed
@@ -226,6 +227,7 @@ Ok I think that's working.
 Update: It did work!!!! I did get an exit code though because I think there was an issue with the multiqc part of the code. I removed the last two lines of the code to get rid of the multiqc code, and I'll try running that as a separate script now.
 
 This is what I ran and it worked:
+
 ```bash
 #!/bin/bash
 #BSUB -J AcerCCC_multiqc
@@ -262,6 +264,7 @@ In her code, one thing that could be useful and help is this note that she added
 The only problem is I'm not sure how exactly to add the identifier. But she definitely added it for Acer before running STAR.
 
 Here is the code she used for the Acer genome index:
+
 ```bash
 module load STAR/2.5.3a-foss-2016b
 
@@ -269,6 +272,7 @@ STAR --runThreadN 10 --runMode genomeGenerate --genomeDir /data/putnamlab/jillas
 ```
 
 and for aligning reads to the genome
+
 ```bash
 mkdir AlignReads_Acerv
 cd AlignReads_Acerv

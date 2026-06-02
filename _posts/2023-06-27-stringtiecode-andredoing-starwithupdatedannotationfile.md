@@ -149,6 +149,7 @@ write.table(Acerv.gff, file="~/Desktop/GFFs/Acerv.GFFannotations.fixed_transcrip
 Because she did this step before the STAR alignment, I should re-run all the STAR things so that those files aren't messed up. 
 
 **new STAR index**
+
 ```bash
 #!/bin/bash
 #BSUB -J Acer_star_index_fixedannotations
@@ -174,6 +175,7 @@ and="/scratch/projects/and_transcriptomics"
 ```
 
 **new STAR alignment**
+
 ```bash
 #!/bin/bash
 #BSUB -J star_align_trimmed_fixedannotations
@@ -215,6 +217,7 @@ done
 Then run multiqc again on the STAR alignment. 
 
 **run stringtie again**
+
 ```bash
 #!/bin/bash
 #BSUB -J stringtie_updatedannotations
@@ -274,6 +277,7 @@ ${and}/programs/stringtie-2.2.1/stringtie --merge -p 8 -G ${and}/genomes/Acer/Ac
 **gffcompare to check assembly quality**
 
 Can just run this in the terminal, it doesn't take long.
+
 ```bash
 cd /scratch/projects/and_transcriptomics/Allyson_CCC/aligned_updatedannotations/stringtie_gtf_files
 
@@ -337,6 +341,7 @@ Let me try two things: first try running it without the -e option and see if tha
 
 1. without e option
 - even when I removed the e option it says "/projects/lsf_spool/1688064612.27955592.shell: line 21:  : command not found". So something isn't working at all. Maybe. I should try just runnnig stringtie on one file.
+
 ```bash
 /scratch/projects/and_transcriptomics/programs/stringtie-2.2.1/stringtie -G /scratch/projects/and_transcriptomics/genomes/Acer/Acerv_assembly_v1.0.gff3 -o 1087_trimmed_trimmed.fastq.gzAligned.sortedByCoord.out.bam.gtf 1087_trimmed_trimmed.fastq.gzAligned.sortedByCoord.out.bam
 ```

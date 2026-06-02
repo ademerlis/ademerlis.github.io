@@ -42,6 +42,7 @@ But, do we want to test the significance of time point as a variable and get sta
 ### Predation prevalence
 
 ##### Model 1 (monitoring interval as random effect)
+
 ```r
 #some variables are nested and need to be controlled for in the model, but can't be fixed effects (model becomes too complicated)
 

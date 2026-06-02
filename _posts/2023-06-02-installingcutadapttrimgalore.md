@@ -77,6 +77,7 @@ Proceeding with 'gzip' for decompression
 To decrease CPU usage of decompression, please install 'igzip' and run again
 
 I am now trying to install pigz, which I can't use "sudo install" because I am not an administrator on Pegasus. I then tried loading the anaconda environment, but this didn't work either (I don't have permissions to write files to the anaconda shared folder):
+
 ```bash
 source /share/apps/anaconda/anaconda3_build/bin/activate
 conda install -c conda-forge pigz

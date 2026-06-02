@@ -13,6 +13,7 @@ First, I needed to tidy up the metadata file and figure out how many samples had
 ## 1. obtaining_aligned_reads.Rmd
 
 Graphs of alignment rates and reads aligned
+
 ```r
 sequencing_data <- read.csv("../../RNA_extraction_sequencing_data.csv")
 
@@ -35,6 +36,7 @@ sequencing_data %>%
 <img width="627" alt="Screen Shot 2023-08-14 at 4 51 23 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/0adc5f8f-1980-4f18-b1e7-8bc7315c0f5f">
 
 Making data frame for reads aligned (to filter out anything less than 4 million reads)
+
 ```r
 sequencing_data %>% 
   select(Species:Treatment,Raw.Reads..Million.,M.Reads.After.Filtering..Trimmed.reads.,Mapping.Rate..Post.trimming.alignment.) %>% 
@@ -80,6 +82,7 @@ library(pheatmap)
 ```
 
 Import and tidy gene counts matrix
+
 ```r
 genecounts <- read.csv("../../results/Acer/gene_count_acerv_matrix.csv")
 genecounts %>% column_to_rownames(var = "gene_id") -> genecounts
@@ -95,6 +98,7 @@ for (i in seq_along(new_colnames)) {
 ```
 
 import aligned reads sample metadata
+
 ```r
 sequencing_data <- read.csv("../../RNA_extraction_sequencing_data.csv")
 
@@ -126,6 +130,7 @@ sequencing_data %>%
 <img width="985" alt="Screen Shot 2023-08-14 at 4 53 17 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/d9c64e47-8e02-4902-a547-676060d25492">
 
 Check that there are no genes with 0 counts across all samples
+
 ```r
 dim(genecounts) #33715    48
 nrow(Acer_samples_4M) #45
@@ -149,6 +154,7 @@ nrow(genecounts_filt)
 ```
 
 Filter reads by proportion of samples containing cutoff value
+
 ```r
 filt <- filterfun(pOverA(0.85,5)) #this means keep 85% of samples that have a count >5
 
@@ -166,6 +172,7 @@ genecounts_filt <- as.data.frame(genecounts_filt[which(rownames(genecounts_filt)
 ```
 
 Quality check of datasets to make sure row and column names match
+
 ```r
 Acer_samples_4M %>% 
   column_to_rownames(var = "Sequence.File.Sample.Name") -> Acer_samples_4M
@@ -175,6 +182,7 @@ all(rownames(Acer_samples_4M) == colnames(genecounts_filt)) # FALSE
 ```
 
 Display order of metadata and gene count matrix, and reorder columns of genecounts_filt so they match the samples (need to do this before creating DESeq2 object because the rows and columns need to match EXACTLY)
+
 ```r
 rownames(Acer_samples_4M)
 colnames(genecounts_filt)
@@ -189,6 +197,7 @@ all(rownames(Acer_samples_4M) == colnames(genecounts_filt_ordered)) #TRUE!
 **Note:** I had to do a lot of data tidying to make sure the sample IDs matched across files.
 
 set variables in metadata as factors
+
 ```r
 Acer_samples_4M$Genotype <- factor(Acer_samples_4M$Genotype)
 Acer_samples_4M$Treatment <- factor(Acer_samples_4M$Treatment)
@@ -207,6 +216,7 @@ Acer_samples_4M$time_point <- factor(Acer_samples_4M$time_point)
 ```
 
 create matrix for DESeq
+
 ```r
 data <- DESeqDataSetFromMatrix(countData = genecounts_filt_ordered, colData = Acer_samples_4M, design = ~ Genotype + Treatment*time_point)
 ```
@@ -216,6 +226,7 @@ This is the formula design I went with, because Treatment and time point are bot
 I was worried about using time point as a factor instead of a continuous variable, but I looked at how [Dr. Kevin Wong did it in his 2019_Porites_rim_bleaching code](https://github.com/kevinhwong1/Porites_Rim_Bleaching_2019/blob/master/scripts/TagSeq/TagSeq_PCA_WGCNA.R) and he also included "Day" as a factor in his dds model.
 
 estimate size factors
+
 ```r
 SF.data <- estimateSizeFactors(data)
 SF.data
@@ -223,12 +234,14 @@ print(sizeFactors(SF.data)) # everything is less than 4, so I can use vst
 ```
 
 Apply variance stabilizing transformation to minimize effects of small counts and normalize wrt library size
+
 ```r
 vst <- vst(data, blind = FALSE) #accounts for within group variability
 head(assay(vst), 3)
 ```
 
 scree plot for variance
+
 ```r
 pca <- prcomp(t(assay(vst)))
 fviz_eig(pca)
@@ -237,6 +250,7 @@ fviz_eig(pca)
 <img width="626" alt="Screen Shot 2023-08-14 at 4 56 16 PM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/0dda9328-f626-43c4-b01e-6b628eb6545b">
 
 PCA
+
 ```r
 plotPCA(vst, intgroup = c("Treatment"))
 plotPCA(vst, intgroup = c("Genotype"))
@@ -282,6 +296,7 @@ In any case I'm confused per usual.
 Let's try separating the two time points into their own PCAs so it is easier to distinguish genotype x treatment. 
 
 filter for just the first time point
+
 ```r
 Acer_samples_4M %>% filter(time_point == "Day_0") -> day_0_samples
 
@@ -291,11 +306,13 @@ genecounts_filt_ordered %>% select(matches(list_day0)) -> day_0_genecounts
 ```
 
 create matrix for DESeq
+
 ```r
 day0_dds <- DESeqDataSetFromMatrix(countData = day_0_genecounts, colData = day_0_samples, design = ~ Treatment + Genotype)
 ```
 
 estimate size factors
+
 ```r
 SF_day0 <- estimateSizeFactors(day0_dds)
 print(sizeFactors(SF_day0)) # everything is less than 4, so I can use vst
@@ -303,17 +320,20 @@ print(sizeFactors(SF_day0)) # everything is less than 4, so I can use vst
 
 
 Apply variance stabilizing transformation to minimize effects of small counts and normalize wrt library size
+
 ```r
 vst_day0 <- vst(day0_dds, blind = FALSE) #accounts for within group variability
 ```
 
 scree plot for variance
+
 ```r
 pca_day0 <- prcomp(t(assay(vst_day0)))
 fviz_eig(pca_day0)
 ```
 
 PCA
+
 ```r
 plotPCA(vst_day0, intgroup = c("Treatment"))
 plotPCA(vst_day0, intgroup = c("Genotype"))
@@ -444,6 +464,7 @@ ggplot(vst_PCAdata, aes(PC1, PC2, color=Genotype, shape=time_point)) +
 ## Building PERMANOVA model
 
 Conduct PERMANOVA
+
 ```r
 test<-t(assay(vst)) #remember that formula is ~ Treatment*time_point + Genotype
 test<-as.data.frame(test)
@@ -455,6 +476,7 @@ test$time_point <- Acer_samples_4M$time_point[match(test$Sample_ID, rownames(Ace
 ```
 
 Build PERMANOVA model
+
 ```r
 dim(test) #45 4150
 scaled_test <-prcomp(test[c(1:4146)], scale=TRUE, center=TRUE) #subtract 4 from the dim because you made 4 columns for metadata
@@ -472,6 +494,7 @@ print(permanova) #everything is significant woooooo
 ## Running DESeq2
 
 un DESeq2
+
 ```r
 DEG_all <- DESeq(data)
 DEG_all_res <- results(DEG_all, alpha = 0.05)
@@ -497,6 +520,7 @@ I don't think these results are informative. I want a result that says "variable
 Let's try running LRT to see if the reduced model of treatment + time_point is versus the full model is significant? (essentially accounting for the baseline differences of both at the start of the experiment that are not due to treatment)
 
 DESeq2 with LRT
+
 ```r
 data <- DESeqDataSetFromMatrix(countData = genecounts_filt_ordered, colData = Acer_samples_4M, design = ~ Treatment*time_point + Genotype)
 

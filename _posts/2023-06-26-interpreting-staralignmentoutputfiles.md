@@ -27,6 +27,7 @@ Yes, there are three versions: samtools/0.1.19, 1.2, and 1.3.
 
 I'll try 1.3 and run it in my code. (Section of code below adapted from Danielle Becker's code)
 I think we want to use the sortedByCoord.out.bam files based on Danielle's code notes (although it isn't explicitly stated)
+
 ```bash
 #!/bin/bash
 #BSUB -J samtools_aligned_trimmed

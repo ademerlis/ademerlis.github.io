@@ -61,6 +61,7 @@ I need to download a local/scratch space source of the fastp program because Peg
 [methods for installing fastp](https://github.com/OpenGene/fastp)
 
 I ran this in pegasus in my programs folder and i think it worked:
+
 ```bash
 # download the latest build
 wget http://opengene.org/fastp/fastp

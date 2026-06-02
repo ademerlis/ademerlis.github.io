@@ -48,6 +48,7 @@ I successfully downloaded sequences from Box drive to 2TB hard drive using the C
 I used "rsync" to have it give me updates in the terminal for each file, which i found really helpful.
 
 this worked:
+
 ```bash
 rsync -ah --progress --partial . "/Volumes/2TB/Ch3_RT"
 ```
@@ -55,6 +56,7 @@ rsync -ah --progress --partial . "/Volumes/2TB/Ch3_RT"
 Today, I'm using rsync again to transfer all files from 2TB to Pegasus scratch space (and_transcriptomics).
 
 this is working:
+
 ```bash
 rsync -ah --progress --partial -e ssh "/Volumes/2TB/Ch3_RT" and128@pegasus.ccs.miami.edu:/scratch/projects/and_transcriptomics/reciprocaltransplant/raw_seq_files
 ```
@@ -66,6 +68,7 @@ What's weird is the .gz files on Pegasus are now green instead of red. But when 
 
 
 When I run this, I get this: "gzip compressed data, extra field"
+
 ```bash
 file Pstr-Dec2022-164_S46_L001_R1_001.fastq.gz
 ```

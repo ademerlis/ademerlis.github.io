@@ -11,6 +11,7 @@ The first step when aligning reads to the genome when using STAR is to first cre
 When I indexed the genome, I used this fasta file: "Acerv_assembly_v1.0_171209.fasta" which contains everything. There are also .fa files available which had just mRNA vs protein. there is also a "masked.fa" file, which I don't know what that means (on the Galaxy page it says "repeat-masked scaffolds"). 
 
 I think I can just use the fasta file I already used. I made a couple updates to the index script, so this is the most up-to-date version:
+
 ```bash
 #!/bin/bash
 #BSUB -J Acer_star_index

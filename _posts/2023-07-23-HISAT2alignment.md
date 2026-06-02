@@ -15,6 +15,7 @@ I installed it from [source](http://daehwankimlab.github.io/hisat2/download/#ver
 HISAT2 works just like STAR. First, you need to index the genome, then you align reads to the reference genome.
 
 Sam does both steps in one code:
+
 ```bash
 #!/bin/bash
 #SBATCH -t 120:00:00
@@ -53,6 +54,7 @@ done
 ```
 
 I will adapt the above code to run on Pegasus:
+
 ```bash
 #!/bin/bash
 #BSUB -J HISAT2

@@ -283,6 +283,7 @@ I think I want to try to make a dotplot, like in [Traylor-Knowles et al. 2021](h
 I followed Mel's code from the 2021 paper [on Github](https://github.com/ademerlis/sctld_transcriptomics_2021/blob/main/SCTLD_BiNGO_Analysis_May2021.Rmd)
 
 Here is my code:
+
 ```r
 #dot plot
 full_join(sigGO_MF_h1, sigGO_MF_h2) %>% full_join(., sigGO_MF_h4) %>%

@@ -119,6 +119,7 @@ echo "Cleaned MultiQC report generated."
 So I actually remade this entire script because it was really slow and also it didn't do what I wanted. It did rename the .html files to each have a sample name, but that's not actually helpful for running multiqc on the fastp files (it didn't show anything). What I really needed to do was add a flag for renaming the .json files so they wouldn't overwrite themselves. So I added that flag and also made a loop job script, so it submitted a separate job for each sample to trim in parallel.
 
 This is what the script I submitted was:
+
 ```bash
 #BSUB -u and128@miami.edu
 

@@ -7,6 +7,7 @@ tags: [Coding, Ch4 AcerCCC, Temperature Variability 2023]
 ---
 
 Here is the script Natalia used to set up the STAR genome index (https://github.com/China2302/SCTLD_RRC/blob/main/hpc/STAR_index.sh):
+
 ```bash
 #!/bin/bash
 #BSUB -J star_index
@@ -67,6 +68,7 @@ So far it's running and not immediately quitting.
 Following the index generation, we then run a script to align reads to the indexed genome.
 
 Here's Natalia's code (https://github.com/China2302/SCTLD_RRC/blob/main/hpc/star_align_trimmed.sh):
+
 ```bash
 #!/bin/bash
 #BSUB -J star_align
@@ -124,6 +126,7 @@ multiqc ${todata}/NOVA_SCTLD/data/alligned/ \
 ```
 
 For mine:
+
 ```bash
 #!/bin/bash
 #BSUB -J star_align_trimmed

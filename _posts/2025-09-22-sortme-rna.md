@@ -358,6 +358,7 @@ This program is pre-built with scripts and uses sortmerna. There are a couple of
 If you go into their GitHub and look at the modules (in the main.nf doc), you'll see the sortmerna parameters they use.
 
 For denovotranscript:
+
 ```bash
   sortmerna \\
         ${'--ref '+fastas.join(' --ref ')} \\
@@ -373,6 +374,7 @@ For denovotranscript:
 ```
 
 For rnaseq:
+
 ```bash
  """
     sortmerna \\

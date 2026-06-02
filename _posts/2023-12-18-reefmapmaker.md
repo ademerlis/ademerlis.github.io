@@ -41,6 +41,7 @@ PcliCollection	25.77044	-80.15235
 
 
 attempt #1 to run full code:
+
 ```bash
 reefmapmaker --ref-reef-dir /scratch/projects/and_transcriptomics/programs/reefMapMaker/14_001_WCMC008_CoralReefs2021_v4/01_Data --config-sheet /scratch/projects/and_transcriptomics/programs/reefMapMaker/map/config_sheet.tsv --site-sheet /scratch/projects/and_transcriptomics/programs/reefMapMaker/map/site_sheet.tsv --fig-out-dir /scratch/projects/and_transcriptomics/programs/reefMapMaker/14_001_WCMC008_CoralReefs2021_v4 --bounds=-84,-80,24,28
 ```
@@ -64,6 +65,7 @@ Can i do this in the command line? Yes, using sed.
 First, navigate to where reefmapmaker was installed: /nethome/and128/anaconda3/envs/reefmapmaker_env/lib/python3.10/site-packages/reefmapmaker/
 
 Then, run:
+
 ```bash
 sed -i 's/WCMC008_CoralReef2018_Py/WCMC008_CoralReef2021_Py/g' reefmapmaker.py
 
@@ -72,15 +74,18 @@ chmod +x reefmapmaker.py
 ```
 
 Now, navigate to directory which has the WCMC008_CoralReefs2021 data and run:
+
 ```bash
 reefmapmaker --ref-reef-dir /scratch/projects/and_transcriptomics/programs/reefMapMaker/14_001_WCMC008_CoralReefs2021_v4_1 --site-sheet /scratch/projects/and_transcriptomics/programs/reefMapMaker/map/site_sheet.tsv --fig-out-dir /scratch/projects/and_transcriptomics/programs/reefMapMaker --bounds=-84,-80,24,28
 ```
 This didn't work, and neither did running the baseline code: 
+
 ```bash
 reefmapmaker --ref-reef-dir /scratch/projects/and_transcriptomics/programs/reefMapMaker/14_001_WCMC008_CoralReefs2021_v4_1
 ```
 
 this was the log and the errors that came up:
+
 ```bash
 Shape file found: /scratch/projects/and_transcriptomics/programs/reefMapMaker/14_001_WCMC008_CoralReefs2021_v4_1/01_Data/WCMC008_CoralReef2021_Py_v4_1.shp
 Drawing annotations on map

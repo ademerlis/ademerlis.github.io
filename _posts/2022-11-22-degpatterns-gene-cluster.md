@@ -491,6 +491,7 @@ class(clusters)
 
 # Let's see what is stored in the `df` component
 head(clusters$df)
+
 ```
 
 Create tables for clusters
@@ -537,4 +538,5 @@ cluster3<-subset(cluster3,select=-c(Row.names,value))
 colnames(cluster3)[colnames(cluster3)=="genes"]<-"Geneid"
 cluster3<-merge(cluster3,clustering_sig_genes,by='Geneid')
 cluster3<-subset(cluster3,select=-c(Gene_Function.x))
+
 ```

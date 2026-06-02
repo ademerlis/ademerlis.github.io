@@ -77,6 +77,7 @@ nano ~/.bash_profile
 Now I should be able to run the scripts with this program. 
 
 We'll update the original script first:
+
 ```bash
 #!/bin/bash
 #BSUB -J featurecounts_trimmed

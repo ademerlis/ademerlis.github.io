@@ -21,6 +21,7 @@ salmon-1.5.2_linux_x86_64/bin/salmon --verson
 ```
 
 This salmon code worked:
+
 ```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_index
@@ -97,6 +98,7 @@ What about for salmon?
 Looking back at the Salmon_quant.sh script error messages, I noticed this line: "/projects/lsf_spool/1690315742.28019259.shell: line 13: 15099 Segmentation fault" as the final error that halted the script I think. 
 
 This was for job 28019259:
+
 ```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_index
@@ -141,6 +143,7 @@ So running it in the debug queue, it completely ran and it looks like it ran suc
 It worked!
 
 I am now running salmon_quant.sh and I also submitted it to the debug queue and it seems to be working:
+
 ```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_quant

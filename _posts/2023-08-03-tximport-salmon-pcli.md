@@ -49,6 +49,7 @@ names(txi_data)
 #abundance #counts #length #countsFromAbundance
 ```
 Tidying counts matrix so that I can have clean sample names
+
 ```r
 head(txi_data$counts)
 
@@ -69,6 +70,7 @@ countsmatrix_df <- as.data.frame(countsmatrix)
 write_csv(countsmatrix_df, "../../../results/Pcli_transcript_counts_matrix.csv")
 ```
 making sample metadata so that I can match treatment and colony to each sample
+
 ```r
 sample_names
 
@@ -87,6 +89,7 @@ column_to_rownames(samples_tidy, var = "sample_names") -> samples_tidy
 ```
 
 Now I can finally make the DESeq2 object!!
+
 ```r
 dds <- DESeqDataSetFromMatrix(countsmatrix, samples_tidy, ~ treatment)
 ```
@@ -98,6 +101,7 @@ Ok wait but before I create the dds object, I need to make sure all the samples 
 To obtain this, I have to extract the mapping rates from the salmon_quant.log file from each sample.
 
 Check mapping rates for each sample
+
 ```r
 list.dirs(sub_dir)
 
