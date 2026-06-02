@@ -16,7 +16,7 @@ From memory, I remember something about 5 million total reads being a good basel
 
 This Illumina article states that the minimum number may be 5 million reads per sample, however it depends on the species too and what has been published for that species. (https://knowledge.illumina.com/library-preparation/rna-library-prep/library-preparation-rna-library-prep-reference_material-list/000001243)
 
-I found this "best practices for RNA-seq" doc from the ENCODE project which I thought was helpful because it gave specific numbers for things: https://www.encodeproject.org/documents/91494746-0ffe-4931-b219-a09802ce1cfa/@@download/attachment/RNA_standards_v1_2011_May.pdf 
+I found this "best practices for RNA-seq" doc from the ENCODE project which I thought was helpful because it gave specific numbers for things: <https://www.encodeproject.org/documents/91494746-0ffe-4931-b219-a09802ce1cfa/@@download/attachment/RNA_standards_v1_2011_May.pdf> 
 
 Note that it is tailored to the human genome specifically though, so some of the numbers may be more strict than what would be necessary for a coral genome.
 

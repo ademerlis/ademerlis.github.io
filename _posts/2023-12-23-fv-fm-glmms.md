@@ -19,10 +19,10 @@ I think a couple obstacles that held me up were:
 2. Which statistical model do I use? I want to incorporate fixed (treatment, CBASS temperature) and random (genotype, tank) effects, so Generalized Linear Mixed Models is appropriate. However, I was stuck on using glmmTMB with the "beta" family distribution and the "logit" function. The major assumption of this type of distribution is that data are bound by 0 < x < 1. I originally thought fv/fm data would fit this best because it is a proportion that the IPAM is measuring. But, some of the values equal zero, and when I start doing time normalizations I get values greater than 1 or less than zero. So, for this reason I no longer think glmmTMB is appropriate. The next best GLMM would be the classic continuous response model using lme4::lmer. This is consistent with code I've seen from Klepac and Evensen.
 
 See my previous GitHub posts for more confusions:
-1. https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-11-06-TroubleWithFvFmData.md
-2. https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-01-31-GLMMsContinued.md
-3. https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-01-29-GLMMs.md
-4. https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-01-10-LinearMixedModels_StressHardeningExp.md
+1. <https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-11-06-TroubleWithFvFmData.md>
+2. <https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-01-31-GLMMsContinued.md>
+3. <https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-01-29-GLMMs.md>
+4. <https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-01-10-LinearMixedModels_StressHardeningExp.md>
 
 
 Moving forward, I'm going to collate notes from [Cunning et al 2021](https://royalsocietypublishing.org/doi/10.1098/rspb.2021.1613), [Klepac and Barshis 2020](https://royalsocietypublishing.org/doi/10.1098/rspb.2020.1379), and [Evensen et al 2021](https://onlinelibrary.wiley.com/doi/full/10.1002/lno.11715) here. 

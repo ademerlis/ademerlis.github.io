@@ -14,11 +14,11 @@ First, a lot of publications have been using the Libro et al. 2013 Acropora cerv
 ![image](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/19aa9b58-24cf-4d30-8d7a-f80d57ec0337)
 
 
-In Lesneski et al. 2022 (in prep: https://www.biorxiv.org/content/10.1101/2022.03.29.486305v1), the authors state that the Libro et al. 2013 paper was based on RNA sequence data from both Acer and Apal, and this risks generating "mosaic contigs". And, the transcriptome has a relatively low "N50, suggesting a paucity of full-length transcripts." Lesneski et al. generated two "better" transcriptome assemblies for Acer from Belize. Fasta files located here: https://osf.io/u9nq8/
+In Lesneski et al. 2022 (in prep: <https://www.biorxiv.org/content/10.1101/2022.03.29.486305v1>), the authors state that the Libro et al. 2013 paper was based on RNA sequence data from both Acer and Apal, and this risks generating "mosaic contigs". And, the transcriptome has a relatively low "N50, suggesting a paucity of full-length transcripts." Lesneski et al. generated two "better" transcriptome assemblies for Acer from Belize. Fasta files located here: <https://osf.io/u9nq8/>
 
 Baums and Kitchen have an Acer genome hosted on Galaxy (not technically published but publicly available?) 
-https://usegalaxy.org/published/page?id=2f8d21c73f8501e2
-https://usegalaxy.org/published/history?id=1f8678b27ae56467
+<https://usegalaxy.org/published/page?id=2f8d21c73f8501e2>
+<https://usegalaxy.org/published/history?id=1f8678b27ae56467>
 
 
 Ok, so a common theme keeps coming up. In Libro et al, Lesneski et al, and Baums et al, there are no gtf annotation files. Am i supposed to build that? 
@@ -31,6 +31,6 @@ I think what is confusing me too is looking at Natalia's index script (https://g
 
 Alternatively, should I try the Matz / Bowtie2 route? That seems to be another popular pipeline that publications use for Tag-seq based transcriptomes/genomes in particular. 
 
-Update: I found these two articles which say that gff3 and gtf are similar files and can be used in STAR under the --sjdbGTFfile flag. However, one source suggests that converting the gff to gtf using "gffread" is recommended (idk why but I think it has to do with making sure the information is presented correctly for STAR to use it). https://biohpc.cornell.edu/doc/RNA-Seq-2018-Lecture1.pdf and https://goenomics.com/glossary.html
+Update: I found these two articles which say that gff3 and gtf are similar files and can be used in STAR under the --sjdbGTFfile flag. However, one source suggests that converting the gff to gtf using "gffread" is recommended (idk why but I think it has to do with making sure the information is presented correctly for STAR to use it). <https://biohpc.cornell.edu/doc/RNA-Seq-2018-Lecture1.pdf> and <https://goenomics.com/glossary.html>
 
-See https://github.com/ademerlis/ademerlis.github.io/blob/master/_posts/2023-06-21_STARalignmenttroubleshooting.md for more details
+See <https://github.com/ademerlis/ademerlis.github.io/blob/master/_posts/2023-06-21_STARalignmenttroubleshooting.md> for more details

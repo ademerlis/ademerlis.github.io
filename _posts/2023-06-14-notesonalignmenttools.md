@@ -23,12 +23,12 @@ tags: [STAR, Bowtie, Michael, Natalia, Wound Healing, AcerCCC, Stress-Hardening,
  After talking to Dr. Kevin Wong, he said to just pick whichever gives the best alignment rate. 
  
  In terms of which tool to use, STAR seems to be the superior aligner:
- 1. https://www.biostars.org/p/353946/
+ 1. <https://www.biostars.org/p/353946/>
  2. <img width="737" alt="Screen Shot 2023-06-15 at 8 17 33 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/785896b7-c784-48bd-9d2b-995030d55f94">
 
 Also important to note for RNA-Seq (with polyA+ and total) is using an aligner that "looks for splicing junctions in addition to genome mapping". STAR is a fast splice read aligner that uses short reads. The key limitation is RAM. (http://homer.ucsd.edu/homer/basicTutorial/mapping.html)
 
-To use STAR (notes come from this tutorial: http://homer.ucsd.edu/homer/basicTutorial/mapping.html):
+To use STAR (notes come from this tutorial: <http://homer.ucsd.edu/homer/basicTutorial/mapping.html>):
 
 1. Build a genome index (common step for all aligners). Make a directory for the index, then copy the genome FASTA files into the directory. Make that your current directory and then run a script (or submit a job on an HPC) to build the index. 
 

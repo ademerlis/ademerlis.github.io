@@ -6,7 +6,7 @@ categories: [Bioinformatics]
 tags: [WGCNA, Wound Healing]
 ---
 
-I'm currently working through the WGCNA tutorial for the wound healing dataset (following https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html and I specifically did the step-by-step network construction, not the automatic one).
+I'm currently working through the WGCNA tutorial for the wound healing dataset (following <https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html> and I specifically did the step-by-step network construction, not the automatic one).
 
 The first thing I noticed in this tutorial is that all the traits that the authors use to correlate with the modules are numeric, but my traits are condition (wounded vs. control) and time of sampling (hour=0,1,2,4). So I feel like these things are abnormal for the input of WGCNA and need to be considered more closely. 
 
@@ -45,7 +45,7 @@ I added the maxPOutliers argument to the adjacency calculation, but I'm sure if 
 
 Then again these may all change once I look into time-series with WGCNA.
 
-https://github.com/ademerlis/sctld_transcriptomics_2021/blob/main/ofav_wgcna_updated.Rmd
+<https://github.com/ademerlis/sctld_transcriptomics_2021/blob/main/ofav_wgcna_updated.Rmd>
 
 ```r
 #From Mike Connelly:

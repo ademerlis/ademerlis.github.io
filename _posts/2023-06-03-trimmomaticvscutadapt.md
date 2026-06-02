@@ -6,7 +6,7 @@ categories: [Bioinformatics]
 tags: [Trimmomatic, Cutadapt, RNA-Seq]
 ---
 
-Before even diving into the benefits of Trimmomatic versus Cutadapt on 3' RNA-seq data, I remembered a 2020 publication which said that adapter and low-quality base trimming was actually not even necessary before alignment, and that the "soft-clipping" removal of these short sequences during the alignment stage using Subread was more successful at not having false positives (and removing relevant data) while still removing 94% of adapter sequences. Here is the link to the paper: https://academic.oup.com/nargab/article/2/3/lqaa068/5901066
+Before even diving into the benefits of Trimmomatic versus Cutadapt on 3' RNA-seq data, I remembered a 2020 publication which said that adapter and low-quality base trimming was actually not even necessary before alignment, and that the "soft-clipping" removal of these short sequences during the alignment stage using Subread was more successful at not having false positives (and removing relevant data) while still removing 94% of adapter sequences. Here is the link to the paper: <https://academic.oup.com/nargab/article/2/3/lqaa068/5901066>
 
 I looked up this paper on ConnectedPapers to see if any publications have come out since 2020 to either support or dispute this finding, because when I look at people's publications on RNA-seq data, it is still part of the norm to use some sort of adapter trimming software tool. 
 
@@ -18,4 +18,4 @@ Before going further down this rabbit hole, let's circle back to the original go
 
 I guess I can run both and see which works better? 
 
-here is the link for the available adapters on Trimmomatic: https://github.com/timflutre/trimmomatic/tree/master/adapters
+here is the link for the available adapters on Trimmomatic: <https://github.com/timflutre/trimmomatic/tree/master/adapters>

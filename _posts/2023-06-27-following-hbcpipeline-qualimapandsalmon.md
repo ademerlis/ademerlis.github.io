@@ -6,7 +6,7 @@ categories: [Coding]
 tags: [Coding]
 ---
 
-I keep returning to this GitHub page time and time again, and it continues to be the best resource I can find to explain to me **why** certain tools are used, as well as provide citations for tested tools that improve accuracy and precision over others. Here is the link to the overview: https://github.com/hbctraining/DGE_workshop_salmon_online/blob/master/lessons/01a_RNAseq_processing_workflow.md 
+I keep returning to this GitHub page time and time again, and it continues to be the best resource I can find to explain to me **why** certain tools are used, as well as provide citations for tested tools that improve accuracy and precision over others. Here is the link to the overview: <https://github.com/hbctraining/DGE_workshop_salmon_online/blob/master/lessons/01a_RNAseq_processing_workflow.md> 
 
 So although samtools and stringtie could be good things to use, I'm just going to try to follow the HBC training from now on because it seems to be in agreement with the current bioinformatics literature. STAR keeps coming up as a good option for genomic alignment of reads, and Salmon is the top performer in terms of quantifying expression using lightweight alignment. So I'll move forward with that (unless it doesn't work at all on Pegasus).
 

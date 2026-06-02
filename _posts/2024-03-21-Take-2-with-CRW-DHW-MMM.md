@@ -11,7 +11,7 @@ here](https://github.com/ademerlis/ademerlis.github.io/blob/main/_posts/2023-12-
 
 I found Dr. Ana Palacio's code on [her GitHub](https://github.com/anampc/DHW_Uva/tree/master) that documents really well her scripts for downloading the data from NOAA's database. 
 
-First, I downloaded the .nc file here: https://www.star.nesdis.noaa.gov/pub/sod/mecb/crw/data/5km/v3.1_op/climatology/nc/
+First, I downloaded the .nc file here: <https://www.star.nesdis.noaa.gov/pub/sod/mecb/crw/data/5km/v3.1_op/climatology/nc/>
 
 Then, I needed to download a package for the terminal that allows me to read .nc files.
 

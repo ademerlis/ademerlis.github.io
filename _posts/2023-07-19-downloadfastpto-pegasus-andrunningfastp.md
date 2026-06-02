@@ -55,7 +55,7 @@ echo "Cleaned MultiQC report generated." $(date)
 ```
 
 I need to download a local/scratch space source of the fastp program because Pegasus doesn't have that module installed. I've tried a couple things so far and neither worked:
-1. cloning source: "git clone https://github.com/OpenGene/fastp.git" (then you need to make and install and then also install all the dependencies manually - I think this will work if I do it all, it just takes awhile and idk how many dependencies I need to install so I want it to do it all for me)
+1. cloning source: "git clone <https://github.com/OpenGene/fastp.git>" (then you need to make and install and then also install all the dependencies manually - I think this will work if I do it all, it just takes awhile and idk how many dependencies I need to install so I want it to do it all for me)
 2. module load anaconda on pegasus then do conda install: "conda install -c bioconda fastp" (it then asks me to update conda and i can't do that for pegasus because it's a shared module and i need admin access)
 
 [methods for installing fastp](https://github.com/OpenGene/fastp)

@@ -8,20 +8,20 @@ tags: [Coding]
 
 I just wanted to put all these somewhere for when I need them. Stringtie is what Jill Ashey used following STAR alignment. In the past I used Subread (I think?) for Pdam. 
 
-I think Natalia just downloaded the STAR results and used that: https://github.com/China2302/SCTLD_RRC/blob/main/06a_gene_expression_analysis.Rmd
+I think Natalia just downloaded the STAR results and used that: <https://github.com/China2302/SCTLD_RRC/blob/main/06a_gene_expression_analysis.Rmd>
 
 Anyways here are the stringtie articles I found to look at later:
-1. https://ccb.jhu.edu/software/stringtie/
-2. https://www.nature.com/articles/nbt.3122
-3. https://github.com/gpertea/stringtie
-4. https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1910-1
-5. https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-022-08465-0 (review of transcriptome analysis methods with reference genome)
+1. <https://ccb.jhu.edu/software/stringtie/>
+2. <https://www.nature.com/articles/nbt.3122>
+3. <https://github.com/gpertea/stringtie>
+4. <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1910-1>
+5. <https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-022-08465-0> (review of transcriptome analysis methods with reference genome)
 
 From Liu et al. 2022 (review of transcriptome analysis methods), they said that tools like Stringtie and Cufflinks are good for improving mapping rates because: "In some cases, the original reads may be spliced and associated with software-constructed transcriptomes to improve the alignment. The tools used for these procedures, including StringTie [8] and Cufflinks [9], can detect de novo transcripts. Moreover, when the annotation for the reference genome is incomplete, these tools can effectively fill the gap for the missing annotation information."
 
 Interestingly, tools like Kallisto and Salmon do "pseudo-alignment":  "Several research teams recently have introduced pseudo-alignment or “alignment-free” tools. These tools, including Kallisto [10] (Fig. 1a) and Salmon [11], can directly associate the raw sequencing reads with the transcript and evaluate the gene or transcript expression levels."
 
-But, Young et al. 2020 did STAR alignment and then Salmon for quantification: https://github.com/benyoung93/innate_immune_response_acropora_palmata/blob/master/SALMON_quant_apal.sh
+But, Young et al. 2020 did STAR alignment and then Salmon for quantification: <https://github.com/benyoung93/innate_immune_response_acropora_palmata/blob/master/SALMON_quant_apal.sh>
 
 So I guess you can do both? 
 

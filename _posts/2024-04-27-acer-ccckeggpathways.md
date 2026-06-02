@@ -27,12 +27,12 @@ I think I need a lot more evidence to support the role of endocrine/hormonal sig
 Since I'm running low on time to prepare my defense presentation, I'm going to not go down this path any further at this time. But, I compiled a list of papers to review later and look at which genes are specifically linked to endocrine signaling in these papers. If a lot of my genes are also mentioned, then I think that warrants further discussion about the potential role of this pathway. DO THIS LATER!
 
 papers:
-- https://peerj.com/articles/1982/
-- https://www.int-res.com/abstracts/meps/v269/p121-129/
-- https://www.sciencedirect.com/science/article/abs/pii/S1095643321000167?via%3Dihub
-- https://www.sciencedirect.com/science/article/abs/pii/S0048969722071194
-- https://www.sciencedirect.com/science/article/abs/pii/S0166445X18305216?casa_token=XQuzXdc9at4AAAAA:QaPEECqFZxjvIwkzwiiaF9pyPDxnmWYYkRDmp2plorfIO4dBzt9s6I7hWEJWlr6h1LLKtqlC
-- https://www.int-res.com/abstracts/meps/v269/p121-129/
-- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8910684/
-- https://www.sciencedirect.com/science/article/pii/S0048969721037049#bb0665
-- https://ehp.niehs.nih.gov/doi/10.1289/ehp.5233
+- <https://peerj.com/articles/1982/>
+- <https://www.int-res.com/abstracts/meps/v269/p121-129/>
+- <https://www.sciencedirect.com/science/article/abs/pii/S1095643321000167?via%3Dihub>
+- <https://www.sciencedirect.com/science/article/abs/pii/S0048969722071194>
+- <https://www.sciencedirect.com/science/article/abs/pii/S0166445X18305216?casa_token=XQuzXdc9at4AAAAA:QaPEECqFZxjvIwkzwiiaF9pyPDxnmWYYkRDmp2plorfIO4dBzt9s6I7hWEJWlr6h1LLKtqlC>
+- <https://www.int-res.com/abstracts/meps/v269/p121-129/>
+- <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8910684/>
+- <https://www.sciencedirect.com/science/article/pii/S0048969721037049#bb0665>
+- <https://ehp.niehs.nih.gov/doi/10.1289/ehp.5233>

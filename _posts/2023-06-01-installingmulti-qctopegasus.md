@@ -8,7 +8,7 @@ tags: [Pegasus, MultiQC, Bash]
 
 I want to install multiqc so I can look at all the fastQC results at once and compare them to one another. 
 
-https://multiqc.info/#:~:text=Install%20from%20the%20Python%20Package,installation%20instructions%20for%20more%20help.
+<https://multiqc.info/#:~:text=Install%20from%20the%20Python%20Package,installation%20instructions%20for%20more%20help.>
 
 ```bash
 module load py-pip/20.2
@@ -30,7 +30,7 @@ Ok navigating into the folder with all the fastqc results and running "multiqc .
 
 I need to figure out how to load a local package.
 
-I found this tutorial on a cutadapt tutorial website: https://gensoft.pasteur.fr/docs/cutadapt/1.18/installation.html
+I found this tutorial on a cutadapt tutorial website: <https://gensoft.pasteur.fr/docs/cutadapt/1.18/installation.html>
 
  " You can then run the program like this:
   ```bash

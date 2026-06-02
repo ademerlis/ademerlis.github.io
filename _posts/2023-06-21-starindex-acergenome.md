@@ -6,7 +6,7 @@ categories: [Coding]
 tags: [Coding, Ch4 AcerCCC, Temperature Variability 2023]
 ---
 
-The first step when aligning reads to the genome when using STAR is to first create an index based on the most up-to-date genome assembly. I downloaded a 2019 draft assembly from Baums et al. (https://usegalaxy.org/published/history?id=1f8678b27ae56467 and https://usegalaxy.org/published/page?id=2f8d21c73f8501e2 for file descriptions based on Apal files). 
+The first step when aligning reads to the genome when using STAR is to first create an index based on the most up-to-date genome assembly. I downloaded a 2019 draft assembly from Baums et al. (https://usegalaxy.org/published/history?id=1f8678b27ae56467 and <https://usegalaxy.org/published/page?id=2f8d21c73f8501e2> for file descriptions based on Apal files). 
 
 When I indexed the genome, I used this fasta file: "Acerv_assembly_v1.0_171209.fasta" which contains everything. There are also .fa files available which had just mRNA vs protein. there is also a "masked.fa" file, which I don't know what that means (on the Galaxy page it says "repeat-masked scaffolds"). 
 

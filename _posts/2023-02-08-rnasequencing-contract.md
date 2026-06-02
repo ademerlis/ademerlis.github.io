@@ -9,14 +9,14 @@ tags: [RNA, Sequencing, RNA-Seq, Stress-Hardening, Reciprocal Transplant, Michae
 Prepping metadata from RNA extractions for 2022 Stress-Hardening Experiment and 2022-2023 Urban Coral Reciprocal Transplant (Carly+Rich Experiment)
 
 - NOAA Sequencing contract is with UT Austin GSAF:
-https://wikis.utexas.edu/display/GSAF/Home+Page
+<https://wikis.utexas.edu/display/GSAF/Home+Page>
 
 - Need to prepare plate maps with Sample IDs and their locations on a 96-well plate. 
-https://docs.google.com/spreadsheets/d/1Ed0iTtE-sqT7BKSp2zzZTqw-9wOGhohaJa2O7GcZdzU/edit#gid=0
+<https://docs.google.com/spreadsheets/d/1Ed0iTtE-sqT7BKSp2zzZTqw-9wOGhohaJa2O7GcZdzU/edit#gid=0>
 
 - We also calculated dilutions from concentrations of RNA determined using Qubit.
-Stress-Hardening project: https://docs.google.com/spreadsheets/d/1P1Lgnrm11YLqmGaR0SajlSMjOQAv6jyE/edit#gid=1845638551
-Carly/Rich Reciprocal transplant: https://docs.google.com/spreadsheets/d/1N3xmNduMS7OGXOdKx_oDRB-9T7m19WpMLewaFyqhyfY/edit#gid=0
+Stress-Hardening project: <https://docs.google.com/spreadsheets/d/1P1Lgnrm11YLqmGaR0SajlSMjOQAv6jyE/edit#gid=1845638551>
+Carly/Rich Reciprocal transplant: <https://docs.google.com/spreadsheets/d/1N3xmNduMS7OGXOdKx_oDRB-9T7m19WpMLewaFyqhyfY/edit#gid=0>
 
 UT Austin prefers to receive 25 uL of sample, and Michael determined based on the quantities of RNA that we extracted that we could get away with aiming for 500 ng of RNA per sample. We eluted RNA in either ~20 or ~40 uL of nuclease-free water (depending on whether or not then went through the Zymo Clean and Concentrate-5 Kit). That's important to keep track of in a spreadsheet too for all the metadata.
 

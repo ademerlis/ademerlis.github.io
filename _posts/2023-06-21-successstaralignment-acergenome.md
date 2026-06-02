@@ -254,7 +254,7 @@ I can't tell if the results of the alignment are good or not.
 
 If I had to guess, I would say the results are not good. 
 
-Thankfully, Jill Ashey has come to save the day by sharing her github repo for using STAR + the Acer genome from Iliana Baums and Sheila Kitchen. https://github.com/JillAshey/SedimentStress/blob/master/Bioinf/RNASeq_pipeline_FL.md 
+Thankfully, Jill Ashey has come to save the day by sharing her github repo for using STAR + the Acer genome from Iliana Baums and Sheila Kitchen. <https://github.com/JillAshey/SedimentStress/blob/master/Bioinf/RNASeq_pipeline_FL.md> 
 
 In her code, one thing that could be useful and help is this note that she added: 
 ![Screen Shot 2023-06-22 at 1 13 00 PM](https://github.com/ademerlis/ademerlis.github.io/assets/56000927/08eeb8d7-4609-4908-b414-425ce3ffc197)

@@ -299,25 +299,25 @@ Ok, I discovered anything greater than 20 million reads is not working in sortme
 <img width="1000" height="444" alt="Screenshot 2025-09-23 at 10 31 10 AM" src="https://github.com/user-attachments/assets/510a5f70-a14e-4239-8528-a01bac673133" />
 
 Here are the other threads in sortmerna issues on GitHub:
-- https://github.com/sortmerna/sortmerna/issues/429
-- https://github.com/sortmerna/sortmerna/issues/445
-- https://github.com/sortmerna/sortmerna/issues/421
-- https://github.com/sortmerna/sortmerna/issues/419
-- https://github.com/sortmerna/sortmerna/issues/424
-- https://github.com/sortmerna/sortmerna/issues/340
-- https://github.com/sortmerna/sortmerna/issues/305
-- https://github.com/sortmerna/sortmerna/issues/405
-- https://github.com/sortmerna/sortmerna/issues/326
+- <https://github.com/sortmerna/sortmerna/issues/429>
+- <https://github.com/sortmerna/sortmerna/issues/445>
+- <https://github.com/sortmerna/sortmerna/issues/421>
+- <https://github.com/sortmerna/sortmerna/issues/419>
+- <https://github.com/sortmerna/sortmerna/issues/424>
+- <https://github.com/sortmerna/sortmerna/issues/340>
+- <https://github.com/sortmerna/sortmerna/issues/305>
+- <https://github.com/sortmerna/sortmerna/issues/405>
+- <https://github.com/sortmerna/sortmerna/issues/326>
   
 The last few are more related to resource allocation on HPCs.
 
 So far, the only suggestion I see is to update to use sortmerna v4.3.7. 
 
-Someone talked about running it in parallel on several split up files: https://github.com/sortmerna/sortmerna/issues/413 
+Someone talked about running it in parallel on several split up files: <https://github.com/sortmerna/sortmerna/issues/413> 
 
-On this thread they seem to have made a good script for doing the split: https://github.com/sortmerna/sortmerna/issues/336 
+On this thread they seem to have made a good script for doing the split: <https://github.com/sortmerna/sortmerna/issues/336> 
 
-One flag i saw that could be helpful is the "--no-best" function, since I'm just trying to see if any sequence aligns to any rRNA, not what specific rRNA it is (see this thread: https://github.com/sortmerna/sortmerna/issues/437).
+One flag i saw that could be helpful is the "--no-best" function, since I'm just trying to see if any sequence aligns to any rRNA, not what specific rRNA it is (see this thread: <https://github.com/sortmerna/sortmerna/issues/437>).
 
 Also I saw this flag get suggested: -threads 8
 
@@ -352,8 +352,8 @@ bac-16S 90%, 5S & 5.8S seeds, rest 95% (benchmark accuracy: 99.899%)
 
 ## nf-core
 This program is pre-built with scripts and uses sortmerna. There are a couple of versions:
-- rnaseq: https://github.com/nf-core/rnaseq/tree/3.21.0
-- denovotranscript: https://github.com/nf-core/denovotranscript/tree/main
+- rnaseq: <https://github.com/nf-core/rnaseq/tree/3.21.0>
+- denovotranscript: <https://github.com/nf-core/denovotranscript/tree/main>
 
 If you go into their GitHub and look at the modules (in the main.nf doc), you'll see the sortmerna parameters they use.
 

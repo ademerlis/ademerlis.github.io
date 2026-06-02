@@ -40,13 +40,13 @@ I googled whether it is necessary to remove tRNA, because I've never seen that b
 
 <img width="688" alt="Screen Shot 2023-06-21 at 11 06 37 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/fafeb23d-153d-4a0a-aabe-eca245ee6ffd">
 
-source: https://biohpc.cornell.edu/doc/RNA-Seq-2018-Lecture1.pdf 
+source: <https://biohpc.cornell.edu/doc/RNA-Seq-2018-Lecture1.pdf> 
 
 From the same source, I also found this which was interesting (a new tool to convert gff3 to gtf):
 
 <img width="743" alt="Screen Shot 2023-06-21 at 11 22 08 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/6a49733a-ff68-4384-9245-0428b21bdef2">
 
-I then found this website which explains the difference between GFF and GTF and how you need to "adjust them for the intended reading tool." https://goenomics.com/glossary.html
+I then found this website which explains the difference between GFF and GTF and how you need to "adjust them for the intended reading tool." <https://goenomics.com/glossary.html>
 <img width="852" alt="Screen Shot 2023-06-21 at 11 24 09 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/c63a0fd0-fd65-4574-a68e-d3fac3374dc6">
 
 so, first I need to check if I indexed the Acer genome in the same way.

@@ -10,7 +10,7 @@ Each sample comes with these output files following STAR alignment script:
 
 <img width="368" alt="Screen Shot 2023-06-24 at 11 22 40 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/3f10b651-5d01-4321-8c6c-686f164cc0e5">
 
-But in looking at other people's pipelines (https://github.com/JillAshey/SedimentStress/blob/master/Bioinf/RNASeq_pipeline_FL.md and https://github.com/daniellembecker/DanielleBecker_Lab_Notebook/blob/master/_posts/2021-04-14-Molecular-Underpinnings-RNAseq-Workflow.md) it looks like you need to do more than just MultiQC the aligned reads to make sure if the alignment worked. Otherwise you could have potential errors where things are aligned to the wrong part (see this thread: https://github.com/alexdobin/STAR/issues/613).
+But in looking at other people's pipelines (https://github.com/JillAshey/SedimentStress/blob/master/Bioinf/RNASeq_pipeline_FL.md and <https://github.com/daniellembecker/DanielleBecker_Lab_Notebook/blob/master/_posts/2021-04-14-Molecular-Underpinnings-RNAseq-Workflow.md>) it looks like you need to do more than just MultiQC the aligned reads to make sure if the alignment worked. Otherwise you could have potential errors where things are aligned to the wrong part (see this thread: <https://github.com/alexdobin/STAR/issues/613>).
 
 I also went down a mini-rabbit hole because I remembered Jill's code had said that the "transcript_id" needed to be added to the Acer gff3 file because STAR wouldn't run without it. But my STAR code ran, and when I look at the gff3 file I downloaded I see this: 
 
@@ -50,10 +50,10 @@ done
 
 Ok looking at this github page, I can't use the samtools code that Danielle wrote because hers is specified for paired-end reads and I have single-end reads. (https://gist.github.com/davfre/8596159). I need to use different flags than she did.
 
-It looks like in Danielle's code she also experienced issues with the genome assembly file she used, with an issue relating to transcript_id and some other things within the gff3 file itself. This prevented her from performing gene counts with StringTie. She ended up modifying the genome assembly file (see this thread: https://github.com/Putnam-Lab/Lab_Management/issues/11). So this is something that might come up for me when I try to run stringTie.
+It looks like in Danielle's code she also experienced issues with the genome assembly file she used, with an issue relating to transcript_id and some other things within the gff3 file itself. This prevented her from performing gene counts with StringTie. She ended up modifying the genome assembly file (see this thread: <https://github.com/Putnam-Lab/Lab_Management/issues/11>). So this is something that might come up for me when I try to run stringTie.
 
 I am overall very confused with what to do with my STAR alignment outputs (other than run samtools). So maybe I'll just try stringTie next and see what that does. Subread (which has featureCounts) is installed to Pegasus though so maybe I could try that too since it's already there. 
 
-I also found this 2020 paper that did a comparison of all possible RNA-seq bioinformatics pipelines: https://www.nature.com/articles/s41598-020-76881-x
+I also found this 2020 paper that did a comparison of all possible RNA-seq bioinformatics pipelines: <https://www.nature.com/articles/s41598-020-76881-x>
 
 I'm still not 100% sure whether pseudo-alignment or alignment to a genome is better. Also, is alignment to a transcriptome even an option? I guess if I used the Libro et al. 2013 dataset it would be. Otherwise I only have a genome. 

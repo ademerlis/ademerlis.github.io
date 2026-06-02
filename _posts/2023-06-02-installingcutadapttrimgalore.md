@@ -26,7 +26,7 @@ tar xvzf trim_galore.tar.gz
 
 I installed Trim_galore into my programs folder in the and_transcriptomics project space.
 
-Here is the code I am currently running on Pegasus: (got from Natalia Andrade's code: https://github.com/China2302/SCTLD_RRC/blob/main/hpc/trimming.sh)
+Here is the code I am currently running on Pegasus: (got from Natalia Andrade's code: <https://github.com/China2302/SCTLD_RRC/blob/main/hpc/trimming.sh>)
 
 ```bash
 #!/bin/bash
@@ -70,7 +70,7 @@ When I submit this job, though, it says that "multicore support is not enabled. 
 Ok, I found on Pegasus docs that your project has to be given permission to submit to the bigmem queue. I can, however, submit to the parallel queue if I use a specific flag. Parallel is for 16 or more cores, which is what I specified in my job anyways.
 
 The following notes came up when I ran trim_galore:
-PLEASE NOTE: Using multi-cores for trimming with 'gzip' only has only very limited effect! (see here: https://github.com/FelixKrueger/TrimGalore/issues/16#issuecomment-458557103)
+PLEASE NOTE: Using multi-cores for trimming with 'gzip' only has only very limited effect! (see here: <https://github.com/FelixKrueger/TrimGalore/issues/16#issuecomment-458557103>)
 To increase performance, please install 'pigz' and run again
 
 Proceeding with 'gzip' for decompression
