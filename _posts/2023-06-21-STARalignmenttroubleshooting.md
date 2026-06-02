@@ -2,8 +2,8 @@
 layout: post
 title: STAR alignment troubleshooting
 date: '2023-06-21'
-categories: coding
-tags: [coding, CCC_ch4, temperaturevariability2023]
+categories: [Coding]
+tags: [Coding, Ch4 AcerCCC, Temperature Variability 2023]
 ---
 
 I'm looking at Young et al. 2020 methodology because they used Iliana Baums' Apal genome, which is also available on Galaxy, so maybe the code required will be similar. 
@@ -12,7 +12,7 @@ First, it looks like they installed a local version of the STAR program instead 
 
 Ok, a couple more things to note. I am currently looking at their STAR index code for the Apal genome, and I noticed that they 1) removed tRNA from the gff3 file and 2) used the gff3 file in place of the GTF file. (see below)
 
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J STAR_index
 #BSUB -q bigmem

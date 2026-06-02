@@ -2,13 +2,13 @@
 layout: post
 title: Ch4_AcerCCC read counts
 date: '2023-08-20'
-categories: coding
-tags: [coding, Ch4_AcerCCC]
+categories: [Coding]
+tags: [Coding, Ch4 AcerCCC]
 ---
 
 I'm writing up a summary for the Ch4 samples now, and I want to generate a summary table with the average and standard deviation of raw reads, trimmed reads, and percent alignment rates.
 
-```{r}
+```r
 library(tidyverse)
 
 sample_metadata <- read_csv("../input_files/sample_metadata.csv")

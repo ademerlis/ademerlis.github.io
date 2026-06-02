@@ -2,13 +2,13 @@
 layout: post
 title: Pcli Salmon transcriptome
 date: '2023-07-26'
-categories: coding
-tags: [coding, Ch2_tempvariability]
+categories: [Coding]
+tags: [Coding, Ch2 Temp Variability]
 ---
 
 So I installed Salmon locally onto my scratch space by downloading the Linux binary package:
 
-```{bash}
+```bash
 wget https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz
 tar -xzvf salmon-1.5.2_linux_x86_64.tar.gz
 cd salmon-1.5.2_linux_x86_64/bin/
@@ -21,7 +21,7 @@ salmon-1.5.2_linux_x86_64/bin/salmon --verson
 ```
 
 This salmon code worked:
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_index
 #BSUB -q general
@@ -42,7 +42,7 @@ Output:
 
 Following [this Salmon tutorial](https://combine-lab.github.io/salmon/getting_started/):
 
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_quant
 #BSUB -q general
@@ -77,7 +77,7 @@ STAR error:
 
 How much RAM allocation is allowed on Pegasus?
 
-```{bash}
+```bash
 [and128@login4 scripts]$ free -h
               total        used        free      shared  buff/cache   available
 Mem:           125G         18G         99G        254M        7.2G        105G
@@ -97,7 +97,7 @@ What about for salmon?
 Looking back at the Salmon_quant.sh script error messages, I noticed this line: "/projects/lsf_spool/1690315742.28019259.shell: line 13: 15099 Segmentation fault" as the final error that halted the script I think. 
 
 This was for job 28019259:
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_index
 #BSUB -q bigmem
@@ -141,7 +141,7 @@ So running it in the debug queue, it completely ran and it looks like it ran suc
 It worked!
 
 I am now running salmon_quant.sh and I also submitted it to the debug queue and it seems to be working:
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_quant
 #BSUB -q bigmem
@@ -177,7 +177,7 @@ So I think I'll rerun the quant code with that flag just to be safe.
 <img width="1100" alt="Screen Shot 2023-07-28 at 10 07 37 AM" src="https://github.com/ademerlis/ademerlis.github.io/assets/56000927/e0d0e287-b03b-4bf1-880e-2360ed307c93">
 
 
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J Pcli_transcriptome_salmon_quant
 #BSUB -q bigmem
@@ -208,7 +208,7 @@ Ok so in trying to import the quant.sf file from salmon, I realized I did this c
 Since I have to re-run the above script, I'm going to remove teh --gcBias flag because it says that it is experimental in single-end libraries anyways.
 
 
-```{bash}
+```bash
 #BSUB -u and128@miami.edu
 
 #specify variables and paths

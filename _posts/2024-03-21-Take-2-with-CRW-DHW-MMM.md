@@ -2,8 +2,8 @@
 layout: post
 title: Take 2 with CRW DHW MMM
 date: '2024-03-21'
-categories: Analysis, Processing
-tags: [Ch4_AcerCCC, coding]
+categories: [Analysis, Processing]
+tags: [Ch4 AcerCCC, Coding]
 ---
 
 I am revisiting this post from last year, where I was trying to download data from NOAA's CRW to calculate MMM and DHW for my reef sites. [Post 
@@ -15,7 +15,7 @@ First, I downloaded the .nc file here: https://www.star.nesdis.noaa.gov/pub/sod/
 
 Then, I needed to download a package for the terminal that allows me to read .nc files.
 
-```{bash}
+```bash
 brew update
 brew install netcdf
 
@@ -26,7 +26,7 @@ I can see in the header that I think it includes all lat, lon coordinates.
 
 Now, I read it into R using Ana's code:
 
-```{r Extract_OISST_data, cache=TRUE}
+```r extract_oisst_data
  library(raster)
   library(parallel)
 library(ncdf4)

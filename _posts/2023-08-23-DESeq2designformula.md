@@ -2,8 +2,8 @@
 layout: post
 title: DESeq2 design formula
 date: '2023-08-23'
-categories: coding
-tags: [coding]
+categories: [Coding]
+tags: [Coding]
 ---
 
 I have started working through [Dr. Michael Studivan's DESeq code](https://github.com/mstudiva/SCTLD-intervention-transcriptomics/blob/main/code/intervention/deseq2_intervention_host.R), but I am having trouble figuring out how best to include all of my explanatory variables in the DESeq model. In his study, he has time and treatment as explanatory variables. He created a column that combined the two: time.treatment. See screenshot of data table with design:

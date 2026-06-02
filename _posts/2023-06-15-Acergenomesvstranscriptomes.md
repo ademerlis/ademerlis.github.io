@@ -2,8 +2,8 @@
 layout: post
 title: Acer genomes vs transcriptomes
 date: '2023-06-15'
-categories: coding
-tags: [coding, CCC_ch4, temperaturevariability2023]
+categories: [Coding]
+tags: [Coding, Ch4 AcerCCC, Temperature Variability 2023]
 ---
 
 I wanted to make a separate post dedicated to Acer because it seems particularly confusing. 

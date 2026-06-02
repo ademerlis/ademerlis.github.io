@@ -2,8 +2,8 @@
 layout: post
 title: Addressing reviewer comments for stress-hardening paper
 date: '2025-07-01'
-categories: Analysis
-tags: [Coding, Ch2_tempvariability, DESeq2, PCoA]
+categories: [Analysis]
+tags: [Coding, Ch2 Temp Variability, DESeq2, PCoA]
 ---
 
 A reviewer had a concern about the intra-genotypic variation in the Acer and Pcli stress-hardening manuscript that I submitted to Ecology and Evolution (see figure below).
@@ -18,7 +18,7 @@ So I ran this for genotype for Acer host gene expression first:
 
 First run the PCoA function to make sure it's making the same PCoA as the manuscript and also to make sure the variables are all loaded.
 
-```{r}
+```r
 load("Rdata_files/host/initial_fullddsdesigncountsVsdcounts.RData")
 ad.pcoa=pcoa(dist(t(assay(Vsd)),method="manhattan")/1000)
 scores=ad.pcoa$vectors

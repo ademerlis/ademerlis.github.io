@@ -2,8 +2,8 @@
 layout: post
 title: Starting over
 date: '2023-07-18'
-categories: coding
-tags: [coding, temperaturevariability2023, CCC_ch4]
+categories: [Coding]
+tags: [Coding, Temperature Variability 2023, Ch4 AcerCCC]
 ---
 
 I think I need to start from the beginning and go through one pipeline that has been proven for that person (or lab group) to work time and time again, rather than try to frankenstein pieces of people's codes together to get something to work (which is what I have tried thus far and haven't been successful). It also helps to find a person with well-annotated code. Thankfully, Hollie Putnam's lab has tried-and-true methods that go back to pipelines of [Dr. Sam Barr](https://github.com/SamGurr/SamGurr.github.io/blob/master/_posts/2021-01-07-Geoduck-TagSeq-Pipeline.md) and [Dr. Ariana Huffmyer](https://github.com/AHuffmyer/EarlyLifeHistory_Energetics/blob/master/Mcap2020/Scripts/TagSeq/Genome_V3/TagSeq_BioInf_genomeV3.md). 

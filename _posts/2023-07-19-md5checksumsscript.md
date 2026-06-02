@@ -2,13 +2,13 @@
 layout: post
 title: md5 check sums script
 date: '2023-07-19'
-categories: coding
-tags: [coding, temperaturevariability2023, CCC_ch4]
+categories: [Coding]
+tags: [Coding, Temperature Variability 2023, Ch4 AcerCCC]
 ---
 
 So I followed the first script from [Sam](https://github.com/SamGurr/SamGurr.github.io/blob/master/_posts/2021-01-07-Geoduck-TagSeq-Pipeline.md) and [Ariana](https://github.com/AHuffmyer/EarlyLifeHistory_Energetics/blob/master/Mcap2020/Scripts/TagSeq/Genome_V3/TagSeq_BioInf_genomeV3.md) to do the "md5 check sums" thing. I guess the purpose of it is to check the integrity of the files after downloading them from Basespace. Idk why it's necessary but everyone in Hollie's lab seems to do it, so it must be important! However, I submitted this job on Pegasus yesterday for the Ch2_tempvariability2023 raw fastq.gz files and the job had still not yet started today:
 
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J transfer_checks
 #BSUB -q general
@@ -30,7 +30,7 @@ zcat ${and}/fastq_rawreads/*.fastq.gz | echo $((`wc -l`/4)) > ${and}/fastq_rawre
 ```
 
 I'm not sure what's wrong with it and why it hasn't started. Does it require a lot of memory or something? In Sam code, this was what they specified in the job:
-```{bash}
+```bash
 #!/bin/bash
 #SBATCH -t 120:00:00
 #SBATCH --nodes=1 --ntasks-per-node=10

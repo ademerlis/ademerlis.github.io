@@ -2,8 +2,8 @@
 layout: post
 title: PCR duplicates
 date: '2023-08-21'
-categories: coding
-tags: [coding]
+categories: [Coding]
+tags: [Coding]
 ---
 
 I met with Dr. Michael Studivan last week to discuss plans for DNA and RNA extractions of the Ch 3 Pstr samples. During this meeting, we talked about the results from the Ch 2 RNA-seq data, and he was concerned with how high the number of passed reads there were post-filtering step (see [the multiqc report](https://github.com/ademerlis/temperaturevariability2023/tree/main/gene_expression/bioinformatics/QC#2-multiqc-reports-of-trimmed-reads)). He said that when he has run TagSeq analysis, he usually get around 60% loss of reads when going from raw reads to trimmed reads. Whereas for mine, I got >95% retention of reads which passed the fastp filter. So what's happening here? Did fastp not work? 

@@ -2,8 +2,8 @@
 layout: post
 title: updated stringtie code
 date: '2023-07-22'
-categories: coding
-tags: [coding, Ch4_AcerCCC]
+categories: [Coding]
+tags: [Coding, Ch4 AcerCCC]
 ---
 
 Following [Sam's code](https://github.com/SamGurr/SamGurr.github.io/blob/master/_posts/2021-01-07-Geoduck-TagSeq-Pipeline.md#Trimming-polyA-tail), I used these arguments below for stringtie:
@@ -20,7 +20,7 @@ Main StringTie arguments used below:
 
 -o = Sets the name of the output GTF file where StringTie will write the assembled transcripts
 
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J stringtie_updatedannotations_take3
 #BSUB -q general

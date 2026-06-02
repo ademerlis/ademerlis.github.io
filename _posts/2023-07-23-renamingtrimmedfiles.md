@@ -2,15 +2,15 @@
 layout: post
 title: renaming trimmed files
 date: '2023-07-23'
-categories: coding
-tags: [coding]
+categories: [Coding]
+tags: [Coding]
 ---
 
 Following the fastp trimming code, all the file names ended in ".clean.processed" and that prevented them from being recognized as fastq.gz files for the next step in the pipeline. So I needed to write a for-loop to remove those suffices from all file names. 
 
 what ended up working was:
 
-```{bash}
+```bash
 files=($(ls /scratch/projects/and_transcriptomics/Ch2_temperaturevariability2023/AS_pipeline/trimmed))
 
 for file in "${files[@]}"; do     

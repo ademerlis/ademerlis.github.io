@@ -3,14 +3,14 @@ layout: post
 title: Optimizing command line on new laptop for bash scripts for downloading raw sequences
 date: '2023-05-04'
 categories: [Bioinformatics]
-tags: [bash, Basespace, Sequencing]
+tags: [Bash, Basespace, Sequencing]
 ---
 
 Today I received the sequences from UT Austin GSAF via Illumina Basespace. Now I need to download them. 
 
 Michael Studivan provided me with this script (bash not zsh) to run in terminal:
 
-```{bash}
+```bash
 # download BaseSpaceCLI
 wget "https://api.bintray.com/content/basespace/BaseSpaceCLI-EarlyAccess-BIN/latest/\$latest/amd64-linux/bs?bt_package=latest" -O $HOME/bin/bs
 

@@ -2,13 +2,13 @@
 layout: post
 title: writing a script to create multiple jobs at once for trimming
 date: '2023-06-03'
-categories: [Trialing code, Bioinformatics]
-tags: [Pegasus, bash, parallel, trim_galore]
+categories: [Coding, Bioinformatics]
+tags: [Pegasus, Bash, Parallel, Trim Galore]
 ---
 
 This is the code I have right now for the trimming script (note: the parallel flag didn't work, so it ran each file individually one at a time on Pegasus in the general queue, which was very slow):
 
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J trim_CCC
 #BSUB -q parallel
@@ -45,7 +45,7 @@ multiqc ${and}/Allyson_CCC/trimmed/ \
 
 I want to try something different, based on codes Mike Connelly and Ben Young gave me back in 2019. They wrote a script that then created a job for each sample. So basically manually creating parallel jobs so they can all run at once. This is what it looked like:
 
-```{bash}
+```bash
 #!/bin/bash
 #purpose: trimming
 #Thanks Mike Connelly and Ben Young!

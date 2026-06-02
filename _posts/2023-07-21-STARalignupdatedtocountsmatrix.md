@@ -2,8 +2,8 @@
 layout: post
 title: STAR align updated to counts matrix
 date: '2023-07-21'
-categories: coding
-tags: [coding, CCC_ch4]
+categories: [Coding]
+tags: [Coding, Ch4 AcerCCC]
 ---
 
 So following the updated STAR alignment with the updated gff3 file for the Acer CCC samples, I re-tried the code from [Natalia](https://github.com/ademerlis/ademerlis.github.io/blob/master/_posts/2023-06-29_STARoutputtoreadcounts.md) and got different results which I think means it worked!

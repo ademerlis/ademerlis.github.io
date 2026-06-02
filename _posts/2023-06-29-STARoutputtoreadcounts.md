@@ -2,15 +2,15 @@
 layout: post
 title: STAR output to gene counts
 date: '2023-06-29'
-categories: coding
-tags: [coding, CCC_ch4]
+categories: [Coding]
+tags: [Coding, Ch4 AcerCCC]
 ---
 
 I can't get stringtie to work so I want to try Natalia's method instead, where she took the STAR read counts and somehow turned that into a gene count matrix. 
 
 First, she downloads the multiqc_general_stats.txt file from running multiqc on the aligned STAR reads. Then she does a lot of data tidying in R ([code here](https://github.com/China2302/SCTLD_RRC/blob/main/05_read_counts.Rmd)
 
-```{r}
+```r
 library(data.table)
 library(ggplot2)
 library(ggrepel)
@@ -21,7 +21,7 @@ library(tidyverse)
 ```
 
 
-```{r}
+```r
 #Sorting samples with less than 4M and 5M reads mapped
 
 reads_mapped<- read.delim("multiqc_general_stats.txt", sep = "\t")
@@ -40,7 +40,7 @@ samples_selected_5M<- reads_mapped %>% filter(million_uniq > 5000000)
 ```
 
 
-```{r}
+```r
 # read in metadata
 sample_metadata <- read.csv("sample_metadata.csv")
 names(sample_metadata)
@@ -52,7 +52,7 @@ sample_metadata_reads <- drop_na(sample_metadata_reads)
 ```
 
 
-```{r}
+```r
 # create a list of all files from samples that have at least 4M reads mapped
 
 file_4M<- list.files("star_trimmed_reads",

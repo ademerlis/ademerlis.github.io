@@ -2,8 +2,8 @@
 layout: post
 title: WGCNA for wound healing manuscript
 date: '2023-06-06'
-categories: [WGCNA]
-tags: [WGCNA, wound healing]
+categories: [Bioinformatics]
+tags: [WGCNA, Wound Healing]
 ---
 
 I'm currently working through the WGCNA tutorial for the wound healing dataset (following https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html and I specifically did the step-by-step network construction, not the automatic one).
@@ -47,7 +47,7 @@ Then again these may all change once I look into time-series with WGCNA.
 
 https://github.com/ademerlis/sctld_transcriptomics_2021/blob/main/ofav_wgcna_updated.Rmd
 
-```{R}
+```r
 #From Mike Connelly:
 # I have chosen the following network construction parameters for the following reasons:
 # First, following the recommendations of the WGCNA developers (https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/faq.html), a signed network was chosen to be able to detect positive and negative gene correlations, and the biweight midcorrelation was used since it is more robust to outliers. 

@@ -8,7 +8,7 @@ tags: [Stress-Hardening, Transcriptomics, Pegasus, FastQC, CCC]
 
 These scripts are what I want to use for QC once I get access to Pegasus and can move all my sequences onto the project space. 
 
-```{bash}
+```bash
 #!/bin/bash
 #~/scripts/fastqc/fastqc_stresshardening2022.job 
 #/scratch/projects/and_transcriptomics/{foldername}/scripts/fastqc/fastqc_stresshardening2022.job
@@ -41,7 +41,7 @@ I've tried running this job several times now (with the proper file folder names
 
 Ok i got the most recent version of fastqc_AcerCCC.sh to work! Or at least it's running on Pegasus right now and hasn't immediately failed.
 
-```{bash}
+```bash
 #!/bin/bash
 #~/scripts/fastqc_AcerCCC.sh
 #/scratch/projects/and_transcriptomics/Allyson_CCC/scripts/fastqc_AcerCCC.sh

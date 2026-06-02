@@ -2,8 +2,8 @@
 layout: post
 title: HISAT2 alignment
 date: '2023-07-23'
-categories: coding
-tags: [coding, Ch2_tempvariability]
+categories: [Coding]
+tags: [Coding, Ch2 Temp Variability]
 ---
 
 So, following the next step of the pipeline, Ariana, Kevin, Sam, and Zoe all use HISAT2 for alignment. Here is an explanation of all the flags from [Sam's GitHub](https://github.com/SamGurr/SamGurr.github.io/blob/master/_posts/2021-01-07-Geoduck-TagSeq-Pipeline.md#hisat2-alignment). 
@@ -15,7 +15,7 @@ I installed it from [source](http://daehwankimlab.github.io/hisat2/download/#ver
 HISAT2 works just like STAR. First, you need to index the genome, then you align reads to the reference genome.
 
 Sam does both steps in one code:
-```{bash}
+```bash
 #!/bin/bash
 #SBATCH -t 120:00:00
 #SBATCH --nodes=1 --ntasks-per-node=10
@@ -53,7 +53,7 @@ done
 ```
 
 I will adapt the above code to run on Pegasus:
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J HISAT2
 #BSUB -q bigmem
@@ -99,7 +99,7 @@ LOL it tried to align the Pcli samples too. It got 0.01% alignment lol.
 
 To view mapping percentages (percent alignment): ([code from Zoe](https://github.com/imkristenbrown/Heron-Pdam-gene-expression/blob/master/BioInf/ZD_Heron-Pdam-gene-expression.md))
 
-```{bash}
+```bash
 module load samtools/1.3
 
 for i in *.bam; do

@@ -2,8 +2,8 @@
 layout: post
 title: Which samples to use based on minimum library size
 date: '2023-06-15'
-categories: coding
-tags: [coding, CCC_ch4, temperaturevariability2023]
+categories: [Coding]
+tags: [Coding, Ch4 AcerCCC, Temperature Variability 2023]
 ---
 
 I have decided which aligner to use, but before I begin that step, I need to determine which samples have made the cut based on the read trimming and QC.

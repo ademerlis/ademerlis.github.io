@@ -3,14 +3,14 @@ layout: post
 title: installing cutadapt and trim_galore on Pegasus
 date: '2023-06-02'
 categories: [Bioinformatics]
-tags: [cutadapt, trim_galore, Pegasus, bash]
+tags: [Cutadapt, Trim Galore, Pegasus, Bash]
 ---
 
 trim_galore is a wrapper that requires cutadapt and fastQC (https://github.com/FelixKrueger/TrimGalore)
 
 first install cutadapt on pegasus
 
-```{bash}
+```bash
 module load py-pip/20.2
 pip install cutadapt
 ```
@@ -19,7 +19,7 @@ That worked.
 
 Now install trim_galore
 
-```{bash}
+```bash
 curl -fsSL https://github.com/FelixKrueger/TrimGalore/archive/0.6.10.tar.gz -o trim_galore.tar.gz
 tar xvzf trim_galore.tar.gz
 ```
@@ -28,7 +28,7 @@ I installed Trim_galore into my programs folder in the and_transcriptomics proje
 
 Here is the code I am currently running on Pegasus: (got from Natalia Andrade's code: https://github.com/China2302/SCTLD_RRC/blob/main/hpc/trimming.sh)
 
-```{bash}
+```bash
 #!/bin/bash
 #BSUB -J trim_CCC
 #BSUB -q bigmem
@@ -77,7 +77,7 @@ Proceeding with 'gzip' for decompression
 To decrease CPU usage of decompression, please install 'igzip' and run again
 
 I am now trying to install pigz, which I can't use "sudo install" because I am not an administrator on Pegasus. I then tried loading the anaconda environment, but this didn't work either (I don't have permissions to write files to the anaconda shared folder):
-```{bash}
+```bash
 source /share/apps/anaconda/anaconda3_build/bin/activate
 conda install -c conda-forge pigz
 ```
@@ -90,7 +90,7 @@ Ok now I'm going to load pigz in the job script and then also specific the paral
 
 Loading pigz and fastQC within the for loop does NOT work.
 
-```{bash}
+```bash
 and="/scratch/projects/and_transcriptomics"
 
 for sample in ${and}/Allyson_CCC/fastq_files/*.gz ;

@@ -2,7 +2,7 @@
 layout: post
 title: UTR gff parser
 date: '2023-11-28'
-categories: Coding
+categories: [Coding]
 tags: [Coding]
 ---
 
@@ -10,7 +10,7 @@ I'm going to try to run [this](https://github.com/danilotat/UTR_add_extend_GTF/t
 
 When I run this, I think this works:
 
-```{bash}
+```bash
 (base) [and128@login4 UTR_add_extend_GTF-main]$ python3 gtf_advanced_parser.py --input /scratch/projects/and_transcriptomics/genomes/Acer_2023/Vollmer_2023/GCA_032359415.1_NEU_Acer_K2_genomic.gtf --output Acer_parsed.gtf
 We finished here. Here's some info:
 Processed genes: 33794
@@ -24,7 +24,7 @@ Enjoy!
 
 But when I run part 2 of the code, I get files with nothing in them.
 
-```{bash}
+```bash
 #!/usr/bin/env bash
 #BSUB -P and_transcriptomics
 #BSUB -e /scratch/projects/and_transcriptomics/genomes/Acer_2023/UTR_add_extend_GTF-main/UTR_add.err
@@ -67,7 +67,7 @@ Ok I figured out the issue with the code, it was having an issue with grep "#" a
 
 First, here's the code that I got to work:
 
-```{bash}
+```bash
 #!/usr/bin/env bash
 #BSUB -P and_transcriptomics
 #BSUB -e /scratch/projects/and_transcriptomics/genomes/Acer_2023/UTR_add_extend_GTF-main/UTR_add.err

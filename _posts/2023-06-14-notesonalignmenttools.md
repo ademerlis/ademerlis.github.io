@@ -3,7 +3,7 @@ layout: post
 title: notes on alignment tools
 date: '2023-06-14'
 categories: [Bioinformatics]
-tags: [STAR, Bowtie, Michael, Natalia, wound healing, AcerCCC, stress-hardening, Kevin, alignment, bash, Pegasus]
+tags: [STAR, Bowtie, Michael, Natalia, Wound Healing, AcerCCC, Stress-Hardening, Kevin, Alignment, Bash, Pegasus]
 ---
 
  In the past, for the Pdamicornis wound healing paper, I used STAR to align the 3' RNAseq reads to the genome, not the transcriptome. 
@@ -32,14 +32,14 @@ To use STAR (notes come from this tutorial: http://homer.ucsd.edu/homer/basicTut
 
 1. Build a genome index (common step for all aligners). Make a directory for the index, then copy the genome FASTA files into the directory. Make that your current directory and then run a script (or submit a job on an HPC) to build the index. 
 
-```{bash}
+```bash
 STAR  --runMode genomeGenerate --runThreadN <# cpus> --genomeDir <genome output directory> --genomeFastaFiles <input Genome FASTA file>
 ```
 
 2. Align RNA-Seq reads to the genome with STAR
 
 
-```{bash}
+```bash
 STAR --genomeDir <Directory with the Genome Index>  --runThreadN <# cpus> --readFilesIn <FASTQ file> --outFileNamePrefix <OutputPrefix>
 #note: this is for single-end data
 ```
