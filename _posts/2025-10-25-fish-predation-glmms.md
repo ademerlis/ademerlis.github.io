@@ -2,8 +2,8 @@
 layout: post
 title: Fish Predation GLMMs
 date: '2025-10-25'
-categories: Analysis, Processing
-tags: [fish predation, RTT project, GLMMs]
+categories: [Analysis, Processing]
+tags: [Fish Predation, Ch3 Reciprocal Transplant, GLMM]
 ---
 
 So I've been diving into the RTT project data and trying to find the best pipeline to analyze different response variables. Since there are so many predictor variables, I've been struggling to come up with a way to test all of them and whether they're important for each response variable I'm testing.
@@ -42,7 +42,7 @@ But, do we want to test the significance of time point as a variable and get sta
 ### Predation prevalence
 
 ##### Model 1 (monitoring interval as random effect)
-```{r}
+```r
 #some variables are nested and need to be controlled for in the model, but can't be fixed effects (model becomes too complicated)
 
 # fixed effects for this test: Species, Region 
