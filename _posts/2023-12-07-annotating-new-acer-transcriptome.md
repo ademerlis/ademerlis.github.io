@@ -3,7 +3,7 @@ layout: post
 title: Annotating new Acer transcriptome
 date: '2023-12-07'
 categories: [Coding]
-tags: [- Coding]
+tags: [Coding]
 published: true
 ---
 

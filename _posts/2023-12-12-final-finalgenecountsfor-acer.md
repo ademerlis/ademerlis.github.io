@@ -3,7 +3,7 @@ layout: post
 title: Acer gene counts using samtools
 date: '2023-12-07'
 categories: [Coding]
-tags: [- Coding]
+tags: [Coding]
 published: true
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: installing and using reefmapmaker to create coral reef maps
 date: '2023-12-18'
 categories: [Coding]
-tags: [- Coding]
+tags: [Coding]
 published: true
 ---
 
