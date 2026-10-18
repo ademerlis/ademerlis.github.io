@@ -1,0 +1,54 @@
+---
+pagetitle: "Allyson's Lab Notebook"
+title-block-banner: false
+page-layout: full
+listing:
+  id: recent
+  contents: posts
+  sort: "date desc"
+  type: grid
+  max-items: 6
+  fields: [date, title, categories]
+  categories: false
+  feed: true
+---
+
+::: {.nb-hero}
+::: {.nb-hero-inner}
+![](assets/headshot.jpg){.headshot fig-alt="Allyson DeMerlis"}
+
+::: {.nb-hero-text}
+# Online Lab Notebook
+
+::: {.tagline}
+Allyson DeMerlis, PhD · Coral Reef Molecular Ecologist
+:::
+
+This notebook documents my day-to-day work learning and running analyses for coral transcriptomics, bioinformatics, and statistics, mostly in R and bash. It is by no means a tutorial, as most of the stuff probably didn't work! But it's a useful record of what I tried, so it's easier to pick a project back up after a few days (or weeks) away.
+
+::: {.link-buttons}
+[<i class="bi bi-journal-text"></i> All entries](notebook.qmd){.btn}
+[<i class="bi bi-folder2-open"></i> Projects](projects.qmd){.btn}
+[<i class="bi bi-globe"></i> allysondemerlis.com](https://allysondemerlis.com){.btn}
+[<i class="bi bi-github"></i> GitHub](https://github.com/ademerlis){.btn}
+:::
+:::
+:::
+:::
+
+::: {.column-body}
+
+## Recent entries
+
+::: {#recent}
+:::
+
+[See all entries →](notebook.qmd){.see-all}
+
+## How this notebook is organized
+
+- **[Notebook](notebook.qmd)** lists every entry, newest first. Use the tags on the right to filter by project, tool, or method (e.g. *Pegasus*, *DESeq2*, *GLMM*).
+- **[Projects](projects.qmd)** groups entries by research project, with links to each project's code on GitHub.
+- The **search** icon in the top right searches the full text of every entry.
+
+:::

@@ -1,0 +1,120 @@
+---
+title: "Projects"
+subtitle: "Notebook entries grouped by research project"
+listing:
+  - id: acerccc
+    contents: posts
+    include:
+      categories: "Ch4 AcerCCC"
+    type: table
+    fields: [date, title]
+    sort: "date desc"
+    date-format: "MMM D, YYYY"
+    filter-ui: false
+    sort-ui: false
+  - id: stresshardening
+    contents: posts
+    include:
+      categories: "Stress-Hardening"
+    type: table
+    fields: [date, title]
+    sort: "date desc"
+    date-format: "MMM D, YYYY"
+    filter-ui: false
+    sort-ui: false
+  - id: rt
+    contents: posts
+    include:
+      categories: "Reciprocal Transplant"
+    type: table
+    fields: [date, title]
+    sort: "date desc"
+    date-format: "MMM D, YYYY"
+    filter-ui: false
+    sort-ui: false
+  - id: woundhealing
+    contents: posts
+    include:
+      categories: "Wound Healing"
+    type: table
+    fields: [date, title]
+    sort: "date desc"
+    date-format: "MMM D, YYYY"
+    filter-ui: false
+    sort-ui: false
+  - id: predation
+    contents: posts
+    include:
+      categories: "Fish Predation"
+    type: table
+    fields: [date, title]
+    sort: "date desc"
+    date-format: "MMM D, YYYY"
+    filter-ui: false
+    sort-ui: false
+---
+
+::: {.project}
+## *Acropora cervicornis* transplanted to the Port of Miami {#acerccc-project}
+
+::: {.project-meta}
+Ch4 AcerCCC · [<i class="bi bi-github"></i> AcerCCC](https://github.com/ademerlis/AcerCCC) · [Frontiers in Marine Science (2026)](https://doi.org/10.3389/fmars.2026.1796814)
+:::
+
+Gene expression patterns in *Acropora cervicornis* following transplantation from an offshore nursery to a marginal, nearshore environment in the Port of Miami.
+
+::: {#acerccc}
+:::
+:::
+
+::: {.project}
+## Stress-Hardening {#stresshardening-project}
+
+::: {.project-meta}
+Stress-Hardening (includes Temperature Variability 2023 and Ch2 Temp Variability) · [<i class="bi bi-github"></i> temperaturevariabilityAcerPcli](https://github.com/ademerlis/temperaturevariabilityAcerPcli) · [Ecology and Evolution (2025)](https://doi.org/10.1002/ece3.72108)
+:::
+
+Gene expression and physiological responses of *Acropora cervicornis* and *Pseudodiploria clivosa* to a variable thermal priming treatment.
+
+::: {#stresshardening}
+:::
+:::
+
+::: {.project}
+## *Pseudodiploria strigosa* reciprocal transplant {#rt-project}
+
+::: {.project-meta}
+Reciprocal Transplant · [<i class="bi bi-github"></i> reciprocaltransplant](https://github.com/ademerlis/reciprocaltransplant)
+:::
+
+A reciprocal transplant experiment with *Pseudodiploria strigosa* between an urbanized, thermally variable inshore site (MacArthur Causeway North, Port of Miami) and an offshore reef (Emerald Reef).
+
+::: {#rt}
+:::
+:::
+
+::: {.project}
+## Coral wound healing in *Pocillopora damicornis* {#woundhealing-project}
+
+::: {.project-meta}
+Wound Healing · [<i class="bi bi-github"></i> woundhealingPdam](https://github.com/ademerlis/woundhealingPdam)
+:::
+
+How the coral innate immune system responds in the early hours following injury.
+
+::: {#woundhealing}
+:::
+:::
+
+::: {.project}
+## Coral predation by corallivorous fish {#predation-project}
+
+::: {.project-meta}
+Fish Predation · [<i class="bi bi-github"></i> RTT_predation](https://github.com/ademerlis/RTT_predation)
+:::
+
+Quantifying corallivorous fish predation on nursery-raised corals outplanted across reef sites in Florida.
+
+::: {#predation}
+:::
+:::

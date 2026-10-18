@@ -1,0 +1,16 @@
+---
+title: "Notebook"
+subtitle: "Every entry, newest first. Filter by tag on the right."
+listing:
+  contents: posts
+  sort: "date desc"
+  type: table
+  fields: [date, title, categories]
+  categories: numbered
+  sort-ui: [date, title]
+  filter-ui: true
+  page-size: 25
+  date-format: "MMM D, YYYY"
+  table-hover: true
+page-layout: full
+---

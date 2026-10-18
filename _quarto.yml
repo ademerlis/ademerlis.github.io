@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - assets/bg.jpg
+
+website:
+  title: "Allyson's Lab Notebook"
+  site-url: https://ademerlis.github.io
+  description: "Allyson DeMerlis' online lab notebook: coral transcriptomics, bioinformatics, and statistics in R and bash."
+  favicon: assets/headshot.jpg
+  search: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: notebook.qmd
+        text: Notebook
+      - href: projects.qmd
+        text: Projects
+      - href: about.qmd
+        text: About
+    tools:
+      - icon: globe
+        href: https://allysondemerlis.com
+      - icon: github
+        href: https://github.com/ademerlis
+  page-footer:
+    left: "© 2026 Allyson DeMerlis · Built with [Quarto](https://quarto.org)"
+    right:
+      - text: allysondemerlis.com
+        href: https://allysondemerlis.com
+      - icon: github
+        href: https://github.com/ademerlis
+
+format:
+  html:
+    theme: [flatly, styles.scss]
+    from: markdown-tex_math_dollars
+    code-copy: true
+    highlight-style: github
+    title-block-banner: assets/bg.jpg
+    title-block-banner-color: "#ffffff"
